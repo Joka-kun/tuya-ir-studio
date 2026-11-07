@@ -1630,7 +1630,9 @@ class IRStudioPanel extends HTMLElement {
             : this._batchStarting ? '<span class="muted">Подключаем приём ИК…</span>'
             : `<button class="primary" data-action="learn-next" ${this._pending ? 'disabled' : ''}>Продолжить обучение</button>
                <button data-action="learn-skip" ${this._pending ? 'disabled' : ''}>Пропустить</button>`}
-          <button data-action="learn-finish">Завершить</button>
+          ${wizard.stopRequested
+            ? '<span class="muted">Завершаем обучение после подтверждения запуска…</span>'
+            : '<button data-action="learn-finish">Завершить</button>'}
         </div>
       </div>
     </div>`;
@@ -1676,13 +1678,20 @@ class IRStudioPanel extends HTMLElement {
       }
     } finally {
       this._batchStarting = false;
-      this._render();
+      // Finish may be requested while the WebSocket start RPC is in flight.
+      // If the job started, cancel it now rather than leaving an invisible
+      // receiver running after the user already closed the guide.
+      if (wizard.stopRequested && this._learnWizard === wizard)
+        await this._batchLearnFinish();
+      else
+        this._render();
     }
   }
 
   _batchLearnSkip() {
     const wizard = this._learnWizard;
-    if (!wizard || this._pending || wizard.index >= wizard.buttonIds.length) return;
+    if (!wizard || wizard.stopRequested || this._batchStarting ||
+        this._pending || wizard.index >= wizard.buttonIds.length) return;
     wizard.index++;
     wizard.skipped++;
     wizard.lastResult = '';
@@ -1692,11 +1701,20 @@ class IRStudioPanel extends HTMLElement {
   async _batchLearnFinish() {
     const wizard = this._learnWizard;
     if (!wizard) return;
+    if (this._batchStarting) {
+      // The server may not have returned the job ID yet. Keep the wizard
+      // attached and cancel the exact job as soon as the start RPC resolves.
+      wizard.stopRequested = true;
+      this._render();
+      return;
+    }
     // Ending the guide must not leave an invisible receiver running.
     if (this._pending?.kind === 'learn' && this._pending.profileId === wizard.profileId)
       await this._cancelLearning();
-    this._learnWizard = null;
-    this._render();
+    if (this._learnWizard === wizard) {
+      this._learnWizard = null;
+      this._render();
+    }
   }
 
   _renderRows() {
@@ -2478,6 +2496,13 @@ class IRStudioPanel extends HTMLElement {
     const action=btn.dataset.action,bid=btn.dataset.button;
     const p=this._selected();
     if(action==='select'){
+      // Do not hide an active receiver by switching to another remote.
+      // First cancel/finish the current guide so the job remains accessible.
+      if (btn.dataset.profile !== this._active &&
+          (this._batchStarting || this._pending?.kind === 'learn')) {
+        this._toast('Сначала заверши или отмени обучение текущего пульта', true);
+        return;
+      }
       if (this._learnWizard && this._learnWizard.profileId !== btn.dataset.profile)
         this._learnWizard = null;
       this._active=btn.dataset.profile;this._filter='';this._render();

@@ -143,5 +143,37 @@ vm.runInContext(src+'\nglobalThis.Panel=IRStudioPanel;',ctx);
   await panel._addCommandFromInput();
   assert.equal(sent.type,'button_add');
   assert.equal(sent.args.name,'My special key');
-  console.log('Guided learning: first-click reception, in-flight deduplication and safe sequencing passed');
+  // If Finish is clicked before the initial start RPC acknowledges, the
+  // deferred job must be cancelled and cannot survive invisibly.
+  panel._pending=null;
+  panel._learnWizard=null;
+  panel._batchStarting=false;
+  panel._pollBusy=false;
+  panel._active=p.id;
+  panel._lastPollAt=0;
+  let acknowledgeStart;
+  let cancellationConfirmed=false;
+  let stopRequests=0;
+  const acknowledge=new Promise(resolve=>{acknowledgeStart=resolve;});
+  panel._call=async(type)=>{
+    if(type==='start'){await acknowledge;return {job_id:'delayed-learn'};}
+    if(type==='job_cancel'){stopRequests++;cancellationConfirmed=true;return {status:'cancelling'};}
+    if(type==='job')return {status:cancellationConfirmed?'cancelled':'running',kind:'learn'};
+    throw Error('Unexpected RPC '+type);
+  };
+  const startWithDelay=panel._beginBatchLearning();
+  assert.equal(panel._batchStarting,true);
+  await panel._handleClick({target:{closest:()=>({dataset:{action:'select',profile:'other'}})}});
+  assert.equal(panel._active,p.id);
+  assert(panel.lastToast.includes('заверши или отмени'));
+  await panel._batchLearnFinish();
+  assert.equal(panel._learnWizard.stopRequested,true);
+  assert.equal(panel._pending,null);
+  acknowledgeStart();
+  await startWithDelay;
+  assert.equal(stopRequests,1);
+  assert.equal(panel._learnWizard,null);
+  assert.equal(panel._pending,null);
+  assert.equal(panel._batchStarting,false);
+  console.log('Guided learning: first click, delayed finish, cancel, switch guard and code safety passed');
 })().catch(e=>{console.error(e);process.exitCode=1});
