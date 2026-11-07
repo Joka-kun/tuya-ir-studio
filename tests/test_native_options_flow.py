@@ -309,8 +309,8 @@ async def test_english_suggestions_and_custom_command_names(env):
     selector = next(v for k, v in result["data_schema"].schema.items()
                     if k.schema == "name")
     values = {item["value"] for item in selector.config.options}
-    assert len(values) == 119
-    assert {"Power", "Power On", "Power Off", "VOL +", "Mute"} <= values
+    assert len(values) == 164
+    assert {"POWER", "POWER ON", "POWER OFF", "VOL +", "MUTE", "MODE", "RGB", "FLASH"} <= values
     assert selector.config.custom_value is True
     assert selector("My original button") == "My original button"
     assert selector("Power") == "Power"

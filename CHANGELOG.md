@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 — Guided learning, input suggestions and command library
+
+- Start IR sequential learning with the first click, show an explicit launch state and prevent overlapping starts. Force immediate status reconciliation after cancellation.
+- Apply a common uppercase, compact caption style to all library commands. Existing stored IR waveforms, immutable remote keys and user-defined captions are preserved.
+- Add 45 command names for RGB/LED lighting, TV and HDMI sources, projector optical controls and audio. New names remain unlearned until trained with a physical remote.
+- Add command-name suggestions and Enter-to-add in the sidebar; selected library suggestions keep canonical command keys. Include search in grouped library cards.
+- Automated regression and HACS/Hassfest checks; real hardware IR learning and transmission require acceptance testing.
+
 ## 1.0.0 — Initial public release
 
 - Local-first Tuya infrared gateway onboarding using QR-assisted sign-in or manual LAN credentials.

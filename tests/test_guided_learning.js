@@ -124,5 +124,24 @@ vm.runInContext(src+'\nglobalThis.Panel=IRStudioPanel;',ctx);
   await initial;
   assert.equal(panel._batchStarting,false);
   assert.equal(panel._pending.buttonId,'first');
+  // Suggestions use canonical keys, while arbitrary input remains supported.
+  panel._data.template_catalog={commands:{
+    power:{key:'Power',labels:{en:'POWER'}},
+    mode:{key:'Mode',labels:{en:'MODE'}},
+    rgb:{key:'RGB',labels:{en:'RGB'}},
+  }};
+  assert.deepEqual(Array.from(panel._commandSuggestions()),['MODE','POWER','RGB']);
+  const input={value:'rgb'};
+  panel.shadowRoot.querySelector=id=>id==='#new-button'?input:null;
+  panel._language=()=> 'ru';
+  let sent;
+  panel._doChange=async (type,args)=>{sent={type,args};return {added:1};};
+  await panel._addCommandFromInput();
+  assert.equal(sent.type,'button_add_set');
+  assert.equal(sent.args.command_ids[0],'rgb');
+  input.value='My special key';
+  await panel._addCommandFromInput();
+  assert.equal(sent.type,'button_add');
+  assert.equal(sent.args.name,'My special key');
   console.log('Guided learning: first-click reception, in-flight deduplication and safe sequencing passed');
 })().catch(e=>{console.error(e);process.exitCode=1});
