@@ -1,0 +1,28 @@
+{
+  "domain": "ir_studio",
+  "name": "Tuya IR Studio",
+  "categories": [
+    "buttons_remotes"
+  ],
+  "codeowners": [
+    "@Joka-kun"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "frontend",
+    "http",
+    "panel_custom",
+    "remote",
+    "websocket_api"
+  ],
+  "documentation": "https://github.com/Joka-kun/tuya-ir-studio#readme",
+  "integration_type": "service",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/Joka-kun/tuya-ir-studio/issues",
+  "requirements": [
+    "tinytuya==1.20.0",
+    "tuya-device-sharing-sdk~=0.2.4",
+    "segno==1.6.6"
+  ],
+  "version": "1.0.0"
+}

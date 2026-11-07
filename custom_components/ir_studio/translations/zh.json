@@ -1,0 +1,73 @@
+{
+  "title": "Tuya IR Studio",
+  "config": {
+    "step": {
+      "user": {
+        "title": "添加涂鸦红外网关",
+        "description": "选择本地红外网关的连接方式：复用 Tuya/Smart Life 登录、二维码登录或手动填写本地凭据。",
+        "data": {
+          "setup_mode": "连接方式"
+        }
+      },
+      "cloud": {
+        "title": "Tuya / Smart Life 账号",
+        "description": "在 Smart Life 或 Tuya 中打开设置 → 账号与安全，找到用户代码，输入后获取登录二维码。",
+        "data": {
+          "user_code": "用户代码"
+        }
+      },
+      "scan": {
+        "title": "完成登录",
+        "description": "用 Smart Life 或 Tuya 扫描二维码，然后提交表单完成授权。"
+      },
+      "choose_device": {
+        "title": "选择红外设备和网关",
+        "description": "请选择红外设备及其父网关。已配置的网关可能显示在单独的列表中。二维码仅用于配置网关，不会导入遥控器按钮。",
+        "data": {
+          "device_id": "红外设备",
+          "hub_id": "父红外网关"
+        }
+      },
+      "search": {
+        "title": "在局域网中搜索网关",
+        "description": "{device_name}IR Studio 将在局域网中查找网关 IP。若未找到，可在下一步手动输入。"
+      },
+      "native_hub": {
+        "title": "确认本地红外网关",
+        "description": "检查地址和协议。Local Key 保存在 Home Assistant 中，网关通过局域网通信。",
+        "data": {
+          "device_id": "网关 Device ID",
+          "host": "IP 地址或主机名",
+          "local_key": "Local Key",
+          "protocol_version": "协议版本（自动检测）",
+          "device_cid": "子设备 Node ID 或 UUID（可选）"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "此涂鸦红外网关已经配置。",
+      "no_devices": "未找到具有 Local Key 的兼容涂鸦设备。"
+    },
+    "error": {
+      "login_error": "Tuya/Smart Life 登录失败或未完成，请重新获取二维码。",
+      "needs_hub": "此设备通过父网关连接，请选择网关。",
+      "does_not_need_hub": "此设备可以直接连接，请不要选择父网关。",
+      "invalid_device": "所选涂鸦设备已不可用。",
+      "invalid_hub": "父网关无效。",
+      "missing_node_id": "子设备缺少 Node ID 或 UUID。",
+      "missing_local_key": "设备或网关缺少 Local Key。",
+      "device_not_found": "局域网中未找到网关，请手动输入 IP。",
+      "invalid_credentials": "请输入 IP、Device ID 和 Local Key。",
+      "cannot_connect": "无法连接本地红外网关，请检查 IP、Device ID、Local Key、子设备 ID 和协议。"
+    }
+  },
+  "selector": {
+    "setup_mode": {
+      "options": {
+        "cloud": "Tuya / Smart Life – 复用登录或二维码",
+        "manual": "手动 – IP、Device ID 和 Local Key",
+        "cloud_fresh_login": "Tuya / Smart Life – 重新二维码登录"
+      }
+    }
+  }
+}

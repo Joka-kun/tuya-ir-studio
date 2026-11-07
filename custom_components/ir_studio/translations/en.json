@@ -1,0 +1,210 @@
+{
+  "title": "Tuya IR Studio",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a Tuya IR hub",
+        "description": "Choose how to connect your local IR gateway. Reuse an existing Tuya / Smart Life login, sign in via QR, or enter local credentials manually.",
+        "data": {
+          "setup_mode": "Connection method"
+        }
+      },
+      "cloud": {
+        "title": "Tuya / Smart Life account",
+        "description": "In the Smart Life or Tuya app, open Settings → Account & Security and find your User Code. Enter it to request a login QR code.",
+        "data": {
+          "user_code": "User Code"
+        }
+      },
+      "scan": {
+        "title": "Complete sign-in",
+        "description": "Open the Smart Life or Tuya app, scan the QR code, then submit this form to complete authorization."
+      },
+      "choose_device": {
+        "title": "Choose the IR device and gateway",
+        "description": "Choose the IR device and its parent gateway. An already configured gateway can appear in the separate parent list. QR is used to set up the gateway only, not to import remote buttons.",
+        "data": {
+          "device_id": "IR device",
+          "hub_id": "Parent IR gateway (separate list)"
+        }
+      },
+      "search": {
+        "title": "Find the gateway on your LAN",
+        "description": "{device_name}IR Studio will scan the local network for the parent gateway's IP address. If discovery fails, enter the address manually on the next step."
+      },
+      "native_hub": {
+        "title": "Confirm the local IR hub",
+        "description": "Check the detected host and protocol. The Local Key is stored in Home Assistant; IR Studio communicates with the hub over your LAN.",
+        "data": {
+          "device_id": "Device ID (for a child device, use the parent gateway ID)",
+          "host": "IP address or hostname",
+          "local_key": "Local Key",
+          "protocol_version": "Protocol version (auto detects it)",
+          "device_cid": "Child device node_id or uuid (optional)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This Tuya IR gateway is already configured.",
+      "no_devices": "No suitable Tuya devices with a Local Key were found."
+    },
+    "error": {
+      "login_error": "Tuya / Smart Life sign-in failed or was not completed. Request a new QR code and try again.",
+      "needs_hub": "This device is connected through a gateway. Select its parent gateway.",
+      "does_not_need_hub": "This device can be connected directly. Do not select a parent gateway.",
+      "invalid_device": "The selected Tuya device is no longer available.",
+      "invalid_hub": "The selected parent gateway is not valid.",
+      "missing_node_id": "The child device has no node_id or uuid.",
+      "missing_local_key": "No Local Key was returned for this device or gateway.",
+      "device_not_found": "Automatic LAN discovery did not find the gateway. Enter its local IP address.",
+      "invalid_credentials": "Enter an IP address, Device ID and Local Key.",
+      "cannot_connect": "Could not connect to the local Tuya IR gateway. Check the IP, Device ID, Local Key, child device ID and protocol."
+    }
+  },
+  "selector": {
+    "setup_mode": {
+      "options": {
+        "cloud": "Tuya / Smart Life — reuse an existing login or sign in with QR",
+        "manual": "Manual local setup — IP, Device ID and Local Key",
+        "cloud_fresh_login": "Tuya / Smart Life — start a fresh QR login"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manage infrared remotes",
+        "menu_options": {
+          "create_remote": "Add remote",
+          "manage_remote": "Manage existing remote",
+          "interface": "Interface"
+        }
+      },
+      "create_remote": {
+        "title": "Add a virtual IR remote",
+        "description": "A remote device and entity will be created in Home Assistant. The selected IR transmitter will learn and send commands; buttons are added only after learning.",
+        "data": {
+          "name": "Remote name",
+          "remote_entity": "IR transmitter",
+          "icon": "Icon (optional)"
+        }
+      },
+      "manage_remote": {
+        "title": "Choose a remote",
+        "data": {
+          "profile_id": "Remote"
+        }
+      },
+      "manage_actions": {
+        "title": "Manage remote commands",
+        "menu_options": {
+          "add_command": "Learn a command",
+          "rename_remote": "Rename remote",
+          "remove_remote": "Delete remote",
+          "finish": "Done",
+          "change_icon": "Choose icon",
+          "manage_button": "Manage button"
+        }
+      },
+      "add_command": {
+        "title": "Learn a button",
+        "description": "Choose a command label from the library or enter a custom one (for example Power, Mute or VOL +). Then point the original remote at the IR hub and press the button.",
+        "data": {
+          "name": "Button label"
+        }
+      },
+      "rename_remote": {
+        "title": "Rename remote",
+        "description": "Changing the visible name does not change the learned signal namespace or Home Assistant entity IDs.",
+        "data": {
+          "name": "Remote name"
+        }
+      },
+      "remove_command": {
+        "title": "Remove button",
+        "description": "Delete the selected button from the virtual remote? Physical-driver IR storage is not deleted.",
+        "data": {
+          "confirm": "Remove button"
+        }
+      },
+      "remove_remote": {
+        "title": "Delete remote {name}",
+        "description": "This removes its Home Assistant virtual remote and buttons. Physical hub and separately stored driver signals remain untouched.",
+        "data": {
+          "confirm": "Delete this remote"
+        }
+      },
+      "interface": {
+        "title": "Advanced editor",
+        "description": "For most users, Home Assistant's Configure wizard is sufficient. The optional legacy editor adds a sidebar item.",
+        "data": {
+          "show_panel": "Show advanced IR Studio panel in sidebar"
+        }
+      },
+      "rename_command": {
+        "title": "Rename button",
+        "description": "The visible label changes; the stored IR signal does not.",
+        "data": {
+          "name": "New button label"
+        }
+      },
+      "change_icon": {
+        "title": "Remote icon",
+        "description": "Choose an icon from Home Assistant's visual MDI picker. Signals remain unchanged.",
+        "data": {
+          "icon": "Icon"
+        }
+      },
+      "manage_button": {
+        "title": "Choose a button",
+        "data": {
+          "button_id": "Button"
+        }
+      },
+      "button_actions": {
+        "title": "Manage selected button",
+        "menu_options": {
+          "test_button": "Test send",
+          "relearn_button": "Relearn IR code",
+          "rename_command": "Rename",
+          "remove_command": "Delete",
+          "choose_another_button": "Choose another button"
+        }
+      },
+      "test_button": {
+        "title": "Test button",
+        "description": "On confirmation, send the IR command ONCE. A successful call does not prove the appliance received it.",
+        "data": {
+          "confirm": "Send once"
+        }
+      },
+      "relearn_button": {
+        "title": "Relearn button",
+        "description": "Learn a replacement signal. The button name, HA unique ID and IR command namespace remain unchanged.",
+        "data": {
+          "confirm": "Begin re-learning"
+        }
+      }
+    },
+    "progress": {
+      "learn": "Waiting for the original remote's IR signal"
+    },
+    "abort": {
+      "saved": "Saved",
+      "not_ready": "IR Studio is not ready. Check the integration status.",
+      "no_hub": "No available physical IR transmitter.",
+      "no_profiles": "No remote has been created yet."
+    },
+    "error": {
+      "limit_reached": "Profile/command limit reached.",
+      "name_exists": "Name is already used.",
+      "invalid_input": "Check the entered values.",
+      "no_hub": "The IR transmitter is unavailable.",
+      "learn_failed": "Learning failed. Check Home Assistant logs and try again.",
+      "confirmation_required": "Please confirm before deleting.",
+      "busy": "An IR learning job is still running.",
+      "send_failed": "IR transmission failed. Check gateway and logs.",
+      "not_learned": "Learn this command first."
+    }
+  }
+}

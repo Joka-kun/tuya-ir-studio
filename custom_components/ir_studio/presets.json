@@ -1,0 +1,2008 @@
+{
+  "schema_version": 2,
+  "commands": {
+    "power": {
+      "key": "Power",
+      "labels": {
+        "en": "Power",
+        "ru": "Power"
+      },
+      "legacy_ru": "Вкл/Выкл"
+    },
+    "power_on": {
+      "key": "PowerOn",
+      "labels": {
+        "en": "Power On",
+        "ru": "Power On"
+      },
+      "legacy_ru": "Включить"
+    },
+    "power_off": {
+      "key": "PowerOff",
+      "labels": {
+        "en": "Power Off",
+        "ru": "Power Off"
+      },
+      "legacy_ru": "Выключить"
+    },
+    "input": {
+      "key": "Input",
+      "labels": {
+        "en": "Input",
+        "ru": "Input"
+      },
+      "legacy_ru": "Вход"
+    },
+    "source": {
+      "key": "Source",
+      "labels": {
+        "en": "Source",
+        "ru": "Source"
+      },
+      "legacy_ru": "Источник"
+    },
+    "home": {
+      "key": "Home",
+      "labels": {
+        "en": "Home",
+        "ru": "Home"
+      },
+      "legacy_ru": "Домой"
+    },
+    "back": {
+      "key": "Back",
+      "labels": {
+        "en": "Back",
+        "ru": "Back"
+      },
+      "legacy_ru": "Назад"
+    },
+    "menu": {
+      "key": "Menu",
+      "labels": {
+        "en": "Menu",
+        "ru": "Menu"
+      },
+      "legacy_ru": "Меню"
+    },
+    "info": {
+      "key": "Info",
+      "labels": {
+        "en": "Info",
+        "ru": "Info"
+      },
+      "legacy_ru": "Информация"
+    },
+    "guide": {
+      "key": "Guide",
+      "labels": {
+        "en": "EPG",
+        "ru": "EPG"
+      },
+      "legacy_ru": "Телегид / EPG"
+    },
+    "settings": {
+      "key": "Settings",
+      "labels": {
+        "en": "Settings",
+        "ru": "Settings"
+      },
+      "legacy_ru": "Настройки"
+    },
+    "up": {
+      "key": "Up",
+      "labels": {
+        "en": "Up",
+        "ru": "Up"
+      },
+      "legacy_ru": "Вверх"
+    },
+    "down": {
+      "key": "Down",
+      "labels": {
+        "en": "Down",
+        "ru": "Down"
+      },
+      "legacy_ru": "Вниз"
+    },
+    "left": {
+      "key": "Left",
+      "labels": {
+        "en": "Left",
+        "ru": "Left"
+      },
+      "legacy_ru": "Влево"
+    },
+    "right": {
+      "key": "Right",
+      "labels": {
+        "en": "Right",
+        "ru": "Right"
+      },
+      "legacy_ru": "Вправо"
+    },
+    "ok": {
+      "key": "OK",
+      "labels": {
+        "en": "OK",
+        "ru": "OK"
+      },
+      "legacy_ru": "OK / Ввод"
+    },
+    "volume_up": {
+      "key": "Volume+",
+      "labels": {
+        "en": "VOL +",
+        "ru": "VOL +"
+      },
+      "legacy_ru": "Громкость +"
+    },
+    "volume_down": {
+      "key": "Volume-",
+      "labels": {
+        "en": "VOL -",
+        "ru": "VOL -"
+      },
+      "legacy_ru": "Громкость −",
+      "legacy_en": "VOL −"
+    },
+    "mute": {
+      "key": "Mute",
+      "labels": {
+        "en": "Mute",
+        "ru": "Mute"
+      },
+      "legacy_ru": "Без звука"
+    },
+    "channel_up": {
+      "key": "Channel+",
+      "labels": {
+        "en": "CH +",
+        "ru": "CH +"
+      },
+      "legacy_ru": "Канал +"
+    },
+    "channel_down": {
+      "key": "Channel-",
+      "labels": {
+        "en": "CH -",
+        "ru": "CH -"
+      },
+      "legacy_ru": "Канал −",
+      "legacy_en": "CH −"
+    },
+    "digit_0": {
+      "key": "0",
+      "labels": {
+        "en": "0",
+        "ru": "0"
+      }
+    },
+    "digit_1": {
+      "key": "1",
+      "labels": {
+        "en": "1",
+        "ru": "1"
+      }
+    },
+    "digit_2": {
+      "key": "2",
+      "labels": {
+        "en": "2",
+        "ru": "2"
+      }
+    },
+    "digit_3": {
+      "key": "3",
+      "labels": {
+        "en": "3",
+        "ru": "3"
+      }
+    },
+    "digit_4": {
+      "key": "4",
+      "labels": {
+        "en": "4",
+        "ru": "4"
+      }
+    },
+    "digit_5": {
+      "key": "5",
+      "labels": {
+        "en": "5",
+        "ru": "5"
+      }
+    },
+    "digit_6": {
+      "key": "6",
+      "labels": {
+        "en": "6",
+        "ru": "6"
+      }
+    },
+    "digit_7": {
+      "key": "7",
+      "labels": {
+        "en": "7",
+        "ru": "7"
+      }
+    },
+    "digit_8": {
+      "key": "8",
+      "labels": {
+        "en": "8",
+        "ru": "8"
+      }
+    },
+    "digit_9": {
+      "key": "9",
+      "labels": {
+        "en": "9",
+        "ru": "9"
+      }
+    },
+    "dash": {
+      "key": "-/--",
+      "labels": {
+        "en": "-/--",
+        "ru": "-/--"
+      }
+    },
+    "subtitle": {
+      "key": "Subtitle",
+      "labels": {
+        "en": "Subtitles",
+        "ru": "Subtitles"
+      },
+      "legacy_ru": "Субтитры"
+    },
+    "audio_track": {
+      "key": "Audio",
+      "labels": {
+        "en": "Audio track",
+        "ru": "Audio track"
+      },
+      "legacy_ru": "Аудиодорожка"
+    },
+    "sleep": {
+      "key": "Sleep",
+      "labels": {
+        "en": "Sleep",
+        "ru": "Sleep"
+      },
+      "legacy_ru": "Таймер сна"
+    },
+    "play_pause": {
+      "key": "PlayPause",
+      "labels": {
+        "en": "Play/Pause",
+        "ru": "Play/Pause"
+      },
+      "legacy_ru": "Воспроизведение / Пауза"
+    },
+    "play": {
+      "key": "Play",
+      "labels": {
+        "en": "Play",
+        "ru": "Play"
+      },
+      "legacy_ru": "Воспроизвести"
+    },
+    "pause": {
+      "key": "Pause",
+      "labels": {
+        "en": "Pause",
+        "ru": "Pause"
+      },
+      "legacy_ru": "Пауза"
+    },
+    "stop": {
+      "key": "Stop",
+      "labels": {
+        "en": "Stop",
+        "ru": "Stop"
+      },
+      "legacy_ru": "Стоп"
+    },
+    "rewind": {
+      "key": "Rewind",
+      "labels": {
+        "en": "Rewind",
+        "ru": "Rewind"
+      },
+      "legacy_ru": "Перемотка назад"
+    },
+    "fast_forward": {
+      "key": "FastForward",
+      "labels": {
+        "en": "Fast forward",
+        "ru": "Fast forward"
+      },
+      "legacy_ru": "Перемотка вперёд"
+    },
+    "previous": {
+      "key": "Previous",
+      "labels": {
+        "en": "Previous",
+        "ru": "Previous"
+      },
+      "legacy_ru": "Предыдущий"
+    },
+    "next": {
+      "key": "Next",
+      "labels": {
+        "en": "Next",
+        "ru": "Next"
+      },
+      "legacy_ru": "Следующий"
+    },
+    "record": {
+      "key": "Record",
+      "labels": {
+        "en": "Record",
+        "ru": "Record"
+      },
+      "legacy_ru": "Запись"
+    },
+    "eject": {
+      "key": "Eject",
+      "labels": {
+        "en": "Eject",
+        "ru": "Eject"
+      },
+      "legacy_ru": "Извлечь диск"
+    },
+    "repeat": {
+      "key": "Repeat",
+      "labels": {
+        "en": "Repeat",
+        "ru": "Repeat"
+      },
+      "legacy_ru": "Повтор"
+    },
+    "favorites": {
+      "key": "Favorites",
+      "labels": {
+        "en": "Favorites",
+        "ru": "Favorites"
+      },
+      "legacy_ru": "Избранное"
+    },
+    "last_channel": {
+      "key": "LastChannel",
+      "labels": {
+        "en": "Last channel",
+        "ru": "Last channel"
+      },
+      "legacy_ru": "Предыдущий канал"
+    },
+    "sound_mode": {
+      "key": "SoundMode",
+      "labels": {
+        "en": "Sound mode",
+        "ru": "Sound mode"
+      },
+      "legacy_ru": "Режим звука"
+    },
+    "bass_up": {
+      "key": "Bass+",
+      "labels": {
+        "en": "BASS +",
+        "ru": "BASS +"
+      },
+      "legacy_ru": "Бас +"
+    },
+    "bass_down": {
+      "key": "Bass-",
+      "labels": {
+        "en": "BASS -",
+        "ru": "BASS -"
+      },
+      "legacy_ru": "Бас −",
+      "legacy_en": "BASS −"
+    },
+    "treble_up": {
+      "key": "Treble+",
+      "labels": {
+        "en": "TREBLE +",
+        "ru": "TREBLE +"
+      },
+      "legacy_ru": "Высокие +"
+    },
+    "treble_down": {
+      "key": "Treble-",
+      "labels": {
+        "en": "TREBLE -",
+        "ru": "TREBLE -"
+      },
+      "legacy_ru": "Высокие −",
+      "legacy_en": "TREBLE −"
+    },
+    "surround": {
+      "key": "Surround",
+      "labels": {
+        "en": "Surround",
+        "ru": "Surround"
+      },
+      "legacy_ru": "Объёмный звук"
+    },
+    "night_mode": {
+      "key": "NightMode",
+      "labels": {
+        "en": "Night mode",
+        "ru": "Night mode"
+      },
+      "legacy_ru": "Ночной режим"
+    },
+    "stereo": {
+      "key": "Stereo",
+      "labels": {
+        "en": "Stereo",
+        "ru": "Stereo"
+      },
+      "legacy_ru": "Стерео"
+    },
+    "radio": {
+      "key": "Radio",
+      "labels": {
+        "en": "Radio",
+        "ru": "Radio"
+      },
+      "legacy_ru": "Радио"
+    },
+    "preset_up": {
+      "key": "Preset+",
+      "labels": {
+        "en": "PRESET +",
+        "ru": "PRESET +"
+      },
+      "legacy_ru": "Станция +"
+    },
+    "preset_down": {
+      "key": "Preset-",
+      "labels": {
+        "en": "PRESET -",
+        "ru": "PRESET -"
+      },
+      "legacy_ru": "Станция −",
+      "legacy_en": "PRESET −"
+    },
+    "zone_2": {
+      "key": "Zone2",
+      "labels": {
+        "en": "Zone 2",
+        "ru": "Zone 2"
+      },
+      "legacy_ru": "Зона 2"
+    },
+    "auto": {
+      "key": "Auto",
+      "labels": {
+        "en": "Auto",
+        "ru": "Auto"
+      },
+      "legacy_ru": "Авто"
+    },
+    "cool": {
+      "key": "Cool",
+      "labels": {
+        "en": "Cool",
+        "ru": "Cool"
+      },
+      "legacy_ru": "Охлаждение"
+    },
+    "heat": {
+      "key": "Heat",
+      "labels": {
+        "en": "Heat",
+        "ru": "Heat"
+      },
+      "legacy_ru": "Обогрев"
+    },
+    "dry": {
+      "key": "Dry",
+      "labels": {
+        "en": "Dry",
+        "ru": "Dry"
+      },
+      "legacy_ru": "Осушение"
+    },
+    "fan": {
+      "key": "Fan",
+      "labels": {
+        "en": "Fan",
+        "ru": "Fan"
+      },
+      "legacy_ru": "Вентиляция"
+    },
+    "temp_up": {
+      "key": "Temp+",
+      "labels": {
+        "en": "TEMP +",
+        "ru": "TEMP +"
+      },
+      "legacy_ru": "Температура +"
+    },
+    "temp_down": {
+      "key": "Temp-",
+      "labels": {
+        "en": "TEMP -",
+        "ru": "TEMP -"
+      },
+      "legacy_ru": "Температура −",
+      "legacy_en": "TEMP −"
+    },
+    "fan_speed": {
+      "key": "FanSpeed",
+      "labels": {
+        "en": "Fan speed",
+        "ru": "Fan speed"
+      },
+      "legacy_ru": "Скорость вентилятора"
+    },
+    "swing": {
+      "key": "Swing",
+      "labels": {
+        "en": "Swing",
+        "ru": "Swing"
+      },
+      "legacy_ru": "Жалюзи"
+    },
+    "turbo": {
+      "key": "Turbo",
+      "labels": {
+        "en": "Turbo",
+        "ru": "Turbo"
+      },
+      "legacy_ru": "Турбо"
+    },
+    "eco": {
+      "key": "Eco",
+      "labels": {
+        "en": "Eco",
+        "ru": "Eco"
+      },
+      "legacy_ru": "Эко"
+    },
+    "quiet": {
+      "key": "Quiet",
+      "labels": {
+        "en": "Quiet",
+        "ru": "Quiet"
+      },
+      "legacy_ru": "Тихий режим"
+    },
+    "display": {
+      "key": "Display",
+      "labels": {
+        "en": "Display",
+        "ru": "Display"
+      },
+      "legacy_ru": "Дисплей"
+    },
+    "timer": {
+      "key": "Timer",
+      "labels": {
+        "en": "Timer",
+        "ru": "Timer"
+      },
+      "legacy_ru": "Таймер"
+    },
+    "follow_me": {
+      "key": "FollowMe",
+      "labels": {
+        "en": "Follow me",
+        "ru": "Follow me"
+      },
+      "legacy_ru": "Следуй за мной"
+    },
+    "speed_1": {
+      "key": "Speed1",
+      "labels": {
+        "en": "Speed 1",
+        "ru": "Speed 1"
+      },
+      "legacy_ru": "Скорость 1"
+    },
+    "speed_2": {
+      "key": "Speed2",
+      "labels": {
+        "en": "Speed 2",
+        "ru": "Speed 2"
+      },
+      "legacy_ru": "Скорость 2"
+    },
+    "speed_3": {
+      "key": "Speed3",
+      "labels": {
+        "en": "Speed 3",
+        "ru": "Speed 3"
+      },
+      "legacy_ru": "Скорость 3"
+    },
+    "natural": {
+      "key": "Natural",
+      "labels": {
+        "en": "Natural breeze",
+        "ru": "Natural breeze"
+      },
+      "legacy_ru": "Естественный ветер"
+    },
+    "oscillation": {
+      "key": "Oscillation",
+      "labels": {
+        "en": "Oscillation",
+        "ru": "Oscillation"
+      },
+      "legacy_ru": "Поворот"
+    },
+    "reverse": {
+      "key": "Reverse",
+      "labels": {
+        "en": "Reverse",
+        "ru": "Reverse"
+      },
+      "legacy_ru": "Реверс"
+    },
+    "ionizer": {
+      "key": "Ionizer",
+      "labels": {
+        "en": "Ionizer",
+        "ru": "Ionizer"
+      },
+      "legacy_ru": "Ионизация"
+    },
+    "uv": {
+      "key": "UV",
+      "labels": {
+        "en": "UV",
+        "ru": "UV"
+      },
+      "legacy_ru": "УФ"
+    },
+    "mist_level": {
+      "key": "MistLevel",
+      "labels": {
+        "en": "Mist level",
+        "ru": "Mist level"
+      },
+      "legacy_ru": "Интенсивность пара"
+    },
+    "humidity_up": {
+      "key": "Humidity+",
+      "labels": {
+        "en": "HUM +",
+        "ru": "HUM +"
+      },
+      "legacy_ru": "Влажность +"
+    },
+    "humidity_down": {
+      "key": "Humidity-",
+      "labels": {
+        "en": "HUM -",
+        "ru": "HUM -"
+      },
+      "legacy_ru": "Влажность −",
+      "legacy_en": "HUM −"
+    },
+    "warm_mist": {
+      "key": "WarmMist",
+      "labels": {
+        "en": "Warm mist",
+        "ru": "Warm mist"
+      },
+      "legacy_ru": "Тёплый пар"
+    },
+    "light": {
+      "key": "Light",
+      "labels": {
+        "en": "Light",
+        "ru": "Light"
+      },
+      "legacy_ru": "Подсветка"
+    },
+    "brightness_up": {
+      "key": "Brightness+",
+      "labels": {
+        "en": "BRIGHT +",
+        "ru": "BRIGHT +"
+      },
+      "legacy_ru": "Яркость +"
+    },
+    "brightness_down": {
+      "key": "Brightness-",
+      "labels": {
+        "en": "BRIGHT -",
+        "ru": "BRIGHT -"
+      },
+      "legacy_ru": "Яркость −",
+      "legacy_en": "BRIGHT −"
+    },
+    "white": {
+      "key": "White",
+      "labels": {
+        "en": "White mode",
+        "ru": "White mode"
+      },
+      "legacy_ru": "Белый режим"
+    },
+    "warm_white": {
+      "key": "WarmWhite",
+      "labels": {
+        "en": "Warm white",
+        "ru": "Warm white"
+      },
+      "legacy_ru": "Тёплый белый"
+    },
+    "cool_white": {
+      "key": "CoolWhite",
+      "labels": {
+        "en": "Cool white",
+        "ru": "Cool white"
+      },
+      "legacy_ru": "Холодный белый"
+    },
+    "red": {
+      "key": "Red",
+      "labels": {
+        "en": "Red",
+        "ru": "Red"
+      },
+      "legacy_ru": "Красный"
+    },
+    "green": {
+      "key": "Green",
+      "labels": {
+        "en": "Green",
+        "ru": "Green"
+      },
+      "legacy_ru": "Зелёный"
+    },
+    "blue": {
+      "key": "Blue",
+      "labels": {
+        "en": "Blue",
+        "ru": "Blue"
+      },
+      "legacy_ru": "Синий"
+    },
+    "color_cycle": {
+      "key": "ColorCycle",
+      "labels": {
+        "en": "Color cycle",
+        "ru": "Color cycle"
+      },
+      "legacy_ru": "Смена цветов"
+    },
+    "scene_1": {
+      "key": "Scene1",
+      "labels": {
+        "en": "Scene 1",
+        "ru": "Scene 1"
+      },
+      "legacy_ru": "Сцена 1"
+    },
+    "scene_2": {
+      "key": "Scene2",
+      "labels": {
+        "en": "Scene 2",
+        "ru": "Scene 2"
+      },
+      "legacy_ru": "Сцена 2"
+    },
+    "scene_3": {
+      "key": "Scene3",
+      "labels": {
+        "en": "Scene 3",
+        "ru": "Scene 3"
+      },
+      "legacy_ru": "Сцена 3"
+    },
+    "scene_4": {
+      "key": "Scene4",
+      "labels": {
+        "en": "Scene 4",
+        "ru": "Scene 4"
+      },
+      "legacy_ru": "Сцена 4"
+    },
+    "effect_speed_up": {
+      "key": "EffectSpeed+",
+      "labels": {
+        "en": "SPEED +",
+        "ru": "SPEED +"
+      },
+      "legacy_ru": "Скорость эффекта +"
+    },
+    "effect_speed_down": {
+      "key": "EffectSpeed-",
+      "labels": {
+        "en": "SPEED -",
+        "ru": "SPEED -"
+      },
+      "legacy_ru": "Скорость эффекта −",
+      "legacy_en": "SPEED −"
+    },
+    "shutter": {
+      "key": "Shutter",
+      "labels": {
+        "en": "Shutter",
+        "ru": "Shutter"
+      },
+      "legacy_ru": "Спуск затвора"
+    },
+    "delayed_shutter": {
+      "key": "DelayedShutter",
+      "labels": {
+        "en": "Delayed shutter",
+        "ru": "Delayed shutter"
+      },
+      "legacy_ru": "Отложенный спуск"
+    },
+    "video_start_stop": {
+      "key": "VideoStartStop",
+      "labels": {
+        "en": "Start / stop video",
+        "ru": "Start / stop video"
+      },
+      "legacy_ru": "Старт / стоп видео"
+    },
+    "clean": {
+      "key": "Clean",
+      "labels": {
+        "en": "Clean",
+        "ru": "Clean"
+      },
+      "legacy_ru": "Уборка"
+    },
+    "dock": {
+      "key": "Dock",
+      "labels": {
+        "en": "Dock",
+        "ru": "Dock"
+      },
+      "legacy_ru": "На базу"
+    },
+    "spot": {
+      "key": "Spot",
+      "labels": {
+        "en": "Spot clean",
+        "ru": "Spot clean"
+      },
+      "legacy_ru": "Локальная уборка"
+    },
+    "edge": {
+      "key": "Edge",
+      "labels": {
+        "en": "Edge clean",
+        "ru": "Edge clean"
+      },
+      "legacy_ru": "Уборка вдоль стен"
+    },
+    "direction_up": {
+      "key": "DirectionUp",
+      "labels": {
+        "en": "Move forward",
+        "ru": "Move forward"
+      },
+      "legacy_ru": "Вперёд"
+    },
+    "direction_down": {
+      "key": "DirectionDown",
+      "labels": {
+        "en": "Move backward",
+        "ru": "Move backward"
+      },
+      "legacy_ru": "Назад"
+    },
+    "direction_left": {
+      "key": "DirectionLeft",
+      "labels": {
+        "en": "Turn left",
+        "ru": "Turn left"
+      },
+      "legacy_ru": "Поворот влево"
+    },
+    "direction_right": {
+      "key": "DirectionRight",
+      "labels": {
+        "en": "Turn right",
+        "ru": "Turn right"
+      },
+      "legacy_ru": "Поворот вправо"
+    },
+    "mode": {
+      "key": "Mode",
+      "labels": {
+        "en": "Mode",
+        "ru": "Mode"
+      },
+      "legacy_ru": "Режим"
+    },
+    "child_lock": {
+      "key": "ChildLock",
+      "labels": {
+        "en": "Child lock",
+        "ru": "Child lock"
+      },
+      "legacy_ru": "Блокировка от детей"
+    },
+    "continuous": {
+      "key": "Continuous",
+      "labels": {
+        "en": "Continuous",
+        "ru": "Continuous"
+      },
+      "legacy_ru": "Непрерывный режим"
+    },
+    "laundry": {
+      "key": "Laundry",
+      "labels": {
+        "en": "Laundry",
+        "ru": "Laundry"
+      },
+      "legacy_ru": "Сушка белья"
+    },
+    "night_light": {
+      "key": "NightLight",
+      "labels": {
+        "en": "Night light",
+        "ru": "Night light"
+      },
+      "legacy_ru": "Ночник"
+    }
+  },
+  "categories": [
+    {
+      "id": "television",
+      "labels": {
+        "en": "Televisions",
+        "ru": "Телевизоры"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for televisions. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Телевизоры». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "tv_standard",
+          "labels": {
+            "en": "Standard TV",
+            "ru": "Обычный телевизор"
+          },
+          "descriptions": {
+            "en": "A classic television remote layout.",
+            "ru": "Классическая раскладка телевизионного пульта."
+          },
+          "buttons": [
+            "power",
+            "input",
+            "menu",
+            "back",
+            "info",
+            "guide",
+            "up",
+            "down",
+            "left",
+            "right",
+            "ok",
+            "volume_up",
+            "volume_down",
+            "mute",
+            "channel_up",
+            "channel_down"
+          ]
+        },
+        {
+          "id": "tv_smart",
+          "labels": {
+            "en": "Smart TV",
+            "ru": "Smart TV"
+          },
+          "descriptions": {
+            "en": "Smart TV with app navigation and media controls.",
+            "ru": "Smart TV с навигацией по приложениям и мультимедиа."
+          },
+          "buttons": [
+            "power",
+            "home",
+            "back",
+            "menu",
+            "settings",
+            "up",
+            "down",
+            "left",
+            "right",
+            "ok",
+            "volume_up",
+            "volume_down",
+            "mute",
+            "input",
+            "play_pause"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projector",
+      "labels": {
+        "en": "Projectors",
+        "ru": "Проекторы"
+      },
+      "templates": [
+        {
+          "id": "projector",
+          "labels": {
+            "en": "Projector",
+            "ru": "Проектор"
+          },
+          "descriptions": {
+            "en": "Device type only; choose real commands explicitly",
+            "ru": "Только тип устройства; команды выбираются вручную"
+          },
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "id": "set_top_box",
+      "labels": {
+        "en": "Set-top boxes and receivers",
+        "ru": "Приставки и ресиверы"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for set-top boxes and receivers. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Приставки и ресиверы». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "stb_general",
+          "labels": {
+            "en": "TV set-top box",
+            "ru": "ТВ-приставка"
+          },
+          "descriptions": {
+            "en": "Cable, terrestrial and general-purpose receivers.",
+            "ru": "Кабельные, эфирные и универсальные ресиверы."
+          },
+          "buttons": [
+            "power",
+            "menu",
+            "back",
+            "info",
+            "guide",
+            "up",
+            "down",
+            "left",
+            "right",
+            "ok",
+            "channel_up",
+            "channel_down",
+            "volume_up",
+            "volume_down",
+            "mute"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streaming_player",
+      "labels": {
+        "en": "Streaming media players",
+        "ru": "Медиаплееры и Smart TV Box"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for streaming media players. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Медиаплееры и Smart TV Box». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "streaming_player",
+          "labels": {
+            "en": "Streaming / Android TV box",
+            "ru": "Стриминговая / Android TV-приставка"
+          },
+          "descriptions": {
+            "en": "For streaming boxes that support infrared control. Bluetooth-only remotes are not supported.",
+            "ru": "Для медиаприставок с ИК-управлением. Пульты только с Bluetooth не поддерживаются."
+          },
+          "buttons": [
+            "power",
+            "home",
+            "back",
+            "menu",
+            "up",
+            "down",
+            "left",
+            "right",
+            "ok",
+            "volume_up",
+            "volume_down",
+            "mute",
+            "play_pause"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "disc_player",
+      "labels": {
+        "en": "Disc players and recorders",
+        "ru": "Проигрыватели и рекордеры"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for disc players and recorders. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Проигрыватели и рекордеры». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "dvd_bluray",
+          "labels": {
+            "en": "DVD / Blu-ray player",
+            "ru": "DVD / Blu-ray-плеер"
+          },
+          "descriptions": {
+            "en": "DVD and Blu-ray player controls.",
+            "ru": "Команды DVD- и Blu-ray-проигрывателей."
+          },
+          "buttons": [
+            "power",
+            "eject",
+            "play",
+            "pause",
+            "stop",
+            "previous",
+            "next",
+            "rewind",
+            "fast_forward",
+            "menu",
+            "up",
+            "down",
+            "ok"
+          ]
+        },
+        {
+          "id": "dvr_vcr",
+          "labels": {
+            "en": "DVR / VCR",
+            "ru": "DVR / видеомагнитофон"
+          },
+          "descriptions": {
+            "en": "Video recorders and legacy VCRs with IR remotes.",
+            "ru": "Видеорекордеры и старые видеомагнитофоны с ИК-пультами."
+          },
+          "buttons": [
+            "power",
+            "play",
+            "pause",
+            "stop",
+            "record",
+            "rewind",
+            "fast_forward",
+            "previous",
+            "next",
+            "eject"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "audio",
+      "labels": {
+        "en": "Audio equipment",
+        "ru": "Аудиотехника"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for audio equipment. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Аудиотехника». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "soundbar",
+          "labels": {
+            "en": "Soundbar",
+            "ru": "Саундбар"
+          },
+          "descriptions": {
+            "en": "Soundbars and compact home-audio systems.",
+            "ru": "Саундбары и компактные аудиосистемы."
+          },
+          "buttons": [
+            "power",
+            "volume_up",
+            "volume_down",
+            "mute",
+            "input",
+            "sound_mode",
+            "surround",
+            "bass_up",
+            "bass_down",
+            "night_mode"
+          ]
+        },
+        {
+          "id": "av_receiver",
+          "labels": {
+            "en": "AV receiver / home theater",
+            "ru": "AV-ресивер / домашний кинотеатр"
+          },
+          "descriptions": {
+            "en": "Receivers, amplifiers and multi-channel home theaters.",
+            "ru": "Ресиверы, усилители и многоканальные домашние кинотеатры."
+          },
+          "buttons": [
+            "power",
+            "volume_up",
+            "volume_down",
+            "mute",
+            "input",
+            "source",
+            "sound_mode",
+            "surround",
+            "stereo",
+            "radio",
+            "preset_up",
+            "preset_down"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "air_conditioner",
+      "labels": {
+        "en": "Air conditioners",
+        "ru": "Кондиционеры"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for air conditioners. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Кондиционеры». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "split_ac",
+          "labels": {
+            "en": "Split air conditioner",
+            "ru": "Сплит-система"
+          },
+          "descriptions": {
+            "en": "Template only: many AC remotes transmit a complete state frame, not independent button codes.",
+            "ru": "Только заготовка: многие кондиционеры передают полный кадр состояния, а не отдельный код кнопки."
+          },
+          "buttons": [
+            "power",
+            "auto",
+            "cool",
+            "heat",
+            "dry",
+            "fan",
+            "temp_up",
+            "temp_down",
+            "fan_speed",
+            "swing",
+            "turbo",
+            "eco",
+            "sleep",
+            "timer"
+          ]
+        },
+        {
+          "id": "portable_ac",
+          "labels": {
+            "en": "Portable / window AC",
+            "ru": "Мобильный / оконный кондиционер"
+          },
+          "descriptions": {
+            "en": "Portable and window air conditioners with IR receivers.",
+            "ru": "Мобильные и оконные кондиционеры с ИК-приёмником."
+          },
+          "buttons": [
+            "power",
+            "mode",
+            "cool",
+            "dry",
+            "fan",
+            "temp_up",
+            "temp_down",
+            "fan_speed",
+            "timer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fan",
+      "labels": {
+        "en": "Fans",
+        "ru": "Вентиляторы"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for fans. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Вентиляторы». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "floor_tower_fan",
+          "labels": {
+            "en": "Floor / tower fan",
+            "ru": "Напольный / башенный вентилятор"
+          },
+          "descriptions": {
+            "en": "Standing, desk and tower fans.",
+            "ru": "Напольные, настольные и башенные вентиляторы."
+          },
+          "buttons": [
+            "power",
+            "speed_1",
+            "speed_2",
+            "speed_3",
+            "natural",
+            "sleep",
+            "oscillation",
+            "timer"
+          ]
+        },
+        {
+          "id": "ceiling_fan",
+          "labels": {
+            "en": "Ceiling fan",
+            "ru": "Потолочный вентилятор"
+          },
+          "descriptions": {
+            "en": "Only ceiling fans with an infrared handheld remote.",
+            "ru": "Только потолочные вентиляторы с ИК-пультом."
+          },
+          "buttons": [
+            "power",
+            "speed_1",
+            "speed_2",
+            "speed_3",
+            "reverse",
+            "light",
+            "brightness_up",
+            "brightness_down"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heater",
+      "labels": {
+        "en": "Heaters",
+        "ru": "Обогреватели"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for heaters. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Обогреватели». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "electric_heater",
+          "labels": {
+            "en": "Electric heater / convector",
+            "ru": "Электрообогреватель / конвектор"
+          },
+          "descriptions": {
+            "en": "Electric heaters with an IR remote.",
+            "ru": "Электрообогреватели с ИК-пультом."
+          },
+          "buttons": [
+            "power",
+            "temp_up",
+            "temp_down",
+            "mode",
+            "eco",
+            "timer",
+            "child_lock"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "air_purifier",
+      "labels": {
+        "en": "Air purifiers",
+        "ru": "Очистители воздуха"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for air purifiers. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Очистители воздуха». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "air_purifier",
+          "labels": {
+            "en": "Air purifier",
+            "ru": "Очиститель воздуха"
+          },
+          "descriptions": {
+            "en": "Air purifiers and ionizers with IR remotes.",
+            "ru": "Очистители воздуха и ионизаторы с ИК-пультами."
+          },
+          "buttons": [
+            "power",
+            "auto",
+            "speed_1",
+            "speed_2",
+            "sleep",
+            "ionizer",
+            "timer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "humidifier_dehumidifier",
+      "labels": {
+        "en": "Humidifiers and dehumidifiers",
+        "ru": "Увлажнители и осушители"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for humidifiers and dehumidifiers. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Увлажнители и осушители». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "humidifier",
+          "labels": {
+            "en": "Humidifier",
+            "ru": "Увлажнитель воздуха"
+          },
+          "descriptions": {
+            "en": "Only models with an infrared remote.",
+            "ru": "Только модели с ИК-пультом."
+          },
+          "buttons": [
+            "power",
+            "mist_level",
+            "humidity_up",
+            "humidity_down",
+            "warm_mist",
+            "sleep",
+            "timer"
+          ]
+        },
+        {
+          "id": "dehumidifier",
+          "labels": {
+            "en": "Dehumidifier",
+            "ru": "Осушитель воздуха"
+          },
+          "descriptions": {
+            "en": "Only models with an infrared remote.",
+            "ru": "Только модели с ИК-пультом."
+          },
+          "buttons": [
+            "power",
+            "auto",
+            "humidity_up",
+            "humidity_down",
+            "fan_speed",
+            "continuous",
+            "timer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lighting",
+      "labels": {
+        "en": "Lighting and LED controllers",
+        "ru": "Освещение и LED-контроллеры"
+      },
+      "descriptions": {
+        "en": "Infrared LED strip and lighting-controller presets. White mode switches to a white-light channel; it is not a brightness or colour-temperature value.",
+        "ru": "Заготовки для ИК-контроллеров LED-лент и светильников. «Белый режим» переключает контроллер на белый канал, а не задаёт яркость или цветовую температуру."
+      },
+      "templates": [
+        {
+          "id": "rgb_controller",
+          "labels": {
+            "en": "RGB / RGBW controller",
+            "ru": "RGB / RGBW-контроллер"
+          },
+          "descriptions": {
+            "en": "IR LED strip and lighting controllers.",
+            "ru": "ИК-контроллеры светодиодных лент и светильников."
+          },
+          "buttons": [
+            "power",
+            "brightness_up",
+            "brightness_down",
+            "red",
+            "green",
+            "blue",
+            "white",
+            "color_cycle",
+            "scene_1",
+            "scene_2",
+            "scene_3"
+          ]
+        },
+        {
+          "id": "white_dimmer",
+          "labels": {
+            "ru": "Светильник",
+            "en": "Light fixture"
+          },
+          "descriptions": {
+            "ru": "ИК-светильник: включение, яркость и цветовая температура.",
+            "en": "IR light fixture: power, brightness and white temperature."
+          },
+          "buttons": [
+            "power",
+            "brightness_up",
+            "brightness_down",
+            "warm_white",
+            "cool_white"
+          ]
+        },
+        {
+          "id": "lamp",
+          "labels": {
+            "en": "Lamp",
+            "ru": "Лампа"
+          },
+          "descriptions": {
+            "en": "Infrared table and floor lamps with separate power and light controls.",
+            "ru": "Настольные и напольные лампы с ИК-пультом и отдельными командами питания и освещения."
+          },
+          "buttons": [
+            "power",
+            "brightness_up",
+            "brightness_down",
+            "warm_white",
+            "cool_white"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "camera",
+      "labels": {
+        "en": "Camera remotes",
+        "ru": "Пульты фотокамер"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for camera remotes. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Пульты фотокамер». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "camera_shutter",
+          "labels": {
+            "en": "IR camera shutter",
+            "ru": "ИК-спуск затвора камеры"
+          },
+          "descriptions": {
+            "en": "For cameras that explicitly support infrared remote control.",
+            "ru": "Для камер с поддержкой ИК-дистанционного управления."
+          },
+          "buttons": [
+            "shutter",
+            "delayed_shutter",
+            "video_start_stop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "robot_vacuum",
+      "labels": {
+        "en": "Robot vacuums",
+        "ru": "Роботы-пылесосы"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for robot vacuums. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Роботы-пылесосы». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "robot_vacuum_ir",
+          "labels": {
+            "en": "Robot vacuum (IR remote only)",
+            "ru": "Робот-пылесос (только ИК-пульт)"
+          },
+          "descriptions": {
+            "en": "Experimental category. Most robot vacuums use Wi-Fi or RF, not IR. Use only if the supplied remote is infrared.",
+            "ru": "Экспериментальная категория. Большинство роботов используют Wi-Fi или RF. Используй только при наличии ИК-пульта."
+          },
+          "buttons": [
+            "clean",
+            "pause",
+            "dock",
+            "spot",
+            "edge",
+            "direction_up",
+            "direction_down",
+            "direction_left",
+            "direction_right"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "water_heater",
+      "labels": {
+        "en": "Water heaters",
+        "ru": "Водонагреватели"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for water heaters. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Водонагреватели». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "water_heater_ir",
+          "labels": {
+            "en": "Water heater (IR remote)",
+            "ru": "Водонагреватель (ИК-пульт)"
+          },
+          "descriptions": {
+            "en": "Rare category; only selected models have an IR receiver.",
+            "ru": "Редкая категория: ИК-приёмник есть только у отдельных моделей."
+          },
+          "buttons": [
+            "power",
+            "temp_up",
+            "temp_down",
+            "mode",
+            "eco",
+            "timer"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "custom",
+      "labels": {
+        "en": "Custom device",
+        "ru": "Своё устройство"
+      },
+      "descriptions": {
+        "en": "Starter command layouts for custom device. Actual buttons depend on the device model.",
+        "ru": "Шаблоны команд для устройств категории «Своё устройство». Состав кнопок зависит от модели пульта."
+      },
+      "templates": [
+        {
+          "id": "blank_remote",
+          "labels": {
+            "en": "Blank remote",
+            "ru": "Пустой пульт"
+          },
+          "descriptions": {
+            "en": "Create an empty profile and add only the commands you need.",
+            "ru": "Создай пустой профиль и добавь только нужные команды."
+          },
+          "buttons": []
+        }
+      ]
+    }
+  ],
+  "button_sets": [
+    {
+      "id": "power",
+      "labels": {
+        "en": "Power and standby",
+        "ru": "Включение и выключение"
+      },
+      "descriptions": {
+        "en": "Toggle, discrete on and discrete off commands.",
+        "ru": "Переключение, отдельные команды включения и выключения."
+      },
+      "buttons": [
+        "power",
+        "power_on",
+        "power_off"
+      ]
+    },
+    {
+      "id": "navigation",
+      "labels": {
+        "en": "Navigation",
+        "ru": "Навигация"
+      },
+      "descriptions": {
+        "en": "Menu and directional controls.",
+        "ru": "Управление меню и навигацией."
+      },
+      "buttons": [
+        "home",
+        "back",
+        "menu",
+        "up",
+        "down",
+        "left",
+        "right",
+        "ok",
+        "settings"
+      ]
+    },
+    {
+      "id": "numeric_keypad",
+      "labels": {
+        "en": "Numeric keypad",
+        "ru": "Цифровая клавиатура"
+      },
+      "descriptions": {
+        "en": "Digits and channel-entry separator.",
+        "ru": "Цифры и разделитель ввода каналов."
+      },
+      "buttons": [
+        "digit_0",
+        "digit_1",
+        "digit_2",
+        "digit_3",
+        "digit_4",
+        "digit_5",
+        "digit_6",
+        "digit_7",
+        "digit_8",
+        "digit_9",
+        "dash"
+      ]
+    },
+    {
+      "id": "tv_channels",
+      "labels": {
+        "en": "TV channels",
+        "ru": "ТВ-каналы"
+      },
+      "descriptions": {
+        "en": "Channel, guide and broadcast controls.",
+        "ru": "Каналы, телегид и управление вещанием."
+      },
+      "buttons": [
+        "channel_up",
+        "channel_down",
+        "last_channel",
+        "guide",
+        "favorites",
+        "info",
+        "subtitle",
+        "audio_track"
+      ]
+    },
+    {
+      "id": "media_playback",
+      "labels": {
+        "en": "Media playback",
+        "ru": "Управление воспроизведением"
+      },
+      "descriptions": {
+        "en": "Transport controls for players and recorders.",
+        "ru": "Управление проигрывателями и рекордерами."
+      },
+      "buttons": [
+        "play_pause",
+        "play",
+        "pause",
+        "stop",
+        "rewind",
+        "fast_forward",
+        "previous",
+        "next",
+        "repeat",
+        "record",
+        "eject"
+      ]
+    },
+    {
+      "id": "audio",
+      "labels": {
+        "en": "Audio controls",
+        "ru": "Аудиоуправление"
+      },
+      "descriptions": {
+        "en": "Volume, input and sound processing.",
+        "ru": "Громкость, входы и обработка звука."
+      },
+      "buttons": [
+        "volume_up",
+        "volume_down",
+        "mute",
+        "input",
+        "source",
+        "sound_mode",
+        "surround",
+        "bass_up",
+        "bass_down",
+        "treble_up",
+        "treble_down",
+        "night_mode"
+      ]
+    },
+    {
+      "id": "climate",
+      "labels": {
+        "en": "Air conditioner",
+        "ru": "Кондиционер"
+      },
+      "descriptions": {
+        "en": "Common climate controls. Actual AC frames may encode full state.",
+        "ru": "Основные команды климата. Реальный кадр кондиционера может кодировать полное состояние."
+      },
+      "buttons": [
+        "power",
+        "auto",
+        "cool",
+        "heat",
+        "dry",
+        "fan",
+        "temp_up",
+        "temp_down",
+        "fan_speed",
+        "swing",
+        "turbo",
+        "eco",
+        "sleep",
+        "quiet",
+        "display",
+        "timer",
+        "follow_me"
+      ]
+    },
+    {
+      "id": "fan",
+      "labels": {
+        "en": "Fan controls",
+        "ru": "Вентилятор"
+      },
+      "descriptions": {
+        "en": "Fan speed, oscillation and timer.",
+        "ru": "Скорость, поворот и таймер вентилятора."
+      },
+      "buttons": [
+        "power",
+        "speed_1",
+        "speed_2",
+        "speed_3",
+        "natural",
+        "oscillation",
+        "reverse",
+        "timer"
+      ]
+    },
+    {
+      "id": "lighting",
+      "labels": {
+        "en": "Lighting controls",
+        "ru": "Освещение"
+      },
+      "descriptions": {
+        "en": "Brightness, color and scene controls.",
+        "ru": "Яркость, цвет и световые сцены."
+      },
+      "buttons": [
+        "power",
+        "brightness_up",
+        "brightness_down",
+        "white",
+        "warm_white",
+        "cool_white",
+        "red",
+        "green",
+        "blue",
+        "color_cycle",
+        "scene_1",
+        "scene_2",
+        "scene_3",
+        "scene_4",
+        "effect_speed_up",
+        "effect_speed_down"
+      ]
+    },
+    {
+      "id": "appliance_modes",
+      "labels": {
+        "en": "Appliance modes and timer",
+        "ru": "Режимы техники и таймер"
+      },
+      "descriptions": {
+        "en": "Reusable mode and timer controls.",
+        "ru": "Универсальные команды режимов и таймера."
+      },
+      "buttons": [
+        "mode",
+        "auto",
+        "eco",
+        "sleep",
+        "quiet",
+        "timer",
+        "display",
+        "child_lock"
+      ]
+    },
+    {
+      "id": "camera",
+      "labels": {
+        "en": "Camera shutter",
+        "ru": "Спуск затвора камеры"
+      },
+      "descriptions": {
+        "en": "IR shutter and video controls.",
+        "ru": "ИК-спуск затвора и управление видео."
+      },
+      "buttons": [
+        "shutter",
+        "delayed_shutter",
+        "video_start_stop"
+      ]
+    },
+    {
+      "id": "robot_vacuum",
+      "labels": {
+        "en": "Robot vacuum",
+        "ru": "Робот-пылесос"
+      },
+      "descriptions": {
+        "en": "Only for robot vacuums with an IR receiver.",
+        "ru": "Только для роботов-пылесосов с ИК-приёмником."
+      },
+      "buttons": [
+        "clean",
+        "pause",
+        "dock",
+        "spot",
+        "edge",
+        "direction_up",
+        "direction_down",
+        "direction_left",
+        "direction_right"
+      ]
+    },
+    {
+      "id": "radio_extended",
+      "labels": {
+        "en": "Radio and audio zones",
+        "ru": "Радио и аудиозоны"
+      },
+      "descriptions": {
+        "en": "Radio tuning, stereo and secondary output zone.",
+        "ru": "Радио, стерео и дополнительная аудиозона."
+      },
+      "buttons": [
+        "stereo",
+        "radio",
+        "preset_up",
+        "preset_down",
+        "zone_2"
+      ]
+    },
+    {
+      "id": "air_treatment",
+      "labels": {
+        "en": "Air treatment and humidity",
+        "ru": "Очистка воздуха и влажность"
+      },
+      "descriptions": {
+        "en": "Humidifier, air purifier and UV modes (only if the device has those controls).",
+        "ru": "Увлажнитель, очиститель воздуха и УФ-режимы при наличии в устройстве."
+      },
+      "buttons": [
+        "ionizer",
+        "uv",
+        "mist_level",
+        "humidity_up",
+        "humidity_down",
+        "warm_mist",
+        "light"
+      ]
+    },
+    {
+      "id": "utility_modes",
+      "labels": {
+        "en": "Appliance utility modes",
+        "ru": "Режимы бытовых приборов"
+      },
+      "descriptions": {
+        "en": "Dehumidifier laundry cycle, continuous mode and night light.",
+        "ru": "Непрерывная работа, сушка белья и ночник."
+      },
+      "buttons": [
+        "continuous",
+        "laundry",
+        "night_light"
+      ]
+    }
+  ]
+}

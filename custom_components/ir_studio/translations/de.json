@@ -1,0 +1,73 @@
+{
+  "title": "Tuya IR Studio",
+  "config": {
+    "step": {
+      "user": {
+        "title": "IR-Gateway hinzufügen",
+        "description": "Wähle die Verbindung für dein lokales IR-Gateway: vorhandene Tuya/Smart-Life-Anmeldung, QR-Code oder lokale Daten.",
+        "data": {
+          "setup_mode": "Verbindungsmethode"
+        }
+      },
+      "cloud": {
+        "title": "Tuya-/Smart-Life-Konto",
+        "description": "Öffne in Smart Life oder Tuya Einstellungen → Konto und Sicherheit und suche den Benutzercode. Gib ihn ein, um einen QR-Code anzufordern.",
+        "data": {
+          "user_code": "Benutzercode"
+        }
+      },
+      "scan": {
+        "title": "Anmeldung abschließen",
+        "description": "Scanne den QR-Code in Smart Life oder Tuya und bestätige anschließend dieses Formular."
+      },
+      "choose_device": {
+        "title": "IR-Gerät und Gateway auswählen",
+        "description": "Wähle das IR-Gerät und das zugehörige Gateway. Ein bereits konfiguriertes Gateway kann in der separaten übergeordneten Liste erscheinen. QR dient nur der Gateway-Einrichtung, nicht dem Import von Fernbedienungstasten.",
+        "data": {
+          "device_id": "IR-Gerät",
+          "hub_id": "Übergeordnetes IR-Gateway"
+        }
+      },
+      "search": {
+        "title": "Gateway im lokalen Netzwerk suchen",
+        "description": "{device_name}IR Studio sucht im LAN nach der IP-Adresse des Gateways. Falls die Suche fehlschlägt, kann die Adresse manuell eingegeben werden."
+      },
+      "native_hub": {
+        "title": "Lokales IR-Gateway bestätigen",
+        "description": "Prüfe Host und Protokoll. Der Local Key wird in Home Assistant gespeichert. Die Kommunikation mit dem IR-Gateway erfolgt im lokalen Netzwerk.",
+        "data": {
+          "device_id": "Gateway Device ID",
+          "host": "IP-Adresse oder Hostname",
+          "local_key": "Local Key",
+          "protocol_version": "Protokollversion (automatisch)",
+          "device_cid": "Node ID oder UUID des Kindgeräts (optional)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Dieses Tuya-IR-Gateway ist bereits eingerichtet.",
+      "no_devices": "Keine geeigneten Tuya-Geräte mit Local Key gefunden."
+    },
+    "error": {
+      "login_error": "Tuya-/Smart-Life-Anmeldung fehlgeschlagen oder nicht bestätigt. Neuen QR-Code anfordern.",
+      "needs_hub": "Dieses Gerät benötigt ein übergeordnetes Gateway.",
+      "does_not_need_hub": "Dieses Gerät kann direkt verbunden werden. Kein übergeordnetes Gateway wählen.",
+      "invalid_device": "Das gewählte Tuya-Gerät ist nicht mehr verfügbar.",
+      "invalid_hub": "Ungültiges übergeordnetes Gateway.",
+      "missing_node_id": "Das Kindgerät hat keine Node ID oder UUID.",
+      "missing_local_key": "Kein Local Key für das Gerät/Gateway verfügbar.",
+      "device_not_found": "Gateway im LAN nicht gefunden. Bitte lokale IP-Adresse eingeben.",
+      "invalid_credentials": "Bitte IP-Adresse, Device ID und Local Key eingeben.",
+      "cannot_connect": "Verbindung zum lokalen Tuya-IR-Gateway fehlgeschlagen. IP, Device ID, Local Key, Kindgerät-ID und Protokoll prüfen."
+    }
+  },
+  "selector": {
+    "setup_mode": {
+      "options": {
+        "cloud": "Tuya / Smart Life – bestehende Anmeldung oder QR-Code",
+        "manual": "Manuell – IP, Device ID und Local Key",
+        "cloud_fresh_login": "Tuya / Smart Life – neue QR-Anmeldung"
+      }
+    }
+  }
+}
