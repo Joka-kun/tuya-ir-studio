@@ -2179,6 +2179,9 @@ class IRStudioPanel extends HTMLElement {
     this._updateLearningCountdown();
     try {
       await this._call('job_cancel', {job_id: pending.id});
+      // Poll immediately after an explicit cancellation; rate limiting here
+      // could leave a stale pending job that blocks the next learning attempt.
+      this._lastPollAt = 0;
       await this._poll();
     } catch (error) {
       if (this._pending === pending) {

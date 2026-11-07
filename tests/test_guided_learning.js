@@ -97,6 +97,7 @@ vm.runInContext(src+'\nglobalThis.Panel=IRStudioPanel;',ctx);
   await panel._batchLearnFinish();
   assert.equal(cancels,1);
   assert.equal(panel._learnWizard,null);
+  assert.equal(panel._pending,null);
 
   // All real learned flags suppress the wizard, including verified buttons.
   p.buttons.forEach(b=>{b.code_in_local_store=true;b.status='stored'});
