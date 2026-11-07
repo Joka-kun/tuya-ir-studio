@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2 — Safe completion of in-flight IR learning
+
+- If Finish is pressed while a sequential-learning start is awaiting its WebSocket response, queue cancellation and stop that exact job as soon as its ID arrives.
+- Prevent switching to a different remote during an active or starting IR learning session, keeping the cancellation control accessible.
+- Protect Skip during start/stop transitions and cover delayed start, navigation and cancellation in regression tests.
+- Preserve profile/button identifiers, command keys, learned IR waveforms and the 164-command library unchanged.
+
 ## 1.0.1 — Guided learning, input suggestions and command library
 
 - Start IR sequential learning with the first click, show an explicit launch state and prevent overlapping starts. Force immediate status reconciliation after cancellation.
