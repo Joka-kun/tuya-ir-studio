@@ -942,6 +942,8 @@ class IRStudioPanel extends HTMLElement {
     this._filter = '';
     this._pending = null;
     this._learnWizard = null;
+    this._batchStarting = false;
+    this._commandAddBusy = false;
     this._advancedMode = false;
     this._poller = null;
     this._pollBusy = false;
@@ -1020,6 +1022,14 @@ class IRStudioPanel extends HTMLElement {
     return null;
   }
 
+  _commandSuggestions() {
+    // Suggestions are names only, never invented IR signals.
+    return Object.values(this._data?.template_catalog?.commands || {})
+      .map(item => item?.labels?.en)
+      .filter(value => typeof value === 'string' && value)
+      .sort((a, b) => a.localeCompare(b));
+  }
+
   _showButtonLibrary() {
     const sets = this._data?.template_catalog?.button_sets || [];
     const commands = this._data?.template_catalog?.commands || {};
@@ -1032,7 +1042,21 @@ class IRStudioPanel extends HTMLElement {
       }).join('');
       return `<div class="set-card"><label class="set-option"><input type="checkbox" data-set-choice="${h(item.id)}" /><span><b>${h(name)}</b><small>${h(description)} · ${item.buttons.length}</small></span></label><details><summary>Выбрать отдельные команды</summary><div class="command-pick-list">${individual}</div></details></div>`;
     }).join('');
-    this._dialog(`<h3>Библиотека команд</h3><p class="muted">Выбери набор целиком или отметь отдельные команды. Уже существующие команды не дублируются.</p><div class="set-list">${options}</div><div class="row" style="margin-top:10px"><button data-action="button-sets-select-all">Выбрать все наборы</button><button data-action="button-sets-select-none">Снять выбор</button></div><div class="dialog-footer"><button data-action="close-modal">Отмена</button><button class="primary" data-action="add-button-sets">Добавить выбранные</button></div>`);
+    this._dialog(`<h3>Библиотека команд</h3><p class="muted">Выбери набор целиком или отметь отдельные команды. Уже существующие команды не дублируются.</p><input class="library-search" id="library-search" type="search" placeholder="Поиск команд: MODE, RGB…" aria-label="Поиск в библиотеке" autocomplete="off" /><div class="set-list">${options}</div><div class="row" style="margin-top:10px"><button data-action="button-sets-select-all">Выбрать все наборы</button><button data-action="button-sets-select-none">Снять выбор</button></div><div class="dialog-footer"><button data-action="close-modal">Отмена</button><button class="primary" data-action="add-button-sets">Добавить выбранные</button></div>`);
+    this.shadowRoot.querySelector('#library-search')?.addEventListener('input', event => {
+      const term = event.target.value.trim().toLocaleLowerCase();
+      this.shadowRoot.querySelectorAll('.set-card').forEach(card => {
+        const group = card.querySelector('.set-option')?.textContent?.toLocaleLowerCase().includes(term);
+        let visible = 0;
+        card.querySelectorAll('.command-choice').forEach(choice => {
+          const show = !term || group || choice.textContent?.toLocaleLowerCase().includes(term);
+          choice.hidden = !show;
+          if (show) visible++;
+        });
+        card.hidden = Boolean(term && !group && !visible);
+        if (term && visible && !group) card.querySelector('details').open = true;
+      });
+    });
   }
 
   async _load() {
@@ -1256,6 +1280,8 @@ class IRStudioPanel extends HTMLElement {
       .settings-button{background:linear-gradient(115deg,rgba(14,165,233,.12),rgba(139,92,246,.1));border-color:var(--primary-color,#38bdf8)}
       .command-add-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:15px 0}
       .command-add-bar input{flex:1;min-width:170px}
+      .dialog .library-search{margin:9px 0 12px;min-height:43px;border-radius:11px}
+      .dialog .command-choice[hidden],.dialog .set-card[hidden]{display:none}
       .empty-state{border:1px dashed var(--divider-color,#374151);border-radius:15px;text-align:center;padding:35px 18px;margin-top:11px;background:linear-gradient(135deg,rgba(14,165,233,.05),rgba(124,58,237,.07))}
       .empty-state-icon{font-size:34px;margin-bottom:10px}
       .empty-state h3{font-size:16px;margin-bottom:5px}
@@ -1523,7 +1549,7 @@ class IRStudioPanel extends HTMLElement {
                 <div class="muted tiny">Создай нужные команды и обучи их оригинальным пультом через локальный шлюз.</div></div>
                 <input class="search" id="filter" placeholder="Поиск кнопки…" value="${h(this._filter)}" /></div>
               ${this._learningGuide(profile)}
-              <div class="command-add-bar"><input id="new-button" placeholder="Новая кнопка, например Power" maxlength="96" />
+              <div class="command-add-bar"><input id="new-button" list="library-command-suggestions" placeholder="Название команды: MODE, RGB…" maxlength="96" autocomplete="off" aria-label="Новая команда с подсказками" /><datalist id="library-command-suggestions">${this._commandSuggestions().map(name => `<option value="${h(name)}"></option>`).join("")}</datalist>
                 <button data-action="new-button">+ Добавить</button>
                 <button data-action="button-library">⊞ Библиотека</button></div>
               <div id="command-list" class="table"></div>
@@ -1535,6 +1561,13 @@ class IRStudioPanel extends HTMLElement {
       </div>`);
     const filter = this.shadowRoot.querySelector('#filter');
     if (filter) filter.oninput = (e) => {this._filter=e.target.value; this._renderRows();};
+    const addInput = this.shadowRoot.querySelector('#new-button');
+    if (addInput) addInput.onkeydown = event => {
+      if (event.key === 'Enter' && !event.isComposing) {
+        event.preventDefault();
+        void this._addCommandFromInput();
+      }
+    };
     this._renderRows();
   }
 
@@ -1589,11 +1622,12 @@ class IRStudioPanel extends HTMLElement {
       <div><strong>Обучение ${label} из ${total}: <span data-no-translate>${h(current.name)}</span></strong>
         <p>${learning
           ? 'Направь оригинальный пульт на ИК-шлюз и нажми указанную кнопку. У тебя до 60 секунд.'
-          : 'Приготовь оригинальный пульт. Нажми «Продолжить», затем эту же кнопку на пульте.'}</p>
+          : this._batchStarting ? 'Запускаем приём сигнала…' : 'Приготовь оригинальный пульт. Нажми «Продолжить», затем эту же кнопку на пульте.'}</p>
         ${wizard.lastResult ? `<p>${h(wizard.lastResult)}</p>` : ''}
         <div class="row" style="margin-top:8px">
           ${learning
             ? '<span class="muted">Ожидаем ИК-сигнал… Таймер и отмена — в строке команды ниже.</span>'
+            : this._batchStarting ? '<span class="muted">Подключаем приём ИК…</span>'
             : `<button class="primary" data-action="learn-next" ${this._pending ? 'disabled' : ''}>Продолжить обучение</button>
                <button data-action="learn-skip" ${this._pending ? 'disabled' : ''}>Пропустить</button>`}
           <button data-action="learn-finish">Завершить</button>
@@ -1612,7 +1646,7 @@ class IRStudioPanel extends HTMLElement {
       index: 0, completed: 0, skipped: 0, lastResult: '',
     };
     this._filter = '';
-    this._render();
+    // First click must launch the first IR receiver, not just display Continue.
     // Begin just the first command. Between commands require a user click
     // so a lingering press cannot be accidentally saved as the next code.
     await this._batchLearnNext();
@@ -1621,8 +1655,8 @@ class IRStudioPanel extends HTMLElement {
   async _batchLearnNext() {
     const wizard = this._learnWizard;
     const profile = this._selected();
-    if (!wizard || !profile || profile.id !== wizard.profileId || this._pending)
-      return;
+    if (!wizard || !profile || profile.id !== wizard.profileId ||
+        this._pending || this._batchStarting) return;
     const buttonId = wizard.buttonIds[wizard.index];
     if (!buttonId) return;
     const button = profile.buttons.find(b => b.id === buttonId);
@@ -1634,9 +1668,14 @@ class IRStudioPanel extends HTMLElement {
       return;
     }
     wizard.lastResult = '';
+    this._batchStarting = true;
     this._render();
-    if (!await this._start('learn', buttonId)) {
-      wizard.lastResult = 'Не удалось запустить приём. Можно повторить или пропустить.';
+    try {
+      if (!await this._start('learn', buttonId)) {
+        wizard.lastResult = 'Не удалось запустить приём. Можно повторить или пропустить.';
+      }
+    } finally {
+      this._batchStarting = false;
       this._render();
     }
   }
@@ -2408,6 +2447,29 @@ class IRStudioPanel extends HTMLElement {
     return Boolean(result?.moved);
   }
 
+  async _addCommandFromInput() {
+    const profile = this._selected();
+    const input = this.shadowRoot.querySelector('#new-button');
+    const name = input?.value?.trim();
+    if (!profile || !name || this._commandAddBusy) return;
+    this._commandAddBusy = true;
+    try {
+      const library = Object.entries(this._data?.template_catalog?.commands || {});
+      const matched = library.find(([, entry]) =>
+        entry?.labels?.en?.toLocaleLowerCase() === name.toLocaleLowerCase());
+      if (matched) {
+        await this._doChange('button_add_set', {
+          profile_id: profile.id, set_ids: [], command_ids: [matched[0]],
+          language: this._language(),
+        });
+      } else {
+        await this._doChange('button_add', {profile_id: profile.id, name});
+      }
+    } finally {
+      this._commandAddBusy = false;
+    }
+  }
+
   async _handleClick(event) {
     const btn=event.target.closest('[data-action]');if(!btn)return;
     const action=btn.dataset.action,bid=btn.dataset.button;
@@ -2488,10 +2550,7 @@ class IRStudioPanel extends HTMLElement {
       if(window.confirm(`Удалить пульт «${p.name}», его кнопки и импортированные IR Studio коды? Сигналы, обученные в самом HA Remote, сохраняются.`))
         await this._doChange('profile_delete',{profile_id:p.id});
     }
-    else if(action==='new-button') {
-      const input=this.shadowRoot.querySelector('#new-button');
-      const name=input?.value?.trim();if(name) await this._doChange('button_add',{profile_id:p.id,name});
-    }
+    else if(action==='new-button') await this._addCommandFromInput();
     else if(action==='rename-button') this._showRenameButton(bid);
     else if(action==='save-button-name') {
       const name=this.shadowRoot.querySelector('#rename-button-name')?.value?.trim();
