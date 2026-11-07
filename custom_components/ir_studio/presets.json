@@ -4,74 +4,83 @@
     "power": {
       "key": "Power",
       "labels": {
-        "en": "Power",
-        "ru": "Power"
+        "en": "POWER",
+        "ru": "POWER"
       },
-      "legacy_ru": "Вкл/Выкл"
+      "legacy_ru": "Вкл/Выкл",
+      "legacy_caption": "Power"
     },
     "power_on": {
       "key": "PowerOn",
       "labels": {
-        "en": "Power On",
-        "ru": "Power On"
+        "en": "POWER ON",
+        "ru": "POWER ON"
       },
-      "legacy_ru": "Включить"
+      "legacy_ru": "Включить",
+      "legacy_caption": "Power On"
     },
     "power_off": {
       "key": "PowerOff",
       "labels": {
-        "en": "Power Off",
-        "ru": "Power Off"
+        "en": "POWER OFF",
+        "ru": "POWER OFF"
       },
-      "legacy_ru": "Выключить"
+      "legacy_ru": "Выключить",
+      "legacy_caption": "Power Off"
     },
     "input": {
       "key": "Input",
       "labels": {
-        "en": "Input",
-        "ru": "Input"
+        "en": "INPUT",
+        "ru": "INPUT"
       },
-      "legacy_ru": "Вход"
+      "legacy_ru": "Вход",
+      "legacy_caption": "Input"
     },
     "source": {
       "key": "Source",
       "labels": {
-        "en": "Source",
-        "ru": "Source"
+        "en": "SOURCE",
+        "ru": "SOURCE"
       },
-      "legacy_ru": "Источник"
+      "legacy_ru": "Источник",
+      "legacy_caption": "Source"
     },
     "home": {
       "key": "Home",
       "labels": {
-        "en": "Home",
-        "ru": "Home"
+        "en": "HOME",
+        "ru": "HOME"
       },
-      "legacy_ru": "Домой"
+      "legacy_ru": "Домой",
+      "legacy_caption": "Home"
     },
     "back": {
       "key": "Back",
       "labels": {
-        "en": "Back",
-        "ru": "Back"
+        "en": "BACK",
+        "ru": "BACK"
       },
-      "legacy_ru": "Назад"
+      "legacy_ru": "Назад",
+      "legacy_caption": "Back"
     },
     "menu": {
       "key": "Menu",
       "labels": {
-        "en": "Menu",
-        "ru": "Menu"
+        "en": "MENU",
+        "ru": "MENU"
       },
-      "legacy_ru": "Меню"
+      "legacy_ru": "Меню",
+      "legacy_caption": "Menu"
     },
     "info": {
       "key": "Info",
       "labels": {
-        "en": "Info",
-        "ru": "Info"
+        "en": "INFO",
+        "ru": "INFO"
       },
-      "legacy_ru": "Информация"
+      "legacy_ru": "Информация",
+      "legacy_caption": "Info"
     },
     "guide": {
       "key": "Guide",
@@ -84,42 +93,47 @@
     "settings": {
       "key": "Settings",
       "labels": {
-        "en": "Settings",
-        "ru": "Settings"
+        "en": "SETTINGS",
+        "ru": "SETTINGS"
       },
-      "legacy_ru": "Настройки"
+      "legacy_ru": "Настройки",
+      "legacy_caption": "Settings"
     },
     "up": {
       "key": "Up",
       "labels": {
-        "en": "Up",
-        "ru": "Up"
+        "en": "UP",
+        "ru": "UP"
       },
-      "legacy_ru": "Вверх"
+      "legacy_ru": "Вверх",
+      "legacy_caption": "Up"
     },
     "down": {
       "key": "Down",
       "labels": {
-        "en": "Down",
-        "ru": "Down"
+        "en": "DOWN",
+        "ru": "DOWN"
       },
-      "legacy_ru": "Вниз"
+      "legacy_ru": "Вниз",
+      "legacy_caption": "Down"
     },
     "left": {
       "key": "Left",
       "labels": {
-        "en": "Left",
-        "ru": "Left"
+        "en": "LEFT",
+        "ru": "LEFT"
       },
-      "legacy_ru": "Влево"
+      "legacy_ru": "Влево",
+      "legacy_caption": "Left"
     },
     "right": {
       "key": "Right",
       "labels": {
-        "en": "Right",
-        "ru": "Right"
+        "en": "RIGHT",
+        "ru": "RIGHT"
       },
-      "legacy_ru": "Вправо"
+      "legacy_ru": "Вправо",
+      "legacy_caption": "Right"
     },
     "ok": {
       "key": "OK",
@@ -149,10 +163,11 @@
     "mute": {
       "key": "Mute",
       "labels": {
-        "en": "Mute",
-        "ru": "Mute"
+        "en": "MUTE",
+        "ru": "MUTE"
       },
-      "legacy_ru": "Без звука"
+      "legacy_ru": "Без звука",
+      "legacy_caption": "Mute"
     },
     "channel_up": {
       "key": "Channel+",
@@ -251,138 +266,155 @@
     "subtitle": {
       "key": "Subtitle",
       "labels": {
-        "en": "Subtitles",
-        "ru": "Subtitles"
+        "en": "SUBTITLE",
+        "ru": "SUBTITLE"
       },
-      "legacy_ru": "Субтитры"
+      "legacy_ru": "Субтитры",
+      "legacy_caption": "Subtitles"
     },
     "audio_track": {
       "key": "Audio",
       "labels": {
-        "en": "Audio track",
-        "ru": "Audio track"
+        "en": "AUDIO",
+        "ru": "AUDIO"
       },
-      "legacy_ru": "Аудиодорожка"
+      "legacy_ru": "Аудиодорожка",
+      "legacy_caption": "Audio track"
     },
     "sleep": {
       "key": "Sleep",
       "labels": {
-        "en": "Sleep",
-        "ru": "Sleep"
+        "en": "SLEEP",
+        "ru": "SLEEP"
       },
-      "legacy_ru": "Таймер сна"
+      "legacy_ru": "Таймер сна",
+      "legacy_caption": "Sleep"
     },
     "play_pause": {
       "key": "PlayPause",
       "labels": {
-        "en": "Play/Pause",
-        "ru": "Play/Pause"
+        "en": "PLAY/PAUSE",
+        "ru": "PLAY/PAUSE"
       },
-      "legacy_ru": "Воспроизведение / Пауза"
+      "legacy_ru": "Воспроизведение / Пауза",
+      "legacy_caption": "Play/Pause"
     },
     "play": {
       "key": "Play",
       "labels": {
-        "en": "Play",
-        "ru": "Play"
+        "en": "PLAY",
+        "ru": "PLAY"
       },
-      "legacy_ru": "Воспроизвести"
+      "legacy_ru": "Воспроизвести",
+      "legacy_caption": "Play"
     },
     "pause": {
       "key": "Pause",
       "labels": {
-        "en": "Pause",
-        "ru": "Pause"
+        "en": "PAUSE",
+        "ru": "PAUSE"
       },
-      "legacy_ru": "Пауза"
+      "legacy_ru": "Пауза",
+      "legacy_caption": "Pause"
     },
     "stop": {
       "key": "Stop",
       "labels": {
-        "en": "Stop",
-        "ru": "Stop"
+        "en": "STOP",
+        "ru": "STOP"
       },
-      "legacy_ru": "Стоп"
+      "legacy_ru": "Стоп",
+      "legacy_caption": "Stop"
     },
     "rewind": {
       "key": "Rewind",
       "labels": {
-        "en": "Rewind",
-        "ru": "Rewind"
+        "en": "REWIND",
+        "ru": "REWIND"
       },
-      "legacy_ru": "Перемотка назад"
+      "legacy_ru": "Перемотка назад",
+      "legacy_caption": "Rewind"
     },
     "fast_forward": {
       "key": "FastForward",
       "labels": {
-        "en": "Fast forward",
-        "ru": "Fast forward"
+        "en": "FAST FWD",
+        "ru": "FAST FWD"
       },
-      "legacy_ru": "Перемотка вперёд"
+      "legacy_ru": "Перемотка вперёд",
+      "legacy_caption": "Fast forward"
     },
     "previous": {
       "key": "Previous",
       "labels": {
-        "en": "Previous",
-        "ru": "Previous"
+        "en": "PREV",
+        "ru": "PREV"
       },
-      "legacy_ru": "Предыдущий"
+      "legacy_ru": "Предыдущий",
+      "legacy_caption": "Previous"
     },
     "next": {
       "key": "Next",
       "labels": {
-        "en": "Next",
-        "ru": "Next"
+        "en": "NEXT",
+        "ru": "NEXT"
       },
-      "legacy_ru": "Следующий"
+      "legacy_ru": "Следующий",
+      "legacy_caption": "Next"
     },
     "record": {
       "key": "Record",
       "labels": {
-        "en": "Record",
-        "ru": "Record"
+        "en": "RECORD",
+        "ru": "RECORD"
       },
-      "legacy_ru": "Запись"
+      "legacy_ru": "Запись",
+      "legacy_caption": "Record"
     },
     "eject": {
       "key": "Eject",
       "labels": {
-        "en": "Eject",
-        "ru": "Eject"
+        "en": "EJECT",
+        "ru": "EJECT"
       },
-      "legacy_ru": "Извлечь диск"
+      "legacy_ru": "Извлечь диск",
+      "legacy_caption": "Eject"
     },
     "repeat": {
       "key": "Repeat",
       "labels": {
-        "en": "Repeat",
-        "ru": "Repeat"
+        "en": "REPEAT",
+        "ru": "REPEAT"
       },
-      "legacy_ru": "Повтор"
+      "legacy_ru": "Повтор",
+      "legacy_caption": "Repeat"
     },
     "favorites": {
       "key": "Favorites",
       "labels": {
-        "en": "Favorites",
-        "ru": "Favorites"
+        "en": "FAVORITES",
+        "ru": "FAVORITES"
       },
-      "legacy_ru": "Избранное"
+      "legacy_ru": "Избранное",
+      "legacy_caption": "Favorites"
     },
     "last_channel": {
       "key": "LastChannel",
       "labels": {
-        "en": "Last channel",
-        "ru": "Last channel"
+        "en": "LAST CH",
+        "ru": "LAST CH"
       },
-      "legacy_ru": "Предыдущий канал"
+      "legacy_ru": "Предыдущий канал",
+      "legacy_caption": "Last channel"
     },
     "sound_mode": {
       "key": "SoundMode",
       "labels": {
-        "en": "Sound mode",
-        "ru": "Sound mode"
+        "en": "SOUND MODE",
+        "ru": "SOUND MODE"
       },
-      "legacy_ru": "Режим звука"
+      "legacy_ru": "Режим звука",
+      "legacy_caption": "Sound mode"
     },
     "bass_up": {
       "key": "Bass+",
@@ -421,34 +453,38 @@
     "surround": {
       "key": "Surround",
       "labels": {
-        "en": "Surround",
-        "ru": "Surround"
+        "en": "SURROUND",
+        "ru": "SURROUND"
       },
-      "legacy_ru": "Объёмный звук"
+      "legacy_ru": "Объёмный звук",
+      "legacy_caption": "Surround"
     },
     "night_mode": {
       "key": "NightMode",
       "labels": {
-        "en": "Night mode",
-        "ru": "Night mode"
+        "en": "NIGHT MODE",
+        "ru": "NIGHT MODE"
       },
-      "legacy_ru": "Ночной режим"
+      "legacy_ru": "Ночной режим",
+      "legacy_caption": "Night mode"
     },
     "stereo": {
       "key": "Stereo",
       "labels": {
-        "en": "Stereo",
-        "ru": "Stereo"
+        "en": "STEREO",
+        "ru": "STEREO"
       },
-      "legacy_ru": "Стерео"
+      "legacy_ru": "Стерео",
+      "legacy_caption": "Stereo"
     },
     "radio": {
       "key": "Radio",
       "labels": {
-        "en": "Radio",
-        "ru": "Radio"
+        "en": "RADIO",
+        "ru": "RADIO"
       },
-      "legacy_ru": "Радио"
+      "legacy_ru": "Радио",
+      "legacy_caption": "Radio"
     },
     "preset_up": {
       "key": "Preset+",
@@ -470,50 +506,56 @@
     "zone_2": {
       "key": "Zone2",
       "labels": {
-        "en": "Zone 2",
-        "ru": "Zone 2"
+        "en": "ZONE 2",
+        "ru": "ZONE 2"
       },
-      "legacy_ru": "Зона 2"
+      "legacy_ru": "Зона 2",
+      "legacy_caption": "Zone 2"
     },
     "auto": {
       "key": "Auto",
       "labels": {
-        "en": "Auto",
-        "ru": "Auto"
+        "en": "AUTO",
+        "ru": "AUTO"
       },
-      "legacy_ru": "Авто"
+      "legacy_ru": "Авто",
+      "legacy_caption": "Auto"
     },
     "cool": {
       "key": "Cool",
       "labels": {
-        "en": "Cool",
-        "ru": "Cool"
+        "en": "COOL",
+        "ru": "COOL"
       },
-      "legacy_ru": "Охлаждение"
+      "legacy_ru": "Охлаждение",
+      "legacy_caption": "Cool"
     },
     "heat": {
       "key": "Heat",
       "labels": {
-        "en": "Heat",
-        "ru": "Heat"
+        "en": "HEAT",
+        "ru": "HEAT"
       },
-      "legacy_ru": "Обогрев"
+      "legacy_ru": "Обогрев",
+      "legacy_caption": "Heat"
     },
     "dry": {
       "key": "Dry",
       "labels": {
-        "en": "Dry",
-        "ru": "Dry"
+        "en": "DRY",
+        "ru": "DRY"
       },
-      "legacy_ru": "Осушение"
+      "legacy_ru": "Осушение",
+      "legacy_caption": "Dry"
     },
     "fan": {
       "key": "Fan",
       "labels": {
-        "en": "Fan",
-        "ru": "Fan"
+        "en": "FAN",
+        "ru": "FAN"
       },
-      "legacy_ru": "Вентиляция"
+      "legacy_ru": "Вентиляция",
+      "legacy_caption": "Fan"
     },
     "temp_up": {
       "key": "Temp+",
@@ -535,122 +577,137 @@
     "fan_speed": {
       "key": "FanSpeed",
       "labels": {
-        "en": "Fan speed",
-        "ru": "Fan speed"
+        "en": "FAN SPEED",
+        "ru": "FAN SPEED"
       },
-      "legacy_ru": "Скорость вентилятора"
+      "legacy_ru": "Скорость вентилятора",
+      "legacy_caption": "Fan speed"
     },
     "swing": {
       "key": "Swing",
       "labels": {
-        "en": "Swing",
-        "ru": "Swing"
+        "en": "SWING",
+        "ru": "SWING"
       },
-      "legacy_ru": "Жалюзи"
+      "legacy_ru": "Жалюзи",
+      "legacy_caption": "Swing"
     },
     "turbo": {
       "key": "Turbo",
       "labels": {
-        "en": "Turbo",
-        "ru": "Turbo"
+        "en": "TURBO",
+        "ru": "TURBO"
       },
-      "legacy_ru": "Турбо"
+      "legacy_ru": "Турбо",
+      "legacy_caption": "Turbo"
     },
     "eco": {
       "key": "Eco",
       "labels": {
-        "en": "Eco",
-        "ru": "Eco"
+        "en": "ECO",
+        "ru": "ECO"
       },
-      "legacy_ru": "Эко"
+      "legacy_ru": "Эко",
+      "legacy_caption": "Eco"
     },
     "quiet": {
       "key": "Quiet",
       "labels": {
-        "en": "Quiet",
-        "ru": "Quiet"
+        "en": "QUIET",
+        "ru": "QUIET"
       },
-      "legacy_ru": "Тихий режим"
+      "legacy_ru": "Тихий режим",
+      "legacy_caption": "Quiet"
     },
     "display": {
       "key": "Display",
       "labels": {
-        "en": "Display",
-        "ru": "Display"
+        "en": "DISPLAY",
+        "ru": "DISPLAY"
       },
-      "legacy_ru": "Дисплей"
+      "legacy_ru": "Дисплей",
+      "legacy_caption": "Display"
     },
     "timer": {
       "key": "Timer",
       "labels": {
-        "en": "Timer",
-        "ru": "Timer"
+        "en": "TIMER",
+        "ru": "TIMER"
       },
-      "legacy_ru": "Таймер"
+      "legacy_ru": "Таймер",
+      "legacy_caption": "Timer"
     },
     "follow_me": {
       "key": "FollowMe",
       "labels": {
-        "en": "Follow me",
-        "ru": "Follow me"
+        "en": "FOLLOW ME",
+        "ru": "FOLLOW ME"
       },
-      "legacy_ru": "Следуй за мной"
+      "legacy_ru": "Следуй за мной",
+      "legacy_caption": "Follow me"
     },
     "speed_1": {
       "key": "Speed1",
       "labels": {
-        "en": "Speed 1",
-        "ru": "Speed 1"
+        "en": "SPEED 1",
+        "ru": "SPEED 1"
       },
-      "legacy_ru": "Скорость 1"
+      "legacy_ru": "Скорость 1",
+      "legacy_caption": "Speed 1"
     },
     "speed_2": {
       "key": "Speed2",
       "labels": {
-        "en": "Speed 2",
-        "ru": "Speed 2"
+        "en": "SPEED 2",
+        "ru": "SPEED 2"
       },
-      "legacy_ru": "Скорость 2"
+      "legacy_ru": "Скорость 2",
+      "legacy_caption": "Speed 2"
     },
     "speed_3": {
       "key": "Speed3",
       "labels": {
-        "en": "Speed 3",
-        "ru": "Speed 3"
+        "en": "SPEED 3",
+        "ru": "SPEED 3"
       },
-      "legacy_ru": "Скорость 3"
+      "legacy_ru": "Скорость 3",
+      "legacy_caption": "Speed 3"
     },
     "natural": {
       "key": "Natural",
       "labels": {
-        "en": "Natural breeze",
-        "ru": "Natural breeze"
+        "en": "NATURAL",
+        "ru": "NATURAL"
       },
-      "legacy_ru": "Естественный ветер"
+      "legacy_ru": "Естественный ветер",
+      "legacy_caption": "Natural breeze"
     },
     "oscillation": {
       "key": "Oscillation",
       "labels": {
-        "en": "Oscillation",
-        "ru": "Oscillation"
+        "en": "OSCILLATE",
+        "ru": "OSCILLATE"
       },
-      "legacy_ru": "Поворот"
+      "legacy_ru": "Поворот",
+      "legacy_caption": "Oscillation"
     },
     "reverse": {
       "key": "Reverse",
       "labels": {
-        "en": "Reverse",
-        "ru": "Reverse"
+        "en": "REVERSE",
+        "ru": "REVERSE"
       },
-      "legacy_ru": "Реверс"
+      "legacy_ru": "Реверс",
+      "legacy_caption": "Reverse"
     },
     "ionizer": {
       "key": "Ionizer",
       "labels": {
-        "en": "Ionizer",
-        "ru": "Ionizer"
+        "en": "IONIZER",
+        "ru": "IONIZER"
       },
-      "legacy_ru": "Ионизация"
+      "legacy_ru": "Ионизация",
+      "legacy_caption": "Ionizer"
     },
     "uv": {
       "key": "UV",
@@ -663,10 +720,11 @@
     "mist_level": {
       "key": "MistLevel",
       "labels": {
-        "en": "Mist level",
-        "ru": "Mist level"
+        "en": "MIST LEVEL",
+        "ru": "MIST LEVEL"
       },
-      "legacy_ru": "Интенсивность пара"
+      "legacy_ru": "Интенсивность пара",
+      "legacy_caption": "Mist level"
     },
     "humidity_up": {
       "key": "Humidity+",
@@ -688,18 +746,20 @@
     "warm_mist": {
       "key": "WarmMist",
       "labels": {
-        "en": "Warm mist",
-        "ru": "Warm mist"
+        "en": "WARM MIST",
+        "ru": "WARM MIST"
       },
-      "legacy_ru": "Тёплый пар"
+      "legacy_ru": "Тёплый пар",
+      "legacy_caption": "Warm mist"
     },
     "light": {
       "key": "Light",
       "labels": {
-        "en": "Light",
-        "ru": "Light"
+        "en": "LIGHT",
+        "ru": "LIGHT"
       },
-      "legacy_ru": "Подсветка"
+      "legacy_ru": "Подсветка",
+      "legacy_caption": "Light"
     },
     "brightness_up": {
       "key": "Brightness+",
@@ -721,90 +781,101 @@
     "white": {
       "key": "White",
       "labels": {
-        "en": "White mode",
-        "ru": "White mode"
+        "en": "WHITE",
+        "ru": "WHITE"
       },
-      "legacy_ru": "Белый режим"
+      "legacy_ru": "Белый режим",
+      "legacy_caption": "White mode"
     },
     "warm_white": {
       "key": "WarmWhite",
       "labels": {
-        "en": "Warm white",
-        "ru": "Warm white"
+        "en": "WARM WHITE",
+        "ru": "WARM WHITE"
       },
-      "legacy_ru": "Тёплый белый"
+      "legacy_ru": "Тёплый белый",
+      "legacy_caption": "Warm white"
     },
     "cool_white": {
       "key": "CoolWhite",
       "labels": {
-        "en": "Cool white",
-        "ru": "Cool white"
+        "en": "COOL WHITE",
+        "ru": "COOL WHITE"
       },
-      "legacy_ru": "Холодный белый"
+      "legacy_ru": "Холодный белый",
+      "legacy_caption": "Cool white"
     },
     "red": {
       "key": "Red",
       "labels": {
-        "en": "Red",
-        "ru": "Red"
+        "en": "RED",
+        "ru": "RED"
       },
-      "legacy_ru": "Красный"
+      "legacy_ru": "Красный",
+      "legacy_caption": "Red"
     },
     "green": {
       "key": "Green",
       "labels": {
-        "en": "Green",
-        "ru": "Green"
+        "en": "GREEN",
+        "ru": "GREEN"
       },
-      "legacy_ru": "Зелёный"
+      "legacy_ru": "Зелёный",
+      "legacy_caption": "Green"
     },
     "blue": {
       "key": "Blue",
       "labels": {
-        "en": "Blue",
-        "ru": "Blue"
+        "en": "BLUE",
+        "ru": "BLUE"
       },
-      "legacy_ru": "Синий"
+      "legacy_ru": "Синий",
+      "legacy_caption": "Blue"
     },
     "color_cycle": {
       "key": "ColorCycle",
       "labels": {
-        "en": "Color cycle",
-        "ru": "Color cycle"
+        "en": "COLOR CYCLE",
+        "ru": "COLOR CYCLE"
       },
-      "legacy_ru": "Смена цветов"
+      "legacy_ru": "Смена цветов",
+      "legacy_caption": "Color cycle"
     },
     "scene_1": {
       "key": "Scene1",
       "labels": {
-        "en": "Scene 1",
-        "ru": "Scene 1"
+        "en": "SCENE 1",
+        "ru": "SCENE 1"
       },
-      "legacy_ru": "Сцена 1"
+      "legacy_ru": "Сцена 1",
+      "legacy_caption": "Scene 1"
     },
     "scene_2": {
       "key": "Scene2",
       "labels": {
-        "en": "Scene 2",
-        "ru": "Scene 2"
+        "en": "SCENE 2",
+        "ru": "SCENE 2"
       },
-      "legacy_ru": "Сцена 2"
+      "legacy_ru": "Сцена 2",
+      "legacy_caption": "Scene 2"
     },
     "scene_3": {
       "key": "Scene3",
       "labels": {
-        "en": "Scene 3",
-        "ru": "Scene 3"
+        "en": "SCENE 3",
+        "ru": "SCENE 3"
       },
-      "legacy_ru": "Сцена 3"
+      "legacy_ru": "Сцена 3",
+      "legacy_caption": "Scene 3"
     },
     "scene_4": {
       "key": "Scene4",
       "labels": {
-        "en": "Scene 4",
-        "ru": "Scene 4"
+        "en": "SCENE 4",
+        "ru": "SCENE 4"
       },
-      "legacy_ru": "Сцена 4"
+      "legacy_ru": "Сцена 4",
+      "legacy_caption": "Scene 4"
     },
     "effect_speed_up": {
       "key": "EffectSpeed+",
@@ -826,130 +897,461 @@
     "shutter": {
       "key": "Shutter",
       "labels": {
-        "en": "Shutter",
-        "ru": "Shutter"
+        "en": "SHUTTER",
+        "ru": "SHUTTER"
       },
-      "legacy_ru": "Спуск затвора"
+      "legacy_ru": "Спуск затвора",
+      "legacy_caption": "Shutter"
     },
     "delayed_shutter": {
       "key": "DelayedShutter",
       "labels": {
-        "en": "Delayed shutter",
-        "ru": "Delayed shutter"
+        "en": "SHUTTER DELAY",
+        "ru": "SHUTTER DELAY"
       },
-      "legacy_ru": "Отложенный спуск"
+      "legacy_ru": "Отложенный спуск",
+      "legacy_caption": "Delayed shutter"
     },
     "video_start_stop": {
       "key": "VideoStartStop",
       "labels": {
-        "en": "Start / stop video",
-        "ru": "Start / stop video"
+        "en": "VIDEO REC",
+        "ru": "VIDEO REC"
       },
-      "legacy_ru": "Старт / стоп видео"
+      "legacy_ru": "Старт / стоп видео",
+      "legacy_caption": "Start / stop video"
     },
     "clean": {
       "key": "Clean",
       "labels": {
-        "en": "Clean",
-        "ru": "Clean"
+        "en": "CLEAN",
+        "ru": "CLEAN"
       },
-      "legacy_ru": "Уборка"
+      "legacy_ru": "Уборка",
+      "legacy_caption": "Clean"
     },
     "dock": {
       "key": "Dock",
       "labels": {
-        "en": "Dock",
-        "ru": "Dock"
+        "en": "DOCK",
+        "ru": "DOCK"
       },
-      "legacy_ru": "На базу"
+      "legacy_ru": "На базу",
+      "legacy_caption": "Dock"
     },
     "spot": {
       "key": "Spot",
       "labels": {
-        "en": "Spot clean",
-        "ru": "Spot clean"
+        "en": "SPOT CLEAN",
+        "ru": "SPOT CLEAN"
       },
-      "legacy_ru": "Локальная уборка"
+      "legacy_ru": "Локальная уборка",
+      "legacy_caption": "Spot clean"
     },
     "edge": {
       "key": "Edge",
       "labels": {
-        "en": "Edge clean",
-        "ru": "Edge clean"
+        "en": "EDGE CLEAN",
+        "ru": "EDGE CLEAN"
       },
-      "legacy_ru": "Уборка вдоль стен"
+      "legacy_ru": "Уборка вдоль стен",
+      "legacy_caption": "Edge clean"
     },
     "direction_up": {
       "key": "DirectionUp",
       "labels": {
-        "en": "Move forward",
-        "ru": "Move forward"
+        "en": "MOVE FWD",
+        "ru": "MOVE FWD"
       },
-      "legacy_ru": "Вперёд"
+      "legacy_ru": "Вперёд",
+      "legacy_caption": "Move forward"
     },
     "direction_down": {
       "key": "DirectionDown",
       "labels": {
-        "en": "Move backward",
-        "ru": "Move backward"
+        "en": "MOVE BACK",
+        "ru": "MOVE BACK"
       },
-      "legacy_ru": "Назад"
+      "legacy_ru": "Назад",
+      "legacy_caption": "Move backward"
     },
     "direction_left": {
       "key": "DirectionLeft",
       "labels": {
-        "en": "Turn left",
-        "ru": "Turn left"
+        "en": "TURN LEFT",
+        "ru": "TURN LEFT"
       },
-      "legacy_ru": "Поворот влево"
+      "legacy_ru": "Поворот влево",
+      "legacy_caption": "Turn left"
     },
     "direction_right": {
       "key": "DirectionRight",
       "labels": {
-        "en": "Turn right",
-        "ru": "Turn right"
+        "en": "TURN RIGHT",
+        "ru": "TURN RIGHT"
       },
-      "legacy_ru": "Поворот вправо"
+      "legacy_ru": "Поворот вправо",
+      "legacy_caption": "Turn right"
     },
     "mode": {
       "key": "Mode",
       "labels": {
-        "en": "Mode",
-        "ru": "Mode"
+        "en": "MODE",
+        "ru": "MODE"
       },
-      "legacy_ru": "Режим"
+      "legacy_ru": "Режим",
+      "legacy_caption": "Mode"
     },
     "child_lock": {
       "key": "ChildLock",
       "labels": {
-        "en": "Child lock",
-        "ru": "Child lock"
+        "en": "CHILD LOCK",
+        "ru": "CHILD LOCK"
       },
-      "legacy_ru": "Блокировка от детей"
+      "legacy_ru": "Блокировка от детей",
+      "legacy_caption": "Child lock"
     },
     "continuous": {
       "key": "Continuous",
       "labels": {
-        "en": "Continuous",
-        "ru": "Continuous"
+        "en": "CONTINUOUS",
+        "ru": "CONTINUOUS"
       },
-      "legacy_ru": "Непрерывный режим"
+      "legacy_ru": "Непрерывный режим",
+      "legacy_caption": "Continuous"
     },
     "laundry": {
       "key": "Laundry",
       "labels": {
-        "en": "Laundry",
-        "ru": "Laundry"
+        "en": "LAUNDRY",
+        "ru": "LAUNDRY"
       },
-      "legacy_ru": "Сушка белья"
+      "legacy_ru": "Сушка белья",
+      "legacy_caption": "Laundry"
     },
     "night_light": {
       "key": "NightLight",
       "labels": {
-        "en": "Night light",
-        "ru": "Night light"
+        "en": "NIGHT LIGHT",
+        "ru": "NIGHT LIGHT"
       },
-      "legacy_ru": "Ночник"
+      "legacy_ru": "Ночник",
+      "legacy_caption": "Night light"
+    },
+    "rgb": {
+      "key": "RGB",
+      "labels": {
+        "en": "RGB",
+        "ru": "RGB"
+      }
+    },
+    "rgb_mode": {
+      "key": "RGBMode",
+      "labels": {
+        "en": "RGB MODE",
+        "ru": "RGB MODE"
+      }
+    },
+    "flash": {
+      "key": "Flash",
+      "labels": {
+        "en": "FLASH",
+        "ru": "FLASH"
+      }
+    },
+    "strobe": {
+      "key": "Strobe",
+      "labels": {
+        "en": "STROBE",
+        "ru": "STROBE"
+      }
+    },
+    "fade": {
+      "key": "Fade",
+      "labels": {
+        "en": "FADE",
+        "ru": "FADE"
+      }
+    },
+    "smooth": {
+      "key": "Smooth",
+      "labels": {
+        "en": "SMOOTH",
+        "ru": "SMOOTH"
+      }
+    },
+    "jump_3": {
+      "key": "Jump3",
+      "labels": {
+        "en": "JUMP 3",
+        "ru": "JUMP 3"
+      }
+    },
+    "jump_7": {
+      "key": "Jump7",
+      "labels": {
+        "en": "JUMP 7",
+        "ru": "JUMP 7"
+      }
+    },
+    "diy_1": {
+      "key": "DIY1",
+      "labels": {
+        "en": "DIY 1",
+        "ru": "DIY 1"
+      }
+    },
+    "diy_2": {
+      "key": "DIY2",
+      "labels": {
+        "en": "DIY 2",
+        "ru": "DIY 2"
+      }
+    },
+    "diy_3": {
+      "key": "DIY3",
+      "labels": {
+        "en": "DIY 3",
+        "ru": "DIY 3"
+      }
+    },
+    "diy_4": {
+      "key": "DIY4",
+      "labels": {
+        "en": "DIY 4",
+        "ru": "DIY 4"
+      }
+    },
+    "cyan": {
+      "key": "Cyan",
+      "labels": {
+        "en": "CYAN",
+        "ru": "CYAN"
+      }
+    },
+    "magenta": {
+      "key": "Magenta",
+      "labels": {
+        "en": "MAGENTA",
+        "ru": "MAGENTA"
+      }
+    },
+    "yellow": {
+      "key": "Yellow",
+      "labels": {
+        "en": "YELLOW",
+        "ru": "YELLOW"
+      }
+    },
+    "orange": {
+      "key": "Orange",
+      "labels": {
+        "en": "ORANGE",
+        "ru": "ORANGE"
+      }
+    },
+    "purple": {
+      "key": "Purple",
+      "labels": {
+        "en": "PURPLE",
+        "ru": "PURPLE"
+      }
+    },
+    "color_up": {
+      "key": "Color+",
+      "labels": {
+        "en": "COLOR +",
+        "ru": "COLOR +"
+      }
+    },
+    "color_down": {
+      "key": "Color-",
+      "labels": {
+        "en": "COLOR -",
+        "ru": "COLOR -"
+      }
+    },
+    "color_temp_up": {
+      "key": "ColorTemp+",
+      "labels": {
+        "en": "COLOR TEMP +",
+        "ru": "COLOR TEMP +"
+      }
+    },
+    "color_temp_down": {
+      "key": "ColorTemp-",
+      "labels": {
+        "en": "COLOR TEMP -",
+        "ru": "COLOR TEMP -"
+      }
+    },
+    "exit": {
+      "key": "Exit",
+      "labels": {
+        "en": "EXIT",
+        "ru": "EXIT"
+      }
+    },
+    "apps": {
+      "key": "Apps",
+      "labels": {
+        "en": "APPS",
+        "ru": "APPS"
+      }
+    },
+    "search": {
+      "key": "Search",
+      "labels": {
+        "en": "SEARCH",
+        "ru": "SEARCH"
+      }
+    },
+    "live_tv": {
+      "key": "LiveTV",
+      "labels": {
+        "en": "LIVE TV",
+        "ru": "LIVE TV"
+      }
+    },
+    "picture_mode": {
+      "key": "PictureMode",
+      "labels": {
+        "en": "PICTURE MODE",
+        "ru": "PICTURE MODE"
+      }
+    },
+    "aspect_ratio": {
+      "key": "AspectRatio",
+      "labels": {
+        "en": "ASPECT",
+        "ru": "ASPECT"
+      }
+    },
+    "closed_captions": {
+      "key": "ClosedCaptions",
+      "labels": {
+        "en": "CC",
+        "ru": "CC"
+      }
+    },
+    "teletext": {
+      "key": "Teletext",
+      "labels": {
+        "en": "TEXT",
+        "ru": "TEXT"
+      }
+    },
+    "hdmi_1": {
+      "key": "HDMI1",
+      "labels": {
+        "en": "HDMI 1",
+        "ru": "HDMI 1"
+      }
+    },
+    "hdmi_2": {
+      "key": "HDMI2",
+      "labels": {
+        "en": "HDMI 2",
+        "ru": "HDMI 2"
+      }
+    },
+    "usb": {
+      "key": "USB",
+      "labels": {
+        "en": "USB",
+        "ru": "USB"
+      }
+    },
+    "keystone_up": {
+      "key": "Keystone+",
+      "labels": {
+        "en": "KEYSTONE +",
+        "ru": "KEYSTONE +"
+      }
+    },
+    "keystone_down": {
+      "key": "Keystone-",
+      "labels": {
+        "en": "KEYSTONE -",
+        "ru": "KEYSTONE -"
+      }
+    },
+    "focus_up": {
+      "key": "Focus+",
+      "labels": {
+        "en": "FOCUS +",
+        "ru": "FOCUS +"
+      }
+    },
+    "focus_down": {
+      "key": "Focus-",
+      "labels": {
+        "en": "FOCUS -",
+        "ru": "FOCUS -"
+      }
+    },
+    "zoom_up": {
+      "key": "Zoom+",
+      "labels": {
+        "en": "ZOOM +",
+        "ru": "ZOOM +"
+      }
+    },
+    "zoom_down": {
+      "key": "Zoom-",
+      "labels": {
+        "en": "ZOOM -",
+        "ru": "ZOOM -"
+      }
+    },
+    "freeze": {
+      "key": "Freeze",
+      "labels": {
+        "en": "FREEZE",
+        "ru": "FREEZE"
+      }
+    },
+    "subwoofer_up": {
+      "key": "Subwoofer+",
+      "labels": {
+        "en": "SUB +",
+        "ru": "SUB +"
+      }
+    },
+    "subwoofer_down": {
+      "key": "Subwoofer-",
+      "labels": {
+        "en": "SUB -",
+        "ru": "SUB -"
+      }
+    },
+    "bluetooth": {
+      "key": "Bluetooth",
+      "labels": {
+        "en": "BT",
+        "ru": "BT"
+      }
+    },
+    "pair": {
+      "key": "Pair",
+      "labels": {
+        "en": "PAIR",
+        "ru": "PAIR"
+      }
+    },
+    "dialogue": {
+      "key": "Dialogue",
+      "labels": {
+        "en": "DIALOGUE",
+        "ru": "DIALOGUE"
+      }
+    },
+    "voice": {
+      "key": "Voice",
+      "labels": {
+        "en": "VOICE",
+        "ru": "VOICE"
+      }
     }
   },
   "categories": [
@@ -1506,6 +1908,8 @@
           },
           "buttons": [
             "power",
+            "mode",
+            "rgb",
             "brightness_up",
             "brightness_down",
             "red",
@@ -2002,6 +2406,103 @@
         "continuous",
         "laundry",
         "night_light"
+      ]
+    },
+    {
+      "id": "rgb_effects",
+      "labels": {
+        "en": "RGB / LED effects",
+        "ru": "RGB / LED-эффекты"
+      },
+      "descriptions": {
+        "en": "RGB colors, animations and DIY keys.",
+        "ru": "Цвета RGB, режимы, эффекты и DIY-кнопки."
+      },
+      "buttons": [
+        "rgb",
+        "rgb_mode",
+        "flash",
+        "strobe",
+        "fade",
+        "smooth",
+        "jump_3",
+        "jump_7",
+        "diy_1",
+        "diy_2",
+        "diy_3",
+        "diy_4",
+        "cyan",
+        "magenta",
+        "yellow",
+        "orange",
+        "purple",
+        "color_up",
+        "color_down",
+        "color_temp_up",
+        "color_temp_down"
+      ]
+    },
+    {
+      "id": "smart_tv_shortcuts",
+      "labels": {
+        "en": "TV shortcuts and inputs",
+        "ru": "ТВ и входы"
+      },
+      "descriptions": {
+        "en": "Apps, picture settings and HDMI inputs.",
+        "ru": "Приложения, параметры изображения и HDMI-входы."
+      },
+      "buttons": [
+        "exit",
+        "apps",
+        "search",
+        "live_tv",
+        "picture_mode",
+        "aspect_ratio",
+        "closed_captions",
+        "teletext",
+        "hdmi_1",
+        "hdmi_2",
+        "usb"
+      ]
+    },
+    {
+      "id": "projector_controls",
+      "labels": {
+        "en": "Projector controls",
+        "ru": "Управление проектором"
+      },
+      "descriptions": {
+        "en": "Focus, zoom, keystone and freeze when supported.",
+        "ru": "Фокус, увеличение, трапеция и пауза кадра."
+      },
+      "buttons": [
+        "keystone_up",
+        "keystone_down",
+        "focus_up",
+        "focus_down",
+        "zoom_up",
+        "zoom_down",
+        "freeze"
+      ]
+    },
+    {
+      "id": "audio_extended",
+      "labels": {
+        "en": "Audio extras",
+        "ru": "Дополнительное аудио"
+      },
+      "descriptions": {
+        "en": "Subwoofer, Bluetooth and dialogue modes.",
+        "ru": "Сабвуфер, Bluetooth и речь."
+      },
+      "buttons": [
+        "subwoofer_up",
+        "subwoofer_down",
+        "bluetooth",
+        "pair",
+        "dialogue",
+        "voice"
       ]
     }
   ]

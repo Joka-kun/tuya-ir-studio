@@ -29,7 +29,7 @@ def test_russian_library_has_toggle_name_but_same_remote_code():
     catalog = json.loads((ROOT / "custom_components/ir_studio/presets.json")
                          .read_text(encoding="utf-8"))
     assert catalog["commands"]["power"]["key"] == "Power"
-    assert catalog["commands"]["power"]["labels"]["ru"] == "Power"
+    assert catalog["commands"]["power"]["labels"]["ru"] == "POWER"
     assert catalog["commands"]["power"]["legacy_ru"] == "Вкл/Выкл"
     power_group = next(x for x in catalog["button_sets"] if x["id"] == "power")
     assert power_group["labels"]["ru"] == "Включение и выключение"

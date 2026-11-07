@@ -9,7 +9,7 @@ The project is a local infrared remote manager for Home Assistant. QR / Smart Li
 - [x] Direct Tuya LAN gateway setup using QR-assisted or manual credentials; saved QR authorization can be reused.
 - [x] Virtual HA Device and `remote` per profile, with `button` entities for learned commands. User-facing captions, entity IDs and physical IR namespaces are independent.
 - [x] Native **Configure** wizard for profiles and individual buttons (learn, test, relearn, rename, delete), plus an optional advanced sidebar for bulk workflows, Flipper `.ir` import and backups.
-- [x] 119 named library commands, with no fabricated code; curated sidebar icons and the native HA MDI picker affect presentation only.
+- [x] 164 named library commands, with no fabricated code; curated sidebar icons and the native HA MDI picker affect presentation only.
 - [x] One scalable, centered SVG sizing convention for selected-remote headers, sidebar cards, dialogs, previews and empty states. Mobile size is set separately but follows the same convention.
 - [x] Reorder virtual remote profiles in the optional sidebar by touch/mouse drag on a single ⠿ handle, or keyboard ArrowUp / ArrowDown on that focused handle; persist order to the existing HA profile Store without altering codes or entity identifiers.
 - [x] Physical command transmission is serialized. Native Tuya IR performs a readiness check before the first send / after idle, without automatically repeating an uncertain IR write.

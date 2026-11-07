@@ -1,7 +1,7 @@
 # IR command library: naming and coverage
 
-The Tuya IR Studio command library provides **English button captions**, not
-a database of device-specific IR waveforms. A label such as `Power` or `Play`
+The Tuya IR Studio command library provides **uppercase English button captions**, not
+a database of device-specific IR waveforms. A label such as `POWER` or `PLAY`
 does **not** prove a given appliance supports that command. Choose the names
 actually present on the original remote, then learn the physical IR codes.
 
@@ -17,14 +17,14 @@ traffic nor treats these key names as an interoperable IR protocol.
 
 ## Catalog contract
 
-- Every one of the 119 command IDs must appear in at least one command group.
+- Every one of the 164 command IDs must appear in at least one command group.
 - Every unique command ID has one immutable `key` (the learned-code identity).
 - User-facing button labels are English and unique, with ASCII `+`/`-` for
   paired controls such as `VOL +` and `VOL -`.
-- `Power` is normally a *toggle*; `Power On` and `Power Off` are separate
+- `POWER` is normally a *toggle*; `POWER ON` and `POWER OFF` are separate
   discrete controls and must not be synthesized from `Power`.
-- `Input` and `Source` remain distinct because real remotes may have both.
-  Similarly `Previous` and `Last channel` are different actions.
+- `INPUT` and `SOURCE` remain distinct because real remotes may have both.
+  Similarly `PREV` and `LAST CH` are different actions.
 - Climate controls may encode a whole device state in one IR frame; repeating
   `TEMP +` is **not** guaranteed to work on all appliances.
 - New remotes start with **zero** buttons. The library creates named **pending**

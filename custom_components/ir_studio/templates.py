@@ -140,7 +140,7 @@ def upgrade_library_button_labels(profiles: list[dict], catalog: dict) -> int:
             command = by_key.get(button.get("remote_name"))
             if not command:
                 continue
-            historical = {command.get("legacy_ru"), command.get("legacy_en")}
+            historical = {command.get("legacy_ru"), command.get("legacy_en"), command.get("legacy_caption")}
             historical.discard(None)
             new = command.get("labels", {}).get("en")
             if not new or button.get("name") not in historical:
