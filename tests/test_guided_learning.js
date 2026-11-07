@@ -102,5 +102,26 @@ vm.runInContext(src+'\nglobalThis.Panel=IRStudioPanel;',ctx);
   p.buttons.forEach(b=>{b.code_in_local_store=true;b.status='stored'});
   assert.equal(panel._buttonsNeedingLearning(p).length,0);
   assert.equal(panel._learningGuide(p),'');
-  console.log('Guided learning: sequential, cancel, retry, skip and stored-code preservation passed');
+  // A slow first call cannot be duplicated by clicking Continue.
+  p.buttons[0].code_in_local_store=false;
+  p.buttons[0].status='pending';
+  let releaseStart;
+  const gate=new Promise(resolve=>{releaseStart=resolve;});
+  let firstStarts=0;
+  panel._call=async type=>{
+    if(type==='start'){firstStarts++;await gate;return {job_id:'first-delayed'};}
+    if(type==='job')return {status:'running',kind:'learn'};
+    throw Error('Unexpected RPC '+type);
+  };
+  const initial=panel._beginBatchLearning();
+  assert.equal(firstStarts,1);
+  assert.equal(panel._batchStarting,true);
+  assert(panel.guide.includes('Запускаем приём'));
+  await panel._batchLearnNext();
+  assert.equal(firstStarts,1);
+  releaseStart();
+  await initial;
+  assert.equal(panel._batchStarting,false);
+  assert.equal(panel._pending.buttonId,'first');
+  console.log('Guided learning: first-click reception, in-flight deduplication and safe sequencing passed');
 })().catch(e=>{console.error(e);process.exitCode=1});
