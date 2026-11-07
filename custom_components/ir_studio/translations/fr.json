@@ -1,0 +1,73 @@
+{
+  "title": "Tuya IR Studio",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ajouter une passerelle IR Tuya",
+        "description": "Choisissez la connexion à votre passerelle IR locale : session Tuya/Smart Life existante, QR ou identifiants locaux.",
+        "data": {
+          "setup_mode": "Méthode de connexion"
+        }
+      },
+      "cloud": {
+        "title": "Compte Tuya / Smart Life",
+        "description": "Dans Smart Life ou Tuya, ouvrez Paramètres → Compte et sécurité, puis trouvez le code utilisateur. Saisissez-le pour obtenir un QR code.",
+        "data": {
+          "user_code": "Code utilisateur"
+        }
+      },
+      "scan": {
+        "title": "Terminer la connexion",
+        "description": "Scannez le QR code dans Smart Life ou Tuya, puis validez ce formulaire."
+      },
+      "choose_device": {
+        "title": "Choisir l'appareil IR et la passerelle",
+        "description": "Sélectionnez l'appareil IR et sa passerelle parente. Une passerelle déjà configurée peut figurer dans la liste distincte. Le QR sert uniquement à configurer la passerelle, pas à importer les touches.",
+        "data": {
+          "device_id": "Appareil IR",
+          "hub_id": "Passerelle IR parente"
+        }
+      },
+      "search": {
+        "title": "Rechercher la passerelle sur le réseau local",
+        "description": "{device_name}IR Studio recherche l'adresse IP de la passerelle sur le LAN. Si elle est introuvable, renseignez-la manuellement."
+      },
+      "native_hub": {
+        "title": "Confirmer la passerelle IR locale",
+        "description": "Vérifiez l'hôte et le protocole. La Local Key est stockée dans Home Assistant ; la communication s'effectue sur le LAN.",
+        "data": {
+          "device_id": "Device ID de la passerelle",
+          "host": "Adresse IP ou nom d'hôte",
+          "local_key": "Local Key",
+          "protocol_version": "Version du protocole (auto)",
+          "device_cid": "Node ID ou UUID de l'appareil enfant (facultatif)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Cette passerelle IR Tuya est déjà configurée.",
+      "no_devices": "Aucun appareil Tuya approprié avec Local Key n'a été trouvé."
+    },
+    "error": {
+      "login_error": "Connexion Tuya/Smart Life échouée ou incomplète. Demandez un nouveau QR code.",
+      "needs_hub": "Cet appareil nécessite une passerelle parente.",
+      "does_not_need_hub": "Cet appareil se connecte directement ; ne choisissez pas de passerelle parente.",
+      "invalid_device": "L'appareil Tuya sélectionné n'est plus disponible.",
+      "invalid_hub": "Passerelle parente non valide.",
+      "missing_node_id": "L'appareil enfant n'a pas de Node ID ou UUID.",
+      "missing_local_key": "Local Key introuvable pour cet appareil ou cette passerelle.",
+      "device_not_found": "Passerelle introuvable sur le LAN ; saisissez son adresse IP.",
+      "invalid_credentials": "Saisissez l'adresse IP, le Device ID et la Local Key.",
+      "cannot_connect": "Impossible de joindre la passerelle IR Tuya sur le LAN. Vérifiez l'IP, le Device ID, la Local Key, l'ID enfant et le protocole."
+    }
+  },
+  "selector": {
+    "setup_mode": {
+      "options": {
+        "cloud": "Tuya / Smart Life – session existante ou QR",
+        "manual": "Manuel – IP, Device ID et Local Key",
+        "cloud_fresh_login": "Tuya / Smart Life – nouvelle connexion QR"
+      }
+    }
+  }
+}

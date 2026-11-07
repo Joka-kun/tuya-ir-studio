@@ -1,0 +1,1805 @@
+{
+  "schema_version": 1,
+  "icons": [
+    {
+      "id": "tv_standard",
+      "labels": {
+        "ru": "Телевизор",
+        "en": "TV"
+      },
+      "mdi": "television-classic",
+      "group": "video"
+    },
+    {
+      "id": "tv_smart",
+      "labels": {
+        "ru": "Smart TV",
+        "en": "Smart TV"
+      },
+      "mdi": "television",
+      "group": "video"
+    },
+    {
+      "id": "projector",
+      "labels": {
+        "ru": "Проектор",
+        "en": "Projector"
+      },
+      "mdi": "projector",
+      "group": "video"
+    },
+    {
+      "id": "stb_general",
+      "labels": {
+        "ru": "ТВ-приставка",
+        "en": "Set-top box"
+      },
+      "mdi": "set-top-box",
+      "group": "video"
+    },
+    {
+      "id": "streaming_player",
+      "labels": {
+        "ru": "Медиаплеер",
+        "en": "Media player"
+      },
+      "mdi": "cast",
+      "group": "video"
+    },
+    {
+      "id": "dvd_bluray",
+      "labels": {
+        "ru": "DVD/Blu-ray",
+        "en": "DVD/Blu-ray"
+      },
+      "mdi": "disc",
+      "group": "video"
+    },
+    {
+      "id": "dvr_vcr",
+      "labels": {
+        "ru": "Видеорекордер",
+        "en": "Video recorder"
+      },
+      "mdi": "video-vintage",
+      "group": "video"
+    },
+    {
+      "id": "satellite_receiver",
+      "labels": {
+        "ru": "Спутниковый ресивер",
+        "en": "Satellite receiver"
+      },
+      "mdi": "satellite-variant",
+      "group": "video"
+    },
+    {
+      "id": "gaming_console",
+      "labels": {
+        "ru": "Игровая консоль",
+        "en": "Game console"
+      },
+      "mdi": "gamepad-variant",
+      "group": "video"
+    },
+    {
+      "id": "retro_console",
+      "labels": {
+        "ru": "Ретроконсоль",
+        "en": "Retro console"
+      },
+      "mdi": "controller-classic",
+      "group": "video"
+    },
+    {
+      "id": "monitor",
+      "labels": {
+        "ru": "Монитор",
+        "en": "Monitor"
+      },
+      "mdi": "monitor",
+      "group": "video"
+    },
+    {
+      "id": "projector_screen",
+      "labels": {
+        "ru": "Экран проектора",
+        "en": "Projector screen"
+      },
+      "mdi": "projector-screen",
+      "group": "video"
+    },
+    {
+      "id": "soundbar",
+      "labels": {
+        "ru": "Саундбар",
+        "en": "Soundbar"
+      },
+      "mdi": "soundbar",
+      "group": "audio"
+    },
+    {
+      "id": "av_receiver",
+      "labels": {
+        "ru": "AV-ресивер",
+        "en": "AV receiver"
+      },
+      "mdi": "audio-video",
+      "group": "audio"
+    },
+    {
+      "id": "radio_receiver",
+      "labels": {
+        "ru": "Радио",
+        "en": "Radio"
+      },
+      "mdi": "radio",
+      "group": "audio"
+    },
+    {
+      "id": "turntable",
+      "labels": {
+        "ru": "Проигрыватель пластинок",
+        "en": "Turntable"
+      },
+      "mdi": "record-player",
+      "group": "audio"
+    },
+    {
+      "id": "hifi_system",
+      "labels": {
+        "ru": "Музыкальный центр",
+        "en": "Hi-Fi system"
+      },
+      "mdi": "music-box-multiple",
+      "group": "audio"
+    },
+    {
+      "id": "bookshelf_speaker",
+      "labels": {
+        "ru": "Колонка",
+        "en": "Speaker"
+      },
+      "mdi": "speaker",
+      "group": "audio"
+    },
+    {
+      "id": "wireless_speaker",
+      "labels": {
+        "ru": "Беспроводная колонка",
+        "en": "Wireless speaker"
+      },
+      "mdi": "speaker-wireless",
+      "group": "audio"
+    },
+    {
+      "id": "subwoofer",
+      "labels": {
+        "ru": "Сабвуфер",
+        "en": "Subwoofer"
+      },
+      "mdi": "speaker-multiple",
+      "group": "audio"
+    },
+    {
+      "id": "audio_mixer",
+      "labels": {
+        "ru": "Микшер",
+        "en": "Audio mixer"
+      },
+      "mdi": "tune-vertical",
+      "group": "audio"
+    },
+    {
+      "id": "microphone_system",
+      "labels": {
+        "ru": "Микрофонная система",
+        "en": "Microphone system"
+      },
+      "mdi": "microphone",
+      "group": "audio"
+    },
+    {
+      "id": "karaoke",
+      "labels": {
+        "ru": "Караоке",
+        "en": "Karaoke"
+      },
+      "mdi": "microphone-variant",
+      "group": "audio"
+    },
+    {
+      "id": "split_ac",
+      "labels": {
+        "ru": "Кондиционер",
+        "en": "Air conditioner"
+      },
+      "mdi": "air-conditioner",
+      "group": "climate"
+    },
+    {
+      "id": "portable_ac",
+      "labels": {
+        "ru": "Мобильный кондиционер",
+        "en": "Portable AC"
+      },
+      "mdi": "air-filter",
+      "group": "climate"
+    },
+    {
+      "id": "floor_tower_fan",
+      "labels": {
+        "ru": "Напольный вентилятор",
+        "en": "Tower fan"
+      },
+      "mdi": "fan",
+      "group": "climate"
+    },
+    {
+      "id": "ceiling_fan",
+      "labels": {
+        "ru": "Потолочный вентилятор",
+        "en": "Ceiling fan"
+      },
+      "mdi": "ceiling-fan",
+      "group": "climate"
+    },
+    {
+      "id": "desk_fan",
+      "labels": {
+        "ru": "Настольный вентилятор",
+        "en": "Desk fan"
+      },
+      "mdi": "fan-speed-1",
+      "group": "climate"
+    },
+    {
+      "id": "electric_heater",
+      "labels": {
+        "ru": "Обогреватель",
+        "en": "Heater"
+      },
+      "mdi": "radiator",
+      "group": "climate"
+    },
+    {
+      "id": "fireplace",
+      "labels": {
+        "ru": "Камин",
+        "en": "Fireplace"
+      },
+      "mdi": "fireplace",
+      "group": "climate"
+    },
+    {
+      "id": "thermostat",
+      "labels": {
+        "ru": "Термостат",
+        "en": "Thermostat"
+      },
+      "mdi": "thermostat",
+      "group": "climate"
+    },
+    {
+      "id": "heat_pump",
+      "labels": {
+        "ru": "Тепловой насос",
+        "en": "Heat pump"
+      },
+      "mdi": "heat-pump",
+      "group": "climate"
+    },
+    {
+      "id": "air_purifier",
+      "labels": {
+        "ru": "Очиститель воздуха",
+        "en": "Air purifier"
+      },
+      "mdi": "air-purifier",
+      "group": "climate"
+    },
+    {
+      "id": "humidifier",
+      "labels": {
+        "ru": "Увлажнитель",
+        "en": "Humidifier"
+      },
+      "mdi": "air-humidifier",
+      "group": "climate"
+    },
+    {
+      "id": "dehumidifier",
+      "labels": {
+        "ru": "Осушитель",
+        "en": "Dehumidifier"
+      },
+      "mdi": "water-minus",
+      "group": "climate"
+    },
+    {
+      "id": "aroma_diffuser",
+      "labels": {
+        "ru": "Аромадиффузор",
+        "en": "Aroma diffuser"
+      },
+      "mdi": "oil-lamp",
+      "group": "climate"
+    },
+    {
+      "id": "white_dimmer",
+      "labels": {
+        "ru": "Потолочный светильник",
+        "en": "Ceiling light"
+      },
+      "mdi": "ceiling-light",
+      "group": "lighting"
+    },
+    {
+      "id": "lamp",
+      "labels": {
+        "ru": "Люстра",
+        "en": "Chandelier"
+      },
+      "mdi": "chandelier",
+      "group": "lighting"
+    },
+    {
+      "id": "rgb_controller",
+      "labels": {
+        "ru": "LED-подсветка",
+        "en": "LED strip"
+      },
+      "mdi": "led-strip-variant",
+      "group": "lighting"
+    },
+    {
+      "id": "floor_lamp",
+      "labels": {
+        "ru": "Торшер",
+        "en": "Floor lamp"
+      },
+      "mdi": "floor-lamp",
+      "group": "lighting"
+    },
+    {
+      "id": "desk_lamp",
+      "labels": {
+        "ru": "Настольная лампа",
+        "en": "Desk lamp"
+      },
+      "mdi": "desk-lamp",
+      "group": "lighting"
+    },
+    {
+      "id": "wall_light",
+      "labels": {
+        "ru": "Бра",
+        "en": "Wall sconce"
+      },
+      "mdi": "wall-sconce-flat",
+      "group": "lighting"
+    },
+    {
+      "id": "outdoor_light",
+      "labels": {
+        "ru": "Уличный светильник",
+        "en": "Outdoor light"
+      },
+      "mdi": "outdoor-lamp",
+      "group": "lighting"
+    },
+    {
+      "id": "stage_light",
+      "labels": {
+        "ru": "Сценический свет",
+        "en": "Stage light"
+      },
+      "mdi": "spotlight-beam",
+      "group": "lighting"
+    },
+    {
+      "id": "camera_shutter",
+      "labels": {
+        "ru": "Фотокамера",
+        "en": "Camera"
+      },
+      "mdi": "camera",
+      "group": "home"
+    },
+    {
+      "id": "security_camera",
+      "labels": {
+        "ru": "Камера наблюдения",
+        "en": "Security camera"
+      },
+      "mdi": "cctv",
+      "group": "home"
+    },
+    {
+      "id": "robot_vacuum_ir",
+      "labels": {
+        "ru": "Робот-пылесос",
+        "en": "Robot vacuum"
+      },
+      "mdi": "robot-vacuum",
+      "group": "home"
+    },
+    {
+      "id": "water_heater_ir",
+      "labels": {
+        "ru": "Водонагреватель",
+        "en": "Water heater"
+      },
+      "mdi": "water-boiler",
+      "group": "home"
+    },
+    {
+      "id": "curtains",
+      "labels": {
+        "ru": "Шторы",
+        "en": "Curtains"
+      },
+      "mdi": "curtains",
+      "group": "home"
+    },
+    {
+      "id": "blinds",
+      "labels": {
+        "ru": "Жалюзи",
+        "en": "Blinds"
+      },
+      "mdi": "blinds",
+      "group": "home"
+    },
+    {
+      "id": "garage_door",
+      "labels": {
+        "ru": "Гаражные ворота",
+        "en": "Garage door"
+      },
+      "mdi": "garage",
+      "group": "home"
+    },
+    {
+      "id": "gate_control",
+      "labels": {
+        "ru": "Ворота",
+        "en": "Gate"
+      },
+      "mdi": "gate",
+      "group": "home"
+    },
+    {
+      "id": "smart_plug",
+      "labels": {
+        "ru": "Умная розетка",
+        "en": "Smart plug"
+      },
+      "mdi": "power-socket-eu",
+      "group": "home"
+    },
+    {
+      "id": "coffee_machine",
+      "labels": {
+        "ru": "Кофемашина",
+        "en": "Coffee maker"
+      },
+      "mdi": "coffee-maker",
+      "group": "appliance"
+    },
+    {
+      "id": "microwave",
+      "labels": {
+        "ru": "Микроволновка",
+        "en": "Microwave"
+      },
+      "mdi": "microwave",
+      "group": "appliance"
+    },
+    {
+      "id": "washing_machine",
+      "labels": {
+        "ru": "Стиральная машина",
+        "en": "Washing machine"
+      },
+      "mdi": "washing-machine",
+      "group": "appliance"
+    },
+    {
+      "id": "dishwasher",
+      "labels": {
+        "ru": "Посудомоечная машина",
+        "en": "Dishwasher"
+      },
+      "mdi": "dishwasher",
+      "group": "appliance"
+    },
+    {
+      "id": "pool_controller",
+      "labels": {
+        "ru": "Бассейн",
+        "en": "Pool controller"
+      },
+      "mdi": "pool",
+      "group": "appliance"
+    },
+    {
+      "id": "robot_mower",
+      "labels": {
+        "ru": "Робот-газонокосилка",
+        "en": "Robot mower"
+      },
+      "mdi": "robot-mower",
+      "group": "appliance"
+    },
+    {
+      "id": "blank_remote",
+      "labels": {
+        "ru": "Другое",
+        "en": "Other"
+      },
+      "mdi": "remote",
+      "group": "home"
+    },
+    {
+      "id": "icon_television_box",
+      "mdi": "television-box",
+      "labels": {
+        "ru": "ТВ с приставкой",
+        "en": "TV with receiver"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_television_ambient_light",
+      "mdi": "television-ambient-light",
+      "labels": {
+        "ru": "ТВ с подсветкой",
+        "en": "Ambient TV"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_television_guide",
+      "mdi": "television-guide",
+      "labels": {
+        "ru": "Телепрограмма",
+        "en": "TV guide"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_television_speaker",
+      "mdi": "television-speaker",
+      "labels": {
+        "ru": "ТВ-аудиосистема",
+        "en": "TV speaker"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_television_play",
+      "mdi": "television-play",
+      "labels": {
+        "ru": "ТВ-плеер",
+        "en": "TV player"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_television_pause",
+      "mdi": "television-pause",
+      "labels": {
+        "ru": "ТВ-медиапауза",
+        "en": "TV media pause"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_television_stop",
+      "mdi": "television-stop",
+      "labels": {
+        "ru": "ТВ-рекордер",
+        "en": "TV recorder"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_input_hdmi",
+      "mdi": "video-input-hdmi",
+      "labels": {
+        "ru": "HDMI-коммутатор",
+        "en": "HDMI switch"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_input_component",
+      "mdi": "video-input-component",
+      "labels": {
+        "ru": "Компонентный видеовход",
+        "en": "Component video"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_input_svideo",
+      "mdi": "video-input-svideo",
+      "labels": {
+        "ru": "S-Video",
+        "en": "S-Video device"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_input_antenna",
+      "mdi": "video-input-antenna",
+      "labels": {
+        "ru": "Антенный приёмник",
+        "en": "Antenna receiver"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_4k_box",
+      "mdi": "video-4k-box",
+      "labels": {
+        "ru": "4K-приставка",
+        "en": "4K media box"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_high_definition",
+      "mdi": "video-high-definition",
+      "labels": {
+        "ru": "HD-плеер",
+        "en": "HD player"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_3d",
+      "mdi": "video-3d",
+      "labels": {
+        "ru": "3D-проектор",
+        "en": "3D projector"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_wireless",
+      "mdi": "video-wireless",
+      "labels": {
+        "ru": "Беспроводное видео",
+        "en": "Wireless video"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_monitor_speaker",
+      "mdi": "monitor-speaker",
+      "labels": {
+        "ru": "Монитор с динамиками",
+        "en": "Monitor with speakers"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_monitor_multiple",
+      "mdi": "monitor-multiple",
+      "labels": {
+        "ru": "Видеостена",
+        "en": "Video wall"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_monitor_dashboard",
+      "mdi": "monitor-dashboard",
+      "labels": {
+        "ru": "Информационный экран",
+        "en": "Info display"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_monitor_vertical",
+      "mdi": "monitor-vertical",
+      "labels": {
+        "ru": "Вертикальный экран",
+        "en": "Portrait display"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_projector_screen_variant",
+      "mdi": "projector-screen-variant",
+      "labels": {
+        "ru": "Проекционный экран",
+        "en": "Projection screen"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_remote_tv",
+      "mdi": "remote-tv",
+      "labels": {
+        "ru": "Пульт ТВ",
+        "en": "TV remote"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_remote_desktop",
+      "mdi": "remote-desktop",
+      "labels": {
+        "ru": "Удалённый экран",
+        "en": "Remote desktop"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_antenna",
+      "mdi": "antenna",
+      "labels": {
+        "ru": "Антенна",
+        "en": "Antenna"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_video_box",
+      "mdi": "video-box",
+      "labels": {
+        "ru": "Видеоблок",
+        "en": "Video box"
+      },
+      "group": "video"
+    },
+    {
+      "id": "icon_amplifier",
+      "mdi": "amplifier",
+      "labels": {
+        "ru": "Усилитель",
+        "en": "Amplifier"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_boombox",
+      "mdi": "boombox",
+      "labels": {
+        "ru": "Бумбокс",
+        "en": "Boombox"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_home_sound_out",
+      "mdi": "home-sound-out",
+      "labels": {
+        "ru": "Домашняя аудиосистема",
+        "en": "Home audio system"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_music_circle",
+      "mdi": "music-circle",
+      "labels": {
+        "ru": "Музыкальный плеер",
+        "en": "Music player"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_headphones",
+      "mdi": "headphones",
+      "labels": {
+        "ru": "Наушники",
+        "en": "Headphones"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_headset",
+      "mdi": "headset",
+      "labels": {
+        "ru": "Гарнитура",
+        "en": "Headset"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_earbuds",
+      "mdi": "earbuds",
+      "labels": {
+        "ru": "Вкладыши",
+        "en": "Earbuds"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_headphones_bluetooth",
+      "mdi": "headphones-bluetooth",
+      "labels": {
+        "ru": "Bluetooth-наушники",
+        "en": "Bluetooth headphones"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_equalizer",
+      "mdi": "equalizer",
+      "labels": {
+        "ru": "Эквалайзер",
+        "en": "Equalizer"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_surround_sound",
+      "mdi": "surround-sound",
+      "labels": {
+        "ru": "Объёмный звук",
+        "en": "Surround sound"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_surround_sound_5_1",
+      "mdi": "surround-sound-5-1",
+      "labels": {
+        "ru": "Акустика 5.1",
+        "en": "5.1 speakers"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_surround_sound_7_1",
+      "mdi": "surround-sound-7-1",
+      "labels": {
+        "ru": "Акустика 7.1",
+        "en": "7.1 speakers"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_radio_am",
+      "mdi": "radio-am",
+      "labels": {
+        "ru": "AM-приёмник",
+        "en": "AM radio"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_radio_fm",
+      "mdi": "radio-fm",
+      "labels": {
+        "ru": "FM-приёмник",
+        "en": "FM radio"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_radio_handheld",
+      "mdi": "radio-handheld",
+      "labels": {
+        "ru": "Портативное радио",
+        "en": "Handheld radio"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_speaker_bluetooth",
+      "mdi": "speaker-bluetooth",
+      "labels": {
+        "ru": "Bluetooth-динамик",
+        "en": "Bluetooth speaker"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_speaker_message",
+      "mdi": "speaker-message",
+      "labels": {
+        "ru": "Голосовая колонка",
+        "en": "Voice speaker"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_speaker_pause",
+      "mdi": "speaker-pause",
+      "labels": {
+        "ru": "Аудиопауза",
+        "en": "Audio pause"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_speaker_play",
+      "mdi": "speaker-play",
+      "labels": {
+        "ru": "Аудиовоспроизведение",
+        "en": "Audio player"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_speaker_stop",
+      "mdi": "speaker-stop",
+      "labels": {
+        "ru": "Аудиостоп",
+        "en": "Audio stop"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_record",
+      "mdi": "record",
+      "labels": {
+        "ru": "Рекордер",
+        "en": "Recorder"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_record_rec",
+      "mdi": "record-rec",
+      "labels": {
+        "ru": "Аудиозапись",
+        "en": "Audio recording"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_piano",
+      "mdi": "piano",
+      "labels": {
+        "ru": "Электропианино",
+        "en": "Digital piano"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_guitar_electric",
+      "mdi": "guitar-electric",
+      "labels": {
+        "ru": "Гитарный процессор",
+        "en": "Guitar effects processor"
+      },
+      "group": "audio"
+    },
+    {
+      "id": "icon_hvac",
+      "mdi": "hvac",
+      "labels": {
+        "ru": "Система вентиляции",
+        "en": "HVAC"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_hvac_off",
+      "mdi": "hvac-off",
+      "labels": {
+        "ru": "Вентиляционная установка",
+        "en": "Ventilation unit"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_heat_pump_outline",
+      "mdi": "heat-pump-outline",
+      "labels": {
+        "ru": "Контур теплового насоса",
+        "en": "Heat pump controller"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_heating_coil",
+      "mdi": "heating-coil",
+      "labels": {
+        "ru": "Тепловая завеса",
+        "en": "Heating coil"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_patio_heater",
+      "mdi": "patio-heater",
+      "labels": {
+        "ru": "Уличный обогреватель",
+        "en": "Patio heater"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_radiator_off",
+      "mdi": "radiator-off",
+      "labels": {
+        "ru": "Радиатор",
+        "en": "Radiator"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_fan_auto",
+      "mdi": "fan-auto",
+      "labels": {
+        "ru": "Автовентилятор",
+        "en": "Auto fan"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_fan_speed_2",
+      "mdi": "fan-speed-2",
+      "labels": {
+        "ru": "Вентилятор со скоростями",
+        "en": "Variable fan"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_fan_speed_3",
+      "mdi": "fan-speed-3",
+      "labels": {
+        "ru": "Трёхскоростной вентилятор",
+        "en": "Three-speed fan"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_fan_clock",
+      "mdi": "fan-clock",
+      "labels": {
+        "ru": "Вентилятор с таймером",
+        "en": "Timed fan"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_ceiling_fan_light",
+      "mdi": "ceiling-fan-light",
+      "labels": {
+        "ru": "Вентилятор со светом",
+        "en": "Fan with light"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_air_purifier_off",
+      "mdi": "air-purifier-off",
+      "labels": {
+        "ru": "Рециркулятор",
+        "en": "Air recirculator"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_air_humidifier_off",
+      "mdi": "air-humidifier-off",
+      "labels": {
+        "ru": "Мойка воздуха",
+        "en": "Air washer"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_water_percent",
+      "mdi": "water-percent",
+      "labels": {
+        "ru": "Контроллер влажности",
+        "en": "Humidity control"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_thermometer_water",
+      "mdi": "thermometer-water",
+      "labels": {
+        "ru": "Датчик температуры воды",
+        "en": "Water temperature"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_thermometer_plus",
+      "mdi": "thermometer-plus",
+      "labels": {
+        "ru": "Подогрев",
+        "en": "Heating control"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_thermometer_minus",
+      "mdi": "thermometer-minus",
+      "labels": {
+        "ru": "Охлаждение",
+        "en": "Cooling control"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_thermometer_auto",
+      "mdi": "thermometer-auto",
+      "labels": {
+        "ru": "Автотермостат",
+        "en": "Automatic thermostat"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_thermostat_auto",
+      "mdi": "thermostat-auto",
+      "labels": {
+        "ru": "Программируемый термостат",
+        "en": "Smart thermostat"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_snowflake",
+      "mdi": "snowflake",
+      "labels": {
+        "ru": "Охлаждающая установка",
+        "en": "Cooling unit"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_weather_sunny",
+      "mdi": "weather-sunny",
+      "labels": {
+        "ru": "Солнечный нагреватель",
+        "en": "Solar heater"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_weather_night",
+      "mdi": "weather-night",
+      "labels": {
+        "ru": "Ночной климат-контроль",
+        "en": "Night climate"
+      },
+      "group": "climate"
+    },
+    {
+      "id": "icon_ceiling_light_multiple",
+      "mdi": "ceiling-light-multiple",
+      "labels": {
+        "ru": "Группа потолочных светильников",
+        "en": "Ceiling lights"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_ceiling_light_outline",
+      "mdi": "ceiling-light-outline",
+      "labels": {
+        "ru": "Потолочный плафон",
+        "en": "Ceiling fixture"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_floor_lamp_dual",
+      "mdi": "floor-lamp-dual",
+      "labels": {
+        "ru": "Двойной торшер",
+        "en": "Dual floor lamp"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_floor_lamp_torchiere",
+      "mdi": "floor-lamp-torchiere",
+      "labels": {
+        "ru": "Торшер с плафоном",
+        "en": "Torchiere"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_wall_sconce",
+      "mdi": "wall-sconce",
+      "labels": {
+        "ru": "Настенное бра",
+        "en": "Wall lamp"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_wall_sconce_round",
+      "mdi": "wall-sconce-round",
+      "labels": {
+        "ru": "Круглое бра",
+        "en": "Round sconce"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_wall_sconce_round_variant",
+      "mdi": "wall-sconce-round-variant",
+      "labels": {
+        "ru": "Дизайнерское бра",
+        "en": "Decorative sconce"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_lightbulb",
+      "mdi": "lightbulb",
+      "labels": {
+        "ru": "Лампочка",
+        "en": "Light bulb"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_lightbulb_variant",
+      "mdi": "lightbulb-variant",
+      "labels": {
+        "ru": "Декоративная лампа",
+        "en": "Decorative bulb"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_lightbulb_group",
+      "mdi": "lightbulb-group",
+      "labels": {
+        "ru": "Группа ламп",
+        "en": "Bulb group"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_lightbulb_multiple",
+      "mdi": "lightbulb-multiple",
+      "labels": {
+        "ru": "Мультилампа",
+        "en": "Multiple bulbs"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_lightbulb_fluorescent_tube",
+      "mdi": "lightbulb-fluorescent-tube",
+      "labels": {
+        "ru": "Люминесцентный свет",
+        "en": "Fluorescent tube"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_lightbulb_spot",
+      "mdi": "lightbulb-spot",
+      "labels": {
+        "ru": "Точечный светильник",
+        "en": "Spotlight bulb"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_light_recessed",
+      "mdi": "light-recessed",
+      "labels": {
+        "ru": "Встраиваемый светильник",
+        "en": "Recessed light"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_light_flood_down",
+      "mdi": "light-flood-down",
+      "labels": {
+        "ru": "Прожектор вниз",
+        "en": "Downlight flood"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_light_flood_up",
+      "mdi": "light-flood-up",
+      "labels": {
+        "ru": "Прожектор вверх",
+        "en": "Uplight flood"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_track_light",
+      "mdi": "track-light",
+      "labels": {
+        "ru": "Трековый светильник",
+        "en": "Track light"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_string_lights",
+      "mdi": "string-lights",
+      "labels": {
+        "ru": "Гирлянда",
+        "en": "String lights"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_dome_light",
+      "mdi": "dome-light",
+      "labels": {
+        "ru": "Купольный светильник",
+        "en": "Dome light"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_bulkhead_light",
+      "mdi": "bulkhead-light",
+      "labels": {
+        "ru": "Технический светильник",
+        "en": "Bulkhead light"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_globe_light",
+      "mdi": "globe-light",
+      "labels": {
+        "ru": "Шарообразный светильник",
+        "en": "Globe light"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_post_lamp",
+      "mdi": "post-lamp",
+      "labels": {
+        "ru": "Садовый фонарь",
+        "en": "Garden lamp"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_vanity_light",
+      "mdi": "vanity-light",
+      "labels": {
+        "ru": "Подсветка зеркала",
+        "en": "Mirror light"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_lava_lamp",
+      "mdi": "lava-lamp",
+      "labels": {
+        "ru": "Лава-лампа",
+        "en": "Lava lamp"
+      },
+      "group": "lighting"
+    },
+    {
+      "id": "icon_blinds_horizontal",
+      "mdi": "blinds-horizontal",
+      "labels": {
+        "ru": "Горизонтальные жалюзи",
+        "en": "Horizontal blinds"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_blinds_vertical",
+      "mdi": "blinds-vertical",
+      "labels": {
+        "ru": "Вертикальные жалюзи",
+        "en": "Vertical blinds"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_blinds_open",
+      "mdi": "blinds-open",
+      "labels": {
+        "ru": "Жалюзи с приводом",
+        "en": "Motorized blinds"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_curtains_closed",
+      "mdi": "curtains-closed",
+      "labels": {
+        "ru": "Раздвижные шторы",
+        "en": "Curtain motor"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_garage_open",
+      "mdi": "garage-open",
+      "labels": {
+        "ru": "Привод гаража",
+        "en": "Garage opener"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_door",
+      "mdi": "door",
+      "labels": {
+        "ru": "Моторизованная дверь",
+        "en": "Motorized door"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_door_sliding",
+      "mdi": "door-sliding",
+      "labels": {
+        "ru": "Раздвижная дверь",
+        "en": "Sliding door"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_door_sliding_open",
+      "mdi": "door-sliding-open",
+      "labels": {
+        "ru": "Привод двери",
+        "en": "Door opener"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_gate_open",
+      "mdi": "gate-open",
+      "labels": {
+        "ru": "Привод ворот",
+        "en": "Gate opener"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_boom_gate",
+      "mdi": "boom-gate",
+      "labels": {
+        "ru": "Шлагбаум",
+        "en": "Barrier gate"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_fence",
+      "mdi": "fence",
+      "labels": {
+        "ru": "Электрозабор",
+        "en": "Fence"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_doorbell",
+      "mdi": "doorbell",
+      "labels": {
+        "ru": "Дверной звонок",
+        "en": "Doorbell"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_doorbell_video",
+      "mdi": "doorbell-video",
+      "labels": {
+        "ru": "Видеодомофон",
+        "en": "Video intercom"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_alarm_panel",
+      "mdi": "alarm-panel",
+      "labels": {
+        "ru": "Охранная панель",
+        "en": "Alarm panel"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_motion_sensor",
+      "mdi": "motion-sensor",
+      "labels": {
+        "ru": "Датчик движения",
+        "en": "Motion sensor"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_security",
+      "mdi": "security",
+      "labels": {
+        "ru": "Сигнализация",
+        "en": "Security system"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_lock",
+      "mdi": "lock",
+      "labels": {
+        "ru": "Электрозамок",
+        "en": "Electric lock"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_lock_open",
+      "mdi": "lock-open",
+      "labels": {
+        "ru": "Контроль доступа",
+        "en": "Access control"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_access_point",
+      "mdi": "access-point",
+      "labels": {
+        "ru": "Точка доступа",
+        "en": "Wireless access point"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_wifi",
+      "mdi": "wifi",
+      "labels": {
+        "ru": "Wi-Fi-контроллер",
+        "en": "Wi-Fi controller"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_router_wireless",
+      "mdi": "router-wireless",
+      "labels": {
+        "ru": "Маршрутизатор",
+        "en": "Router"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_electric_switch",
+      "mdi": "electric-switch",
+      "labels": {
+        "ru": "Релейный модуль",
+        "en": "Relay switch"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_home_automation",
+      "mdi": "home-automation",
+      "labels": {
+        "ru": "Умный дом",
+        "en": "Home automation"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_home_lightbulb",
+      "mdi": "home-lightbulb",
+      "labels": {
+        "ru": "Управление светом",
+        "en": "Smart lighting"
+      },
+      "group": "home"
+    },
+    {
+      "id": "icon_toaster",
+      "mdi": "toaster",
+      "labels": {
+        "ru": "Тостер",
+        "en": "Toaster"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_toaster_oven",
+      "mdi": "toaster-oven",
+      "labels": {
+        "ru": "Мини-печь",
+        "en": "Countertop oven"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_kettle",
+      "mdi": "kettle",
+      "labels": {
+        "ru": "Электрочайник",
+        "en": "Kettle"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_kettle_steam",
+      "mdi": "kettle-steam",
+      "labels": {
+        "ru": "Чайник с подогревом",
+        "en": "Steam kettle"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_rice",
+      "mdi": "rice",
+      "labels": {
+        "ru": "Рисоварка",
+        "en": "Rice cooker"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_stove",
+      "mdi": "stove",
+      "labels": {
+        "ru": "Плита",
+        "en": "Stove"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_fridge",
+      "mdi": "fridge",
+      "labels": {
+        "ru": "Холодильник",
+        "en": "Fridge"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_fridge_industrial",
+      "mdi": "fridge-industrial",
+      "labels": {
+        "ru": "Промышленный холодильник",
+        "en": "Industrial fridge"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_hair_dryer",
+      "mdi": "hair-dryer",
+      "labels": {
+        "ru": "Фен",
+        "en": "Hair dryer"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_blender",
+      "mdi": "blender",
+      "labels": {
+        "ru": "Блендер",
+        "en": "Blender"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_pot_steam",
+      "mdi": "pot-steam",
+      "labels": {
+        "ru": "Мультиварка",
+        "en": "Multi-cooker"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_tumble_dryer",
+      "mdi": "tumble-dryer",
+      "labels": {
+        "ru": "Сушильная машина",
+        "en": "Tumble dryer"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_washing_machine_off",
+      "mdi": "washing-machine-off",
+      "labels": {
+        "ru": "Стиральная машина с таймером",
+        "en": "Washer control"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_dishwasher_off",
+      "mdi": "dishwasher-off",
+      "labels": {
+        "ru": "Посудомоечный модуль",
+        "en": "Dishwasher control"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_robot_vacuum_variant",
+      "mdi": "robot-vacuum-variant",
+      "labels": {
+        "ru": "Робот-пылесос 2",
+        "en": "Robot vacuum variant"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_robot_mower_outline",
+      "mdi": "robot-mower-outline",
+      "labels": {
+        "ru": "Газонокосилка",
+        "en": "Lawn mower"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_pool_thermometer",
+      "mdi": "pool-thermometer",
+      "labels": {
+        "ru": "Подогрев бассейна",
+        "en": "Pool heater"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_watering_can",
+      "mdi": "watering-can",
+      "labels": {
+        "ru": "Автополив",
+        "en": "Garden irrigation"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_water_pump",
+      "mdi": "water-pump",
+      "labels": {
+        "ru": "Водяной насос",
+        "en": "Water pump"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_fountain",
+      "mdi": "fountain",
+      "labels": {
+        "ru": "Фонтан",
+        "en": "Fountain"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_coffee_maker_outline",
+      "mdi": "coffee-maker-outline",
+      "labels": {
+        "ru": "Кофемашина капсульная",
+        "en": "Capsule coffee maker"
+      },
+      "group": "appliance"
+    },
+    {
+      "id": "icon_microwave_off",
+      "mdi": "microwave-off",
+      "labels": {
+        "ru": "Печь СВЧ",
+        "en": "Microwave control"
+      },
+      "group": "appliance"
+    }
+  ]
+}

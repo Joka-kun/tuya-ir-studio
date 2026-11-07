@@ -1,0 +1,73 @@
+{
+  "title": "Tuya IR Studio",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Añadir pasarela IR Tuya",
+        "description": "Elige cómo conectar la pasarela IR local: sesión Tuya/Smart Life existente, QR o credenciales locales.",
+        "data": {
+          "setup_mode": "Método de conexión"
+        }
+      },
+      "cloud": {
+        "title": "Cuenta de Tuya / Smart Life",
+        "description": "En Smart Life o Tuya, abre Ajustes → Cuenta y seguridad y busca el código de usuario. Introdúcelo para obtener el QR.",
+        "data": {
+          "user_code": "Código de usuario"
+        }
+      },
+      "scan": {
+        "title": "Finalizar acceso",
+        "description": "Escanea el QR con Smart Life o Tuya y confirma este formulario."
+      },
+      "choose_device": {
+        "title": "Seleccionar dispositivo IR y pasarela",
+        "description": "Selecciona el dispositivo IR y su pasarela principal. Una pasarela ya configurada puede aparecer en una lista independiente. El QR se usa solo para configurar la pasarela, no para importar botones.",
+        "data": {
+          "device_id": "Dispositivo IR",
+          "hub_id": "Pasarela IR principal"
+        }
+      },
+      "search": {
+        "title": "Buscar pasarela en la red local",
+        "description": "{device_name}IR Studio buscará la IP de la pasarela en la red local. Si no la encuentra, puedes introducirla manualmente."
+      },
+      "native_hub": {
+        "title": "Confirmar pasarela IR local",
+        "description": "Comprueba el host y el protocolo. La Local Key se guarda en Home Assistant y la comunicación se realiza por la red local.",
+        "data": {
+          "device_id": "Device ID de la pasarela",
+          "host": "Dirección IP o nombre de host",
+          "local_key": "Local Key",
+          "protocol_version": "Versión de protocolo (automática)",
+          "device_cid": "Node ID o UUID del dispositivo secundario (opcional)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Esta pasarela IR Tuya ya está configurada.",
+      "no_devices": "No se han encontrado dispositivos Tuya adecuados con Local Key."
+    },
+    "error": {
+      "login_error": "No se completó el acceso a Tuya/Smart Life. Solicita un QR nuevo.",
+      "needs_hub": "Este dispositivo requiere una pasarela principal.",
+      "does_not_need_hub": "Este dispositivo se conecta directamente. No selecciones una pasarela principal.",
+      "invalid_device": "El dispositivo Tuya ya no está disponible.",
+      "invalid_hub": "La pasarela principal no es válida.",
+      "missing_node_id": "El dispositivo secundario no tiene Node ID ni UUID.",
+      "missing_local_key": "No hay Local Key para el dispositivo o la pasarela.",
+      "device_not_found": "No se encontró la pasarela en la LAN. Introduce su IP local.",
+      "invalid_credentials": "Introduce la IP, el Device ID y la Local Key.",
+      "cannot_connect": "No se puede conectar a la pasarela IR Tuya. Comprueba IP, Device ID, Local Key, ID secundario y protocolo."
+    }
+  },
+  "selector": {
+    "setup_mode": {
+      "options": {
+        "cloud": "Tuya / Smart Life – sesión existente o QR",
+        "manual": "Manual – IP, Device ID y Local Key",
+        "cloud_fresh_login": "Tuya / Smart Life – nuevo acceso QR"
+      }
+    }
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "title": "Tuya IR Studio",
+  "config": {
+    "step": {
+      "native_hub": {
+        "title": "Connect a Tuya IR hub",
+        "description": "Connect the physical hub directly over your local network. Enter the gateway IP address, gateway Device ID and Local Key. If the IR module is a child device, also enter its Node ID. IR Studio validates the LAN connection and creates its own remote entity; no external Tuya integration is required.",
+        "data": {
+          "host": "Hub IP address or hostname",
+          "device_id": "Gateway Device ID",
+          "local_key": "Local Key",
+          "protocol_version": "Protocol version",
+          "node_id": "Child IR module Node ID (optional)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This Tuya IR hub is already configured."
+    },
+    "error": {
+      "invalid_credentials": "Enter the hub address, gateway Device ID and Local Key.",
+      "cannot_connect": "Could not connect to the Tuya IR hub. Check its address, Device ID, Local Key, child Node ID and protocol version."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manage infrared remotes",
+        "menu_options": {
+          "create_remote": "Add remote",
+          "manage_remote": "Manage existing remote",
+          "interface": "Interface"
+        }
+      },
+      "create_remote": {
+        "title": "Add a virtual IR remote",
+        "description": "A remote device and entity will be created in Home Assistant. The selected IR transmitter will learn and send commands; buttons are added only after learning.",
+        "data": {
+          "name": "Remote name",
+          "remote_entity": "IR transmitter",
+          "icon": "Icon (optional)"
+        }
+      },
+      "manage_remote": {
+        "title": "Choose a remote",
+        "data": {
+          "profile_id": "Remote"
+        }
+      },
+      "manage_actions": {
+        "title": "Manage remote commands",
+        "menu_options": {
+          "add_command": "Learn a command",
+          "rename_remote": "Rename remote",
+          "remove_remote": "Delete remote",
+          "finish": "Done",
+          "change_icon": "Choose icon",
+          "manage_button": "Manage button"
+        }
+      },
+      "add_command": {
+        "title": "Learn a button",
+        "description": "Choose a command label from the library or enter a custom one (for example Power, Mute or VOL +). Then point the original remote at the IR hub and press the button.",
+        "data": {
+          "name": "Button label"
+        }
+      },
+      "rename_remote": {
+        "title": "Rename remote",
+        "description": "Changing the visible name does not change the learned signal namespace or Home Assistant entity IDs.",
+        "data": {
+          "name": "Remote name"
+        }
+      },
+      "remove_command": {
+        "title": "Remove button",
+        "description": "Delete the selected button from the virtual remote? Physical-driver IR storage is not deleted.",
+        "data": {
+          "confirm": "Remove button"
+        }
+      },
+      "remove_remote": {
+        "title": "Delete remote {name}",
+        "description": "This removes its Home Assistant virtual remote and buttons. Physical hub and separately stored driver signals remain untouched.",
+        "data": {
+          "confirm": "Delete this remote"
+        }
+      },
+      "interface": {
+        "title": "Advanced editor",
+        "description": "For most users, Home Assistant's Configure wizard is sufficient. The optional legacy editor adds a sidebar item.",
+        "data": {
+          "show_panel": "Show advanced IR Studio panel in sidebar"
+        }
+      },
+      "rename_command": {
+        "title": "Rename button",
+        "description": "The visible label changes; the stored IR signal does not.",
+        "data": {
+          "name": "New button label"
+        }
+      },
+      "change_icon": {
+        "title": "Remote icon",
+        "description": "Choose an icon from Home Assistant's visual MDI picker. Signals remain unchanged.",
+        "data": {
+          "icon": "Icon"
+        }
+      },
+      "manage_button": {
+        "title": "Choose a button",
+        "data": {
+          "button_id": "Button"
+        }
+      },
+      "button_actions": {
+        "title": "Manage selected button",
+        "menu_options": {
+          "test_button": "Test send",
+          "relearn_button": "Relearn IR code",
+          "rename_command": "Rename",
+          "remove_command": "Delete",
+          "choose_another_button": "Choose another button"
+        }
+      },
+      "test_button": {
+        "title": "Test button",
+        "description": "On confirmation, send the IR command ONCE. A successful call does not prove the appliance received it.",
+        "data": {
+          "confirm": "Send once"
+        }
+      },
+      "relearn_button": {
+        "title": "Relearn button",
+        "description": "Learn a replacement signal. The button name, HA unique ID and IR command namespace remain unchanged.",
+        "data": {
+          "confirm": "Begin re-learning"
+        }
+      }
+    },
+    "progress": {
+      "learn": "Waiting for the original remote's IR signal"
+    },
+    "abort": {
+      "saved": "Saved",
+      "not_ready": "IR Studio is not ready. Check the integration status.",
+      "no_hub": "No available physical IR transmitter.",
+      "no_profiles": "No remote has been created yet."
+    },
+    "error": {
+      "limit_reached": "Profile/command limit reached.",
+      "name_exists": "Name is already used.",
+      "invalid_input": "Check the entered values.",
+      "no_hub": "The IR transmitter is unavailable.",
+      "learn_failed": "Learning failed. Check Home Assistant logs and try again.",
+      "confirmation_required": "Please confirm before deleting.",
+      "busy": "An IR learning job is still running.",
+      "send_failed": "IR transmission failed. Check gateway and logs.",
+      "not_learned": "Learn this command first."
+    }
+  }
+}

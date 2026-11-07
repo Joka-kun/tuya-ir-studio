@@ -1,0 +1,75 @@
+name: Publish verified release
+
+on:
+  workflow_run:
+    workflows:
+      - Unit tests and syntax
+      - Hassfest
+      - Validate HACS
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    # Never run privileged release logic for a pull request or a failed run.
+    if: ${{ github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: verified-release
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          persist-credentials: false
+      - name: Publish only after all three checks pass on current main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          current=$(gh api "repos/${REPO}/commits/main" --jq '.sha')
+          if [[ "$current" != "$SHA" ]]; then
+            echo "A newer main commit exists; skipping an obsolete release"
+            exit 0
+          fi
+          # The first two workflows to finish do nothing. The last one
+          # publishes only if ALL required push checks succeeded.
+          gh api "repos/${REPO}/actions/runs?head_sha=${SHA}&per_page=100" > "$RUNNER_TEMP/all-runs.json"
+          for required in "Unit tests and syntax" "Hassfest" "Validate HACS"; do
+            if ! jq -e --arg name "$required" \
+              '[.workflow_runs[] | select(.event == "push" and .name == $name and .conclusion == "success")] | length >= 1' \
+              "$RUNNER_TEMP/all-runs.json" >/dev/null; then
+              echo "Awaiting verified push workflow: $required"
+              exit 0
+            fi
+          done
+          version=$(python -c 'import json; print(json.load(open("custom_components/ir_studio/manifest.json"))["version"])')
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid release version: $version" >&2
+            exit 1
+          fi
+          # Only icon.png is mandatory; logo.png is optional for Marketplace.
+          test -s "custom_components/ir_studio/brand/icon.png"
+          tag="v${version}"
+          if gh release view "$tag" --repo "$REPO" >/dev/null 2>&1; then
+            echo "Release $tag already exists; verifying its tag"
+          else
+            # GitHub creates a lightweight tag at this exact tested commit.
+            if ! gh release create "$tag" --repo "$REPO" --target "$SHA" \
+              --title "Tuya IR Studio ${version}" --generate-notes --latest; then
+              # Concurrent workflow_run events can race.
+              gh release view "$tag" --repo "$REPO" >/dev/null
+            fi
+          fi
+          actual_tag_sha=$(gh api "repos/${REPO}/git/ref/tags/${tag}" --jq '.object.sha')
+          if [[ "$actual_tag_sha" != "$SHA" ]]; then
+            echo "Release tag is not on tested main SHA; refusing mismatch" >&2
+            exit 1
+          fi

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="220" viewBox="0 0 1060 220" role="img" aria-labelledby="a b">
+<title id="a">Tuya IR Studio local control workflow</title><desc id="b">Connect a compatible hub; create a remote; teach your IR buttons; use it offline.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#112039"/><stop offset="1" stop-color="#1c193b"/></linearGradient><linearGradient id="line"><stop stop-color="#0ec6df"/><stop offset="1" stop-color="#977afa"/></linearGradient></defs>
+<rect width="1060" height="220" rx="26" fill="url(#bg)"/>
+<g font-family="Inter, Segoe UI, Arial, sans-serif" text-anchor="middle">
+<g transform="translate(0 0)">
+<rect x="26" y="26" width="232" height="166" rx="17" fill="#1b3052" stroke="#3977a2"/>
+<circle cx="142" cy="78" r="26" stroke="#55cfff" stroke-width="3" fill="none"/><path d="M132 75l10-10 10 10M132 85l10 10 10-10" stroke="#55cfff" fill="none" stroke-width="3"/>
+<text x="142" y="131" font-size="20" font-weight="700" fill="#f1f7ff">01 · Connect</text>
+<text x="142" y="158" font-size="15" fill="#b4c7dd">Local IR hub</text>
+</g><g transform="translate(260 0)">
+<rect x="26" y="26" width="232" height="166" rx="17" fill="#24264f" stroke="#7a6db0"/>
+<rect x="120" y="55" width="44" height="50" rx="8" stroke="#c7b4ff" fill="none" stroke-width="3"/><path d="M131 70h22m-22 12h22m-22 12h12" stroke="#c7b4ff" stroke-width="3"/>
+<text x="142" y="131" font-size="20" font-weight="700" fill="#f1f7ff">02 · Create</text><text x="142" y="158" font-size="15" fill="#b4c7dd">Remote &amp; buttons</text>
+</g><g transform="translate(520 0)">
+<rect x="26" y="26" width="232" height="166" rx="17" fill="#1b3052" stroke="#3977a2"/>
+<path d="M127 90q15-20 30 0M117 75q25-35 50 0M109 61q33-49 66 0" stroke="#67d8fa" stroke-width="4" fill="none" stroke-linecap="round"/>
+<text x="142" y="131" font-size="20" font-weight="700" fill="#f1f7ff">03 · Learn</text><text x="142" y="158" font-size="15" fill="#b4c7dd">Using original remote</text>
+</g><g transform="translate(780 0)">
+<rect x="26" y="26" width="232" height="166" rx="17" fill="#24264f" stroke="#7a6db0"/>
+<circle cx="142" cy="81" r="27" fill="none" stroke="#9d8aff" stroke-width="3"/><path d="M130 81l9 9 16-20" stroke="#77ebc2" stroke-width="4" fill="none" stroke-linecap="round"/>
+<text x="142" y="131" font-size="20" font-weight="700" fill="#f1f7ff">04 · Control</text><text x="142" y="158" font-size="15" fill="#b4c7dd">Over your LAN</text>
+</g></g>
+</svg>
