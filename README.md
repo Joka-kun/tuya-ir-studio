@@ -5,12 +5,12 @@
 <p align="center">
   <a href="https://github.com/Joka-kun/tuya-ir-studio/actions/workflows/tests.yaml"><img src="https://github.com/Joka-kun/tuya-ir-studio/actions/workflows/tests.yaml/badge.svg" alt="Unit tests"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/Joka-kun/tuya-ir-studio" alt="MIT"></a>
-  <a href="https://hacs.xyz/"><img src="https://img.shields.io/badge/HACS-custom%20repository-18a4cb" alt="HACS custom repository"></a>
+  <a href="https://www.home-assistant.io/integrations/marketplace/"><img src="https://img.shields.io/badge/Home%20Assistant-Marketplace%20listed-18a4cb" alt="Listed in the Home Assistant Marketplace"></a>
 </p>
 
 # Tuya IR Studio
 
-A **local-first infrared remote manager** for Home Assistant. Connect a compatible Tuya IR hub, organize virtual remotes, learn commands with the original handset, and send them over your LAN.
+A **community-maintained Home Assistant Marketplace integration** for local infrared remote control. Connect a compatible Tuya / Smart Life IR hub, organize virtual remotes, learn commands with the original handset, and transmit them over your LAN.
 
 **Scope:** speculative Smart Life cloud button imports have been removed. Tuya / Smart Life QR authentication is **only for onboarding the physical hub**; it does not import buttons, cloud presets or IR waveforms.
 
@@ -29,7 +29,7 @@ A **local-first infrared remote manager** for Home Assistant. Connect a compatib
 
 ## Installation
 
-In **HACS → Search**, find **Tuya IR Studio**, install it, and restart Home Assistant if prompted. The integration is included in the official HACS catalog. If your HACS catalog has not refreshed yet, open **Custom repositories**, add `https://github.com/Joka-kun/tuya-ir-studio` as an **Integration**, and install it. Go to **Settings → Devices & services → Add integration → Tuya IR Studio**. Set up your local IR hub with QR-assisted Tuya sign-in or the manual IP / Device ID / Local Key path.
+In **Settings → Marketplace**, search for **Tuya IR Studio** and install it from the community integration catalog. Restart Home Assistant if prompted. If your HACS catalog has not refreshed yet, open **Custom repositories**, add `https://github.com/Joka-kun/tuya-ir-studio` as an **Integration**, and install it. Go to **Settings → Devices & services → Add integration → Tuya IR Studio**. Set up your local IR hub with QR-assisted Tuya sign-in or the manual IP / Device ID / Local Key path.
 
 Open **Settings → Devices & services → Tuya IR Studio → Configure** to add a remote and learn its buttons through Home Assistant's built-in wizard. The advanced IR Studio sidebar is optional (hidden on new installs). Once a command is learned, use its native **button** or virtual **remote** entity in automations. A successful service call does not prove physical operation.
 
