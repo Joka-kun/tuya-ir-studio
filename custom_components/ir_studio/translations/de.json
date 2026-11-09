@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "IR-Gateway hinzufügen",
-        "description": "Wähle die Verbindung für dein lokales IR-Gateway: vorhandene Tuya/Smart-Life-Anmeldung, QR-Code oder lokale Daten.",
+        "description": "Wähle die Verbindung für dein lokales IR-Gateway: nur die eigene gespeicherte QR-Sitzung von IR Studio, neuer QR-Login oder lokale Zugangsdaten.",
         "data": {
           "setup_mode": "Verbindungsmethode"
         }
@@ -64,7 +64,7 @@
   "selector": {
     "setup_mode": {
       "options": {
-        "cloud": "Tuya / Smart Life – bestehende Anmeldung oder QR-Code",
+        "cloud": "Tuya / Smart Life – eigene IR Studio QR-Sitzung oder neuer QR-Login",
         "manual": "Manuell – IP, Device ID und Local Key",
         "cloud_fresh_login": "Tuya / Smart Life – neue QR-Anmeldung"
       }
