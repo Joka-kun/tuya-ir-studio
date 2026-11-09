@@ -31,3 +31,4 @@ jobs:
       - run: node tests/test_placeholder_cleanup.js
       - run: node tests/test_ir_file_ui.js
       - run: node tests/test_guided_learning.js
+      - run: node tests/test_restored_progress.js

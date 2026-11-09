@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.4 — Accurate counters after backup restoration
+
+- Fix the sidebar's `0 of N learned` display after importing a backup with functional IR commands. A restored `needs_check` status now counts toward "learned/restored" while retaining a visible "needs verification" count.
+- Do not mark imported commands as physically verified, inspect another integration's private CodeStore, alter the IR payload or force the user to re-learn a previously working command.
+- The guided-learning wizard no longer treats opaque, imported `needs_check` entries as unlearned by default. If IR Studio itself knows a code is missing, learning remains available.
+- Add an actual-panel JavaScript regression test with backed-up/foreign-store cases. No change to QR login or LAN transport.
+
+
 ## 1.0.3 — Isolation of third-party credentials and IR CodeStores
 
 - Tuya/Smart Life QR login and token refresh now use only IR Studio's own private Home Assistant Store. Legacy unmarked credentials are purged, since older versions might have copied them from Tuya Local; a one-time fresh IR Studio QR login may be necessary. Subsequent explicitly marked IR Studio QR sessions survive restarts.
