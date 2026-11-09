@@ -20,7 +20,7 @@
 
 ## Installation
 
-In **HACS → Benutzerdefinierte Repositories** das Repository `https://github.com/Joka-kun/tuya-ir-studio` als **Integration** hinzufügen. Anschließend installieren und Home Assistant neu starten.
+Unter **Einstellungen → Marketplace** (früher **HACS**) nach **Tuya IR Studio** suchen und die Integration aus dem Katalog installieren.
 
 Über **Einstellungen → Geräte & Dienste → Integration hinzufügen → Tuya IR Studio** das Gateway einrichten. Danach in der Seitenleiste eine Fernbedienung anlegen, Tasten hinzufügen und **schrittweise anlernen**. Die tatsächliche Reaktion des Zielgeräts prüfen.
 
