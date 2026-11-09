@@ -21,8 +21,8 @@ for (const readme of ['README.md','README_RU.md']) {
     'Settings → Marketplace should be the primary install path: ' + readme);
   assert(/(?:search|найди)/i.test(text),
     'Integration search should be documented: ' + readme);
-  assert(/Custom repositories|Пользовательские репозитории/.test(text),
-    'Manual HACS fallback should remain documented: ' + readme);
+  assert(!/Custom repositories|Пользовательские репозитории/.test(text),
+    'Outdated manual repository installation should be removed: ' + readme);
 }
 const core = fs.readFileSync('custom_components/ir_studio/tuya_cloud.py','utf8');
 assert(!core.includes('hass.data.get("tuya_local"'));

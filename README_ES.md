@@ -20,7 +20,7 @@
 
 ## Instalación
 
-En **HACS → Repositorios personalizados**, añade `https://github.com/Joka-kun/tuya-ir-studio` como **Integración**. Instala y reinicia Home Assistant.
+En **Ajustes → Marketplace** (antes **HACS**), busca **Tuya IR Studio** e instala la integración desde el catálogo.
 
 En **Ajustes → Dispositivos y servicios → Añadir integración → Tuya IR Studio**, configura tu pasarela. Después abre la barra lateral, crea un mando, añade botones y utiliza el **aprendizaje paso a paso**. Comprueba que el aparato responda físicamente.
 

@@ -20,7 +20,7 @@
 
 ## 安装
 
-打开 **HACS → 自定义存储库**，将 `https://github.com/Joka-kun/tuya-ir-studio` 添加为**集成**，安装后重启 Home Assistant。
+打开 **设置 → Marketplace**（原 **HACS**），搜索 **Tuya IR Studio**，并从目录中安装此集成。
 
 前往 **设置 → 设备与服务 → 添加集成 → Tuya IR Studio** 配置红外网关。随后在侧边栏创建遥控器，添加所需按键，使用**逐步学习**功能。请务必确认实体设备确实响应。
 
