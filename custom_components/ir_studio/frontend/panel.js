@@ -2337,8 +2337,6 @@ class IRStudioPanel extends HTMLElement {
     // Bind each restored appliance to a *current* HA Remote executor. Old
     // entity IDs in backup files can be stale after reinstalling the gateway.
     const remotes = this._remotes().filter(r=>['on','off'].includes(r.status));
-    const options = remotes.map(r =>
-      `<option value="${h(r.id)}">${h(r.name)} · ${h(r.id)}</option>`).join('');
     return `<div class="row" style="gap:8px;margin:8px 0"><button data-action="backup-select-all">Выбрать все</button><button data-action="backup-select-none">Снять выбор</button></div>` +
       profiles.map(p => {
         const selected = remotes.some(r=>r.id===p.remote_entity)
