@@ -20,7 +20,7 @@
 
 ## Installation
 
-Dans **HACS → Dépôts personnalisés**, ajoutez `https://github.com/Joka-kun/tuya-ir-studio` comme **Intégration**. Installez puis redémarrez Home Assistant.
+Dans **Paramètres → Marketplace** (anciennement **HACS**), recherchez **Tuya IR Studio** et installez l'intégration depuis le catalogue.
 
 Ouvrez **Paramètres → Appareils et services → Ajouter une intégration → Tuya IR Studio** pour configurer la passerelle. Créez ensuite une télécommande dans la barre latérale, ajoutez les touches nécessaires et lancez **l'apprentissage pas à pas**. Vérifiez la réaction de l'appareil réel.
 
