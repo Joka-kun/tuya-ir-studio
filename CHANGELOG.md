@@ -2,7 +2,7 @@
 
 ## 1.0.3 — Isolation of third-party credentials and IR CodeStores
 
-- Tuya/Smart Life QR login and token refresh now use only IR Studio's own private Home Assistant Store. Remove cross-integration reads of Tuya Local's access and refresh tokens; existing IR Studio QR sessions remain restorable.
+- Tuya/Smart Life QR login and token refresh now use only IR Studio's own private Home Assistant Store. Legacy unmarked credentials are purged, since older versions might have copied them from Tuya Local; a one-time fresh IR Studio QR login may be necessary. Subsequent explicitly marked IR Studio QR sessions survive restarts.
 - Never read or mutate the Tuya IR integration's private CodeStore. Externally learned codes are handled through public `remote.learn_command` and `remote.send_command` services only; their storage cannot be asserted by IR Studio.
 - Import RAW Base64 into IR Studio's independent local store for archive/backup only, without claiming it has been transmitted to an externally managed remote. Native Tuya DP202 imports remain separately supported.
 - Add regression tests for foreign-runtime isolation, QR session provenance, RAW import/export, failure rollback and the unchanged native send paths.
