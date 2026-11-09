@@ -33,3 +33,4 @@ jobs:
       - run: node tests/test_guided_learning.js
       - run: node tests/test_restored_progress.js
       - run: node tests/test_backup_executor_ui.js
+      - run: node tests/test_qr_copy.js
