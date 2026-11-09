@@ -5,12 +5,12 @@
 <p align="center">
   <a href="https://github.com/Joka-kun/tuya-ir-studio/actions/workflows/tests.yaml"><img src="https://github.com/Joka-kun/tuya-ir-studio/actions/workflows/tests.yaml/badge.svg" alt="Тесты"></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/Joka-kun/tuya-ir-studio" alt="MIT"></a>
-  <a href="https://hacs.xyz/"><img src="https://img.shields.io/badge/HACS-custom%20repository-18a4cb" alt="HACS"></a>
+  <a href="https://www.home-assistant.io/integrations/marketplace/"><img src="https://img.shields.io/badge/Home%20Assistant-Marketplace%20listed-18a4cb" alt="Интеграция в каталоге Home Assistant Marketplace"></a>
 </p>
 
 # Tuya IR Studio
 
-**Локальные ИК-пульты для Home Assistant.** Подключай совместимый ИК-шлюз Tuya, создавай пульты, обучай команды оригинальным физическим пультом и управляй устройствами по домашней сети.
+**Tuya IR Studio — пользовательская интеграция из каталога Home Assistant Marketplace для локального ИК-управления.** Подключай совместимый ИК-шлюз Tuya / Smart Life, создавай пульты, обучай команды оригинальным физическим пультом и управляй по локальной сети.
 
 **Что важно:** Экспериментальный импорт кнопок Smart Life удалён: он переносил технические названия без работающих ИК-сигналов. **QR теперь используется только для настройки шлюза**, а не для получения кнопок или готовых облачных кодов.
 
@@ -29,7 +29,7 @@
 
 ## Установка
 
-В **HACS → Поиск** найди **Tuya IR Studio** и установи её из официального каталога. Если потребуется, перезапусти Home Assistant. Если каталог HACS ещё не обновился, открой **Пользовательские репозитории**, добавь `https://github.com/Joka-kun/tuya-ir-studio` как **Интеграцию** и установи её. Открой **Настройки → Устройства и службы → Добавить интеграцию → Tuya IR Studio**. Подключи шлюз через QR или вручную.
+В **Настройки → Marketplace** найди **Tuya IR Studio** и установи её из каталога пользовательских интеграций. Если потребуется, перезапусти Home Assistant. Если каталог HACS ещё не обновился, открой **Пользовательские репозитории**, добавь `https://github.com/Joka-kun/tuya-ir-studio` как **Интеграцию** и установи её. Открой **Настройки → Устройства и службы → Добавить интеграцию → Tuya IR Studio**. Подключи шлюз через QR или вручную.
 
 Открой **Настройки → Устройства и службы → Tuya IR Studio → Настроить**. Здесь можно создать пульт, обучить кнопку, переименовать или удалить команды без отдельной боковой панели. На новых установках она скрыта и включается только по желанию. Для автоматизаций используй `button.press` или `remote.send_command`.
 
