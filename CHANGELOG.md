@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.5 — Restore IR profiles to existing transmitters
+
+- Backup import now lets the user choose a **current Home Assistant IR Remote executor for each selected profile**, rather than silently copying a stale remote entity ID from the backup. The prior binding is preselected only when it currently exists and is available.
+- Reject missing, unavailable or virtual Remote entities at the server; validate again on final import. All backup strategies preserve button IDs, remote command keys, device code namespaces and saved waveforms. Explicit executor choice also applies when merging existing profiles; skip leaves existing profiles untouched.
+- Add Python and JavaScript regressions for stale remotes, multiple profiles, safe rejection and unchanged IR payloads.
+- No change to Tuya Local QR isolation, cloud access, native LAN transport or raw code ownership.
+
+
 ## 1.0.4 — Accurate counters after backup restoration
 
 - Fix the sidebar's `0 of N learned` display after importing a backup with functional IR commands. A restored `needs_check` status now counts toward "learned/restored" while retaining a visible "needs verification" count.

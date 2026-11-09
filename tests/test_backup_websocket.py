@@ -364,3 +364,120 @@ async def test_profile_reorder_rejects_stale_ids_and_restores_order_on_failed_sa
     assert rt.profiles is original_list
     assert [p["id"] for p in rt.profiles] == initial
     assert rt.ir_codes["existing/power"] == RAW
+
+
+@pytest.mark.asyncio
+async def test_import_binding_picks_current_ha_remote_without_changing_ir_keys(monkeypatch):
+    ws = load_ws(monkeypatch)
+    rt = RT()
+    rt.ir_codes["existing/power"] = RAW
+    states = types.SimpleNamespace(get=lambda key: {
+        "remote.lan_hub": types.SimpleNamespace(state="off", attributes={}),
+        "remote.old_hub": None,
+    }.get(key))
+    hass = types.SimpleNamespace(data={"ir_studio": rt}, states=states)
+    conn = Conn()
+    backup = {"format": "tuya-ir-studio-backup", "format_version": 3,
+              "profiles": [{
+                  "id": "new", "name": "Bedroom TV",
+                  "remote_entity": "remote.old_hub", "remote_device": "Bedroom TV",
+                  "buttons": [{"id": "power", "name": "Power",
+                               "remote_name": "Power", "status": "verified",
+                               "raw_ir": RAW}]
+              }]}
+    args = {"id": 48, "backup": backup, "profile_ids": ["new"],
+            "strategy": "skip", "remote_bindings": {"new": "remote.lan_hub"}}
+    await ws.ws_backup_import(hass, conn, {**args, "dry_run": True})
+    assert conn.error is None
+    assert rt.saves == 0 and len(rt.profiles) == 1
+    await ws.ws_backup_import(hass, conn, {**args, "dry_run": False})
+    assert conn.error is None
+    imported = rt.profiles[-1]
+    assert imported["remote_entity"] == "remote.lan_hub"
+    assert imported["remote_device"] == "Bedroom TV"
+    assert imported["buttons"][0]["remote_name"] == "Power"
+    assert imported["buttons"][0]["verified"] is False
+    assert rt.ir_codes["new/power"] == RAW
+    assert rt.ir_codes["existing/power"] == RAW
+
+
+@pytest.mark.asyncio
+async def test_existing_profile_binding_merge_replace_and_skip(monkeypatch):
+    ws = load_ws(monkeypatch)
+    rt = RT()
+    rt.native_codes["existing/power"] = "1OLDNATIVECODE"
+    hass = types.SimpleNamespace(
+        data={"ir_studio": rt},
+        states=types.SimpleNamespace(get=lambda key:
+            types.SimpleNamespace(state="on", attributes={})
+            if key == "remote.new_hub" else None))
+    conn = Conn()
+    backup = {"format": "tuya-ir-studio-backup", "format_version": 3,
+              "profiles": [{
+                  "id": "existing", "name": "TV", "remote_device": "TV",
+                  "remote_entity": "remote.old_hub",
+                  "buttons": [{"id": "power", "name": "Power",
+                               "remote_name": "Power", "status": "stored"}]
+              }]}
+    args = {"id": 49, "backup": backup, "profile_ids": ["existing"],
+            "remote_bindings": {"existing": "remote.new_hub"}, "dry_run": False}
+    await ws.ws_backup_import(hass, conn, {**args, "strategy": "skip"})
+    assert conn.error is None
+    assert rt.profiles[0]["remote_entity"] == "remote.hub"
+    await ws.ws_backup_import(hass, conn, {**args, "strategy": "merge"})
+    assert conn.error is None
+    assert rt.profiles[0]["remote_entity"] == "remote.new_hub"
+    assert rt.profiles[0]["remote_device"] == "TV"
+    assert rt.native_codes["existing/power"] == "1OLDNATIVECODE"
+    assert conn.result["changes"]["rebound_profiles"] == ["TV"]
+    await ws.ws_backup_import(hass, conn, {**args, "strategy": "replace"})
+    assert conn.error is None
+    assert rt.profiles[0]["remote_entity"] == "remote.new_hub"
+    assert rt.profiles[0]["id"] == "existing"
+    assert rt.profiles[0]["buttons"][0]["remote_name"] == "Power"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("state,attrs", [
+    ("unavailable", {}), ("unknown", {}), ("on", {"ir_studio_virtual": True}),
+    (None, None),
+])
+async def test_backup_import_rejects_unavailable_or_virtual_transmitters(
+        monkeypatch, state, attrs):
+    ws = load_ws(monkeypatch)
+    rt = RT()
+    old = repr(rt.profiles)
+    states = types.SimpleNamespace(get=lambda key:
+        types.SimpleNamespace(state=state, attributes=attrs)
+        if key == "remote.invalid" and state is not None else None)
+    hass = types.SimpleNamespace(data={"ir_studio": rt}, states=states)
+    conn = Conn()
+    backup = {"format": "tuya-ir-studio-backup", "format_version": 3,
+              "profiles": [{"id": "other", "name": "Other",
+                            "remote_entity": "remote.old",
+                            "buttons": [{"id": "b", "name": "Power"}]}]}
+    await ws.ws_backup_import(hass, conn, {
+        "id": 50, "backup": backup, "profile_ids": ["other"],
+        "remote_bindings": {"other": "remote.invalid"},
+        "strategy": "skip", "dry_run": False,
+    })
+    assert conn.error is not None
+    assert repr(rt.profiles) == old and rt.saves == 0
+    assert rt.ir_codes == {} and rt.native_codes == {}
+
+
+@pytest.mark.asyncio
+async def test_backup_import_rejects_binding_for_unselected_profile(monkeypatch):
+    ws = load_ws(monkeypatch)
+    rt = RT()
+    hass = types.SimpleNamespace(data={"ir_studio": rt})
+    conn = Conn()
+    backup = {"format": "tuya-ir-studio-backup", "format_version": 3,
+              "profiles": [{"id": "new", "name": "TV2", "remote_entity": "remote.old",
+                            "buttons": [{"id": "b", "name": "Power"}]}]}
+    await ws.ws_backup_import(hass, conn, {
+        "id": 51, "backup": backup, "profile_ids": ["new"],
+        "remote_bindings": {"different": "remote.hub"},
+        "strategy": "skip", "dry_run": False,
+    })
+    assert conn.error is not None and rt.saves == 0

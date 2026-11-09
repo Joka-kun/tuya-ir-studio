@@ -2332,6 +2332,29 @@ class IRStudioPanel extends HTMLElement {
       <span><b data-no-translate>${h(p.name)}</b> <small>· ${p.buttons?.length || 0} команд</small></span></label>`).join('');
   }
 
+  _backupImportRows(profiles) {
+    if (!profiles.length) return '<p class="muted">Нет пультов в резервной копии</p>';
+    // Bind each restored appliance to a *current* HA Remote executor. Old
+    // entity IDs in backup files can be stale after reinstalling the gateway.
+    const remotes = this._remotes().filter(r=>['on','off'].includes(r.status));
+    return `<div class="row" style="gap:8px;margin:8px 0"><button data-action="backup-select-all">Выбрать все</button><button data-action="backup-select-none">Снять выбор</button></div>` +
+      profiles.map(p => {
+        const selected = remotes.some(r=>r.id===p.remote_entity)
+          ? p.remote_entity : '';
+        return `<div class="backup-row" style="display:block">
+          <label><input type="checkbox" data-backup-choice="${h(p.id)}" checked />
+            <b data-no-translate>${h(p.name)}</b>
+            <small>· ${p.buttons?.length||0} команд</small></label>
+          <label class="tiny" for="backup-remote-${h(p.id)}">ИК-устройство для отправки команд</label>
+          <select id="backup-remote-${h(p.id)}" data-backup-remote="${h(p.id)}">
+            <option value="" ${!selected?'selected':''} disabled>Выберите действующий ИК-шлюз</option>
+            ${remotes.map(r=>`<option value="${h(r.id)}" ${r.id===selected?'selected':''}>${h(r.name)} · ${h(r.id)}</option>`).join('')}
+          </select>
+          <small class="muted">В резервной копии: ${h(p.remote_entity||'не указан')}</small>
+        </div>`;
+      }).join('');
+  }
+
   _selectedBackupIds() {
     return [...this.shadowRoot.querySelectorAll('[data-backup-choice]:checked')].map(el=>el.dataset.backupChoice);
   }
@@ -2348,7 +2371,8 @@ class IRStudioPanel extends HTMLElement {
     const data=this._importBackup;
     this._setHTML(host, `<h3>Импорт</h3><label>Файл резервной копии JSON</label>
       <input type="file" id="backup-file" accept=".json,application/json" />
-      <div id="backup-import-list">${data ? this._backupRows(data.profiles || []) : '<p class="tiny muted">Сначала выбери JSON-файл.</p>'}</div>
+      <div id="backup-import-list">${data ? this._backupImportRows(data.profiles || []) : '<p class="tiny muted">Сначала выбери JSON-файл.</p>'}</div>
+      <p class="tiny muted">Для каждого выбранного пульта укажи работающий ИК-передатчик Home Assistant. Сохранённая привязка подставляется, только если этот исполнитель всё ещё доступен. Восстановленные команды и их внутренние имена не изменяются.</p>
       <label>Если пульт уже существует</label>
       <select id="backup-strategy"><option value="skip">Пропустить существующие (безопасно)</option>
         <option value="merge">Добавить отсутствующие кнопки</option>
@@ -2386,8 +2410,18 @@ class IRStudioPanel extends HTMLElement {
     if(!this._importBackup||!profile_ids.length){this._toast('Выбери файл и хотя бы один пульт',true);return;}
     const strategy=this.shadowRoot.querySelector('#backup-strategy')?.value||'skip';
     const backup=this._importBackup;
+    const remote_bindings={};
+    const choices=[...this.shadowRoot.querySelectorAll('[data-backup-remote]')];
+    for (const profile_id of profile_ids) {
+      const choice=choices.find(el=>el.dataset.backupRemote===profile_id);
+      if (!choice?.value) {
+        this._toast('Выбери ИК-устройство для каждого импортируемого пульта',true);
+        return;
+      }
+      remote_bindings[profile_id]=choice.value;
+    }
     try {
-      const args={backup,profile_ids,strategy};
+      const args={backup,profile_ids,strategy,remote_bindings};
       const preview=await this._call('backup_import',{...args,dry_run:true});
       const ch=preview.changes;
       if(strategy==='replace' && ch.replaced_profiles.length &&

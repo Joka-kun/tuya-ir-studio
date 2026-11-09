@@ -93,7 +93,7 @@ def normalize_backup(document: dict, *, valid_icons=None) -> list[dict]:
     return normalized
 
 
-def make_import_plan(existing: list[dict], backup: dict, selected_ids: list[str], strategy: str, *, valid_icons=None) -> tuple[list[dict], dict]:
+def make_import_plan(existing: list[dict], backup: dict, selected_ids: list[str], strategy: str, *, valid_icons=None, remote_bindings: dict[str, str] | None = None) -> tuple[list[dict], dict]:
     """Compute changes without mutating existing profiles.
 
     skip: add only new profiles, merge: add unmatched buttons to existing
@@ -110,11 +110,23 @@ def make_import_plan(existing: list[dict], backup: dict, selected_ids: list[str]
     by_id = {p["id"]: p for p in source}
     if any(s not in by_id for s in selected_ids):
         raise ValueError("Selected profile is absent from backup")
+    # Binding is a live HA entity reference, not an IR code namespace.
+    # Never modify remote_device, remote_name or the waveform during remapping.
+    remote_bindings = remote_bindings or {}
+    if not isinstance(remote_bindings, dict) or any(
+        key not in selected_ids or not isinstance(value, str)
+        for key, value in remote_bindings.items()
+    ):
+        raise ValueError("Invalid selected remote bindings")
     target = copy.deepcopy(existing)
     changes = {"added_profiles": [], "merged_profiles": [], "replaced_profiles": [], "skipped_profiles": [],
-               "added_buttons": 0, "raw_codes": 0}
+               "rebound_profiles": [], "added_buttons": 0, "raw_codes": 0}
     for sid in selected_ids:
-        incoming = copy.deepcopy(by_id[sid]); raw = 0
+        incoming = copy.deepcopy(by_id[sid])
+        selected_remote = remote_bindings.get(sid)
+        if selected_remote:
+            incoming["remote_entity"] = remote_entity_id(selected_remote)
+        raw = 0
         for button in incoming["buttons"]:
             if "raw_ir" in button or "tuya_code" in button:
                 raw += 1
@@ -134,12 +146,18 @@ def make_import_plan(existing: list[dict], backup: dict, selected_ids: list[str]
             changes["skipped_profiles"].append(incoming["name"])
         elif strategy == "replace":
             # Preserve the active HA profile ID for registry compatibility.
+            if selected_remote and found["remote_entity"] != incoming["remote_entity"]:
+                changes["rebound_profiles"].append(incoming["name"])
             incoming["id"] = found["id"]
             target[target.index(found)] = incoming
             changes["replaced_profiles"].append(incoming["name"])
             changes["raw_codes"] += raw
         else:
-            # Leave existing buttons, order and remote binding untouched.
+            # Merge may explicitly rebind the executor while retaining button
+            # keys, waveform namespaces, order and HA profile identity.
+            if selected_remote and found["remote_entity"] != incoming["remote_entity"]:
+                changes["rebound_profiles"].append(incoming["name"])
+                found["remote_entity"] = incoming["remote_entity"]
             existing_ids = {b["id"] for b in found["buttons"]}
             existing_labels = {b["name"].casefold() for b in found["buttons"]}
             for b in incoming["buttons"]:
