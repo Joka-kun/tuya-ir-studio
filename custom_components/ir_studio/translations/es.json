@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Añadir pasarela IR Tuya",
-        "description": "Elige cómo conectar la pasarela IR local: sesión Tuya/Smart Life existente, QR o credenciales locales.",
+        "description": "Elige cómo conectar la pasarela IR local: sesión QR guardada por IR Studio, nueva conexión por QR o credenciales locales. No reutiliza sesiones de otras integraciones.",
         "data": {
           "setup_mode": "Método de conexión"
         }
@@ -64,7 +64,7 @@
   "selector": {
     "setup_mode": {
       "options": {
-        "cloud": "Tuya / Smart Life – sesión existente o QR",
+        "cloud": "Tuya / Smart Life – sesión QR propia de IR Studio o nuevo acceso QR",
         "manual": "Manual – IP, Device ID y Local Key",
         "cloud_fresh_login": "Tuya / Smart Life – nuevo acceso QR"
       }
