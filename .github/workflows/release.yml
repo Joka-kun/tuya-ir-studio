@@ -70,6 +70,21 @@ jobs:
           fi
           actual_tag_sha=$(gh api "repos/${REPO}/git/ref/tags/${tag}" --jq '.object.sha')
           if [[ "$actual_tag_sha" != "$SHA" ]]; then
+            # A documentation/test-only merge does not need a new package
+            # version. Keep the published tag immutable, but only skip when
+            # the complete change list proves no runtime files were touched.
+            gh api "repos/${REPO}/compare/${actual_tag_sha}...${SHA}" > "$RUNNER_TEMP/release-diff.json"
+            if jq -e '
+                .status == "ahead"
+                and (.files | length >= 1 and length < 300)
+                and all(.files[];
+                  (.status == "added" or .status == "modified")
+                  and (.filename | test("^(README(?:_[A-Z]+)?\\.md|docs/.*\\.md|tests/.*\\.(py|js)|\\.github/workflows/release\\.yml)$"))
+                )
+              ' "$RUNNER_TEMP/release-diff.json" >/dev/null; then
+              echo "Docs/tests-only change after published ${tag}; keeping immutable release"
+              exit 0
+            fi
             echo "Release tag is not on tested main SHA; refusing mismatch" >&2
             exit 1
           fi
