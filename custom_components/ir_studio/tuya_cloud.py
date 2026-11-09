@@ -90,12 +90,14 @@ def resolve_hub_target(
 
 
 CLOUD_AUTH_STORE_KEY = "ir_studio_cloud_auth"
+OWN_QR_AUTH_ORIGIN = "ir_studio_qr"
 
 
 def _has_valid_cloud_auth(auth: Any) -> bool:
     """Validate stored shape without ever logging or exposing token values."""
     return (
         isinstance(auth, dict)
+        and auth.get("_ir_studio_auth_origin") == OWN_QR_AUTH_ORIGIN
         and all(isinstance(auth.get(field), str) and auth[field]
                 for field in ("user_code", "terminal_id", "endpoint"))
         and isinstance(auth.get("token_info"), dict)
@@ -108,9 +110,9 @@ def _has_valid_cloud_auth(auth: Any) -> bool:
 async def async_restore_cloud_auth(hass) -> None:
     """Restore the *private* QR session before panel and config flow usage.
 
-    Metadata-only account device caching already survives HA restarts, but
-    old versions only kept OAuth tokens in hass.data; they vanished on restart.
-    Existing in-memory sessions always win over disk (QR may have just logged in).
+    Only sessions explicitly obtained by IR Studio's own QR flow are trusted.
+    Old unmarked credentials might have been copied from Tuya Local by previous
+    releases; they must be rejected rather than reused or refreshed.
     """
     from homeassistant.helpers.storage import Store
 
@@ -118,23 +120,24 @@ async def async_restore_cloud_auth(hass) -> None:
     if bucket.get("auth_initialized"):
         return
     try:
-        saved = await Store(hass, 1, CLOUD_AUTH_STORE_KEY, private=True).async_load()
+        store = Store(hass, 1, CLOUD_AUTH_STORE_KEY, private=True)
+        saved = await store.async_load()
         auth = saved.get("auth") if isinstance(saved, dict) else None
-        if _has_valid_cloud_auth(bucket.get("auth_cache")):
-            # A pre-update session may still be in RAM during a hot reload.
-            # Migrate it once rather than waiting for the next QR login.
+        own_auth = bucket.get("auth_cache")
+        if not _has_valid_cloud_auth(own_auth):
+            # In-memory auth from older versions has no verifiable provenance.
+            bucket.pop("auth_cache", None)
+            own_auth = None
+        if auth is not None and not _has_valid_cloud_auth(auth):
+            # Purge legacy credentials that might belong to Tuya Local.
+            # Never refresh them, even if the old private Store contains them.
+            await store.async_save({"auth": None})
+            auth = None
+        if _has_valid_cloud_auth(own_auth):
             if not _has_valid_cloud_auth(auth):
-                await async_persist_cloud_auth(hass, bucket["auth_cache"])
+                await async_persist_cloud_auth(hass, own_auth)
         elif _has_valid_cloud_auth(auth):
             bucket["auth_cache"] = auth
-        else:
-            # Existing Tuya Local users can reuse the same QR session
-            # without another scan. Do not modify Tuya Local's own cache.
-            shared = hass.data.get("tuya_local", {})
-            candidate = shared.get("auth_cache") if isinstance(shared, dict) else None
-            if _has_valid_cloud_auth(candidate):
-                bucket["auth_cache"] = candidate
-                await async_persist_cloud_auth(hass, candidate)
     except Exception as exc:
         _LOGGER.warning("Smart Life session restore failed (%s)", type(exc).__name__)
     bucket["auth_initialized"] = True
@@ -154,19 +157,17 @@ async def async_persist_cloud_auth(hass, auth: dict) -> None:
 
 
 def account_session_available(hass) -> bool:
-    """A reused Tuya / Smart Life QR session is present in HA memory."""
+    """Only IR Studio's explicitly authorized QR session is available."""
     own = hass.data.get("ir_studio_cloud", {})
-    shared = hass.data.get("tuya_local", {})
     return bool(
-        (isinstance(own, dict) and own.get("auth_cache"))
-        or (isinstance(shared, dict) and shared.get("auth_cache"))
+        isinstance(own, dict) and _has_valid_cloud_auth(own.get("auth_cache"))
     )
 
 
 class TuyaCloud:
     """Small wrapper around the same Tuya Sharing SDK used by Tuya Local."""
 
-    def __init__(self, hass, *, use_tuya_local_cache: bool = True):
+    def __init__(self, hass, *, use_cached_session: bool = True):
         from tuya_sharing import LoginControl
 
         self.hass = hass
@@ -175,13 +176,8 @@ class TuyaCloud:
         self._qr_token: str | None = None
         self._last_error: dict[str, Any] = {}
         self._store = hass.data.setdefault("ir_studio_cloud", {})
-        own_auth = self._store.get("auth_cache") if use_tuya_local_cache else None
-        shared_auth = None
-        if use_tuya_local_cache:
-            tuya_local_data = hass.data.get("tuya_local")
-            if isinstance(tuya_local_data, dict):
-                shared_auth = tuya_local_data.get("auth_cache")
-        self._auth = own_auth or shared_auth or {}
+        own_auth = self._store.get("auth_cache") if use_cached_session else None
+        self._auth = own_auth if _has_valid_cloud_auth(own_auth) else {}
         if self._auth:
             self._user_code = self._auth.get("user_code")
 
@@ -242,6 +238,7 @@ class TuyaCloud:
             return False
 
         self._auth = {
+            "_ir_studio_auth_origin": OWN_QR_AUTH_ORIGIN,
             "user_code": self._user_code,
             "terminal_id": info["terminal_id"],
             "endpoint": info["endpoint"],

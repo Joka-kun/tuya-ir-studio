@@ -412,8 +412,8 @@ const EN_TEXT = [
     "Operation failed. Check the Home Assistant log."
   ],
   [
-    "Этот Remote не поддерживает импорт через ИК Студию. Используй нативный Remote ИК Студии или поддерживаемый tuya_ir.",
-    "This remote does not support IR Studio code import. Use a native IR Studio remote or supported tuya_ir."
+    "Этот Remote не поддерживает прямую отправку импортированного кода. Для него используй публичное remote.learn_command.",
+    "This remote cannot send IR Studio imported codes directly. Use the public remote.learn_command service."
   ],
   [
     "Только raw Base64 из DP202 (u16 little-endian, микросекунды). Не вставляй Cloud Key ID, /rules blob или Local Key.",
@@ -424,8 +424,8 @@ const EN_TEXT = [
     "IR payload"
   ],
   [
-    "Импорт сохраняет код в локальном tuya_ir CodeStore, но не проверяет физическую реакцию.",
-    "Import stores the code locally but does not verify the physical response."
+    "RAW-код сохраняется только в IR Studio. Внешний Remote необходимо обучать через remote.learn_command; импорт не изменяет его хранилище.",
+    "RAW is stored only in IR Studio. Learn foreign remotes through remote.learn_command; importing does not alter their private code stores."
   ],
   [
     "Сохранить raw-код",
@@ -684,8 +684,8 @@ const EN_TEXT = [
     "Command not found"
   ],
   [
-    "Код найден в локальном хранилище tuya_ir. Следующий шаг — отправить его и проверить физически.",
-    "Code found in the local tuya_ir store. Send it next and verify the physical response."
+    "Нативный Remote ИК Студии сохранил код. Проверь отправку физически.",
+    "The native IR Studio remote saved the code. Verify the physical transmission."
   ],
   [
     "HA завершил обучение без ошибки, но наличие raw-кода в хранилище не подтверждено. Попробуй отправку или проверь журнал интеграции.",
@@ -720,7 +720,7 @@ const EN_TEXT = [
     "Import is supported only for a local tuya_ir or native IR Studio remote"
   ],
   [
-    "Локальное хранилище tuya_ir не найдено",
+    "IR Studio не имеет доступа к хранилищу другого Remote",
     "Local IR code storage was not found"
   ],
   [
@@ -828,8 +828,8 @@ const EN_TEXT = [
     "Paste the exact DP202 code string received from this local Tuya IR Hub. Do not paste the Local Key or Device ID."
   ],
   [
-    "Вставь raw Base64 из локального tuya_ir CodeStore (u16 little-endian). Не вставляй Cloud Key ID, /rules blob или Local Key.",
-    "Paste raw Base64 from the local tuya_ir CodeStore (u16 little-endian). Do not paste a Cloud Key ID, /rules blob or Local Key."
+    "Вставь RAW Base64 (u16 little-endian). Код сохранится исключительно в IR Studio. Не вставляй Cloud Key ID или Local Key.",
+    "Paste RAW Base64 (u16 little-endian). It will be stored only in IR Studio, not the external remote. Never paste a Local Key."
   ],
   [
     "Импорт сохраняет код локально, но не подтверждает физическую реакцию устройства.",
@@ -912,12 +912,12 @@ const EN_TEXT = [
     "Tuya DP202 import requires a native IR Studio remote"
   ],
   [
-    "Импорт RAW Base64 требует локальный tuya_ir Remote",
-    "RAW Base64 import requires a local tuya_ir remote"
+    "RAW-код хранится только в IR Studio, внешние Remote не изменяются",
+    "RAW is stored only in IR Studio; external remotes are not modified"
   ],
   [
-    "Локальное хранилище tuya_ir не найдено",
-    "Local tuya_ir code storage was not found"
+    "IR Studio не имеет доступа к хранилищу другого Remote",
+    "IR Studio does not access foreign remote code stores"
   ],
   [
     "Неподдерживаемый формат ИК-кода",
@@ -2115,7 +2115,7 @@ class IRStudioPanel extends HTMLElement {
       return;
     }
     if (!native && !legacy) {
-      this._showNotice('Этот Remote не поддерживает импорт через ИК Студию. Используй нативный Remote ИК Студии или поддерживаемый tuya_ir.');
+      this._showNotice('Этот Remote не поддерживает прямую отправку импортированного кода. Для него используй публичное remote.learn_command.');
       return;
     }
     const format = native ? 'tuya_dp202' : 'raw_ir';
@@ -2123,13 +2123,13 @@ class IRStudioPanel extends HTMLElement {
     const placeholder = native ? 'DP202 payload' : 'Base64 ИК-посылки';
     const description = native
       ? 'Вставь исходную строку DP202 из совместимого бэкапа. Не перекодируй её в Base64.'
-      : 'Вставь Base64 с RAW u16LE длительностями ИК-сигнала.';
+      : 'Вставь Base64 с RAW u16LE длительностями ИК-сигнала. Код останется только в IR Studio и не обучит внешний Remote.';
     this._dialog(`<h3>Импорт ИК-кода: ${h(p.name)} / ${h(b.name)}</h3>
       <label>Формат сигнала</label>
       <select id="raw-format"><option value="${format}">${formatLabel}</option></select>
       <p class="muted">${description}</p>
       <textarea id="raw-code" rows="5" placeholder="${placeholder}"></textarea>
-      <p class="tiny">Импорт сохраняет код локально, но не подтверждает физическую работу устройства.</p>
+      <p class="tiny">${native ? 'Импорт не доказывает физическую отправку.' : 'RAW сохраняется только в IR Studio. Для отправки внешним Remote обучи его через remote.learn_command.'}</p>
       <div class="dialog-footer"><button data-action="close-modal">Отмена</button><button class="primary" data-action="import-raw" data-button="${h(b.id)}">Сохранить код</button></div>`);
   }
 
@@ -2605,7 +2605,7 @@ class IRStudioPanel extends HTMLElement {
       const payload=this.shadowRoot.querySelector('#raw-code')?.value?.trim();
       const format=this.shadowRoot.querySelector('#raw-format')?.value||'raw_ir';
       const r=await this._doChange('import_raw',{profile_id:p.id,button_id:bid,payload,format});
-      if(r)this._showNotice('Код сохранён. Нажми «Послать», чтобы проверить его физически.');
+      if(r)this._showNotice(r.sendable_via_bound_remote ? 'Код сохранён. Нажми «Послать», чтобы проверить его физически.' : 'RAW сохранён только в IR Studio. Код не загружен во внешний Remote; обучи его через remote.learn_command.');
     }
     else if(action==='verify') {
       const result=await this._doChange('verify',{job_id:btn.dataset.job});

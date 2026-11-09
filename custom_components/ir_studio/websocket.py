@@ -63,24 +63,18 @@ def _source(hass, entity_id):
 
 
 def _known_code(hass, profile, button):
-    """Check supported local stores; HA service success is not physical proof."""
+    """Inspect IR Studio's native remote only; foreign remote codes are unknown.
+
+    Other remote integrations are accessed solely through public remote.*
+    services, not through their private hass.data or CodeStore objects.
+    """
     runtime = hass.data.get(DOMAIN)
     if runtime:
         native = runtime.native_remotes.get(profile["remote_entity"])
         if native:
             return native.has_code(profile.get("remote_device", profile["name"]),
                                    button.get("remote_name", button["name"]))
-    entity = er.async_get(hass).async_get(profile["remote_entity"])
-    if not entity or entity.platform != "tuya_ir" or not entity.config_entry_id:
-        return None
-    rt = hass.data.get("tuya_ir", {}).get(entity.config_entry_id)
-    if rt is None or not hasattr(rt, "store"):
-        return None
-    # A hub remote namespaces learned codes with 'device' = profile name.
-    # Display labels may be renamed; retain the original CodeStore keys.
-    device_key = profile.get("remote_device", profile["name"])
-    command_key = button.get("remote_name", button["name"])
-    return bool(rt.store.get(device_key, command_key))
+    return None
 
 
 @websocket_api.websocket_command({vol.Required("type"): "ir_studio/get"})
@@ -96,8 +90,15 @@ async def ws_get(hass, connection, msg):
         for btn in profile["buttons"]:
             b = dict(btn)
             known = _known_code(hass, profile, btn)
-            b["code_in_tuya_ir_store"] = known
-            b["code_in_local_store"] = known
+            key = f"{profile['id']}/{btn['id']}"
+            # The legacy field stays null for older UIs; foreign stores are
+            # intentionally opaque. Own imported payloads are not proof that
+            # an external remote backend can transmit them.
+            b["code_in_tuya_ir_store"] = None
+            b["code_in_local_store"] = (
+                True if key in runtime.ir_codes or key in runtime.native_codes
+                else known
+            )
             p["buttons"].append(b)
         profiles.append(p)
     connection.send_result(msg["id"], {
@@ -823,9 +824,11 @@ async def _run_service(hass, runtime, job_id, *, user_id: str):
                 code_is_stored = _known_code(hass, profile, button)
                 button["status"] = "stored" if code_is_stored else "needs_check"
                 job["message"] = (
-                    "Код найден в локальном хранилище tuya_ir. Следующий шаг — отправить его и проверить физически."
+                    "Нативный Remote ИК Студии сохранил код. Проверь отправку физически."
                     if code_is_stored else
-                    "HA завершил обучение без ошибки, но наличие raw-кода в хранилище не подтверждено. Попробуй отправку или проверь журнал интеграции."
+                    "Home Assistant завершил обучение. Для внешнего Remote его"
+                    " хранилище недоступно IR Studio: проверь код через"
+                    " публичный remote.send_command и реакцию устройства."
                 )
             button["verified"] = False
             job["status"] = "done"
@@ -966,29 +969,42 @@ async def ws_import_raw(hass, connection, msg):
             button = runtime.find_button(profile, msg["button_id"])
             ent = er.async_get(hass).async_get(profile["remote_entity"])
 
+            key = f"{profile['id']}/{button['id']}"
+            previous_status = button.get("status")
+            previous_verified = button.get("verified")
             if payload_format == "tuya_dp202":
                 code = validate_code(payload)
                 if not ent or ent.platform != DOMAIN or profile["remote_entity"] not in runtime.native_remotes:
                     raise ValueError("Импорт Tuya DP202 требует нативный Remote ИК Студии")
-                runtime.native_codes[f"{profile['id']}/{button['id']}"] = code
+                target_store = runtime.native_codes
+                new_status = "stored"
             else:
                 code = validate_raw_b64(payload)
-                if not ent or ent.platform != "tuya_ir" or not ent.config_entry_id:
-                    raise ValueError("Импорт RAW Base64 требует локальный tuya_ir Remote")
-                target = hass.data.get("tuya_ir", {}).get(ent.config_entry_id)
-                if not target or not hasattr(target, "store"):
-                    raise ValueError("Локальное хранилище tuya_ir не найдено")
-                await target.store.async_set(
-                    profile.get("remote_device", profile["name"]),
-                    button.get("remote_name", button["name"]),
-                    code,
-                )
+                # A foreign Remote's private CodeStore cannot be modified.
+                # Preserve this waveform exclusively in IR Studio's Store.
+                target_store = runtime.ir_codes
+                new_status = "needs_check"
 
-            button["status"] = "stored"
+            previous_code = target_store.get(key)
+            target_store[key] = code
+            button["status"] = new_status
             button["verified"] = False
-            await runtime.save()
+            try:
+                await runtime.save()
+            except Exception:
+                if previous_code is None:
+                    target_store.pop(key, None)
+                else:
+                    target_store[key] = previous_code
+                button["status"] = previous_status
+                button["verified"] = previous_verified
+                raise
 
-        connection.send_result(msg["id"], {"stored": True, "format": payload_format, "needs_physical_test": True})
+        connection.send_result(msg["id"], {
+            "stored": True, "format": payload_format,
+            "needs_physical_test": True,
+            "sendable_via_bound_remote": payload_format == "tuya_dp202",
+        })
     except ValueError as exc:
         _fail(connection, msg, exc)
     except Exception as exc:
@@ -1012,19 +1028,9 @@ def _read_export_code(hass, runtime, profile, button):
                               button.get("remote_name", button["name"]))
         if raw:
             return {"format": "tuya_dp202", "code": raw}
-    entry = er.async_get(hass).async_get(profile["remote_entity"])
-    if not entry or entry.platform != "tuya_ir" or not entry.config_entry_id:
-        return None
-    driver = hass.data.get("tuya_ir", {}).get(entry.config_entry_id)
-    if driver is None or not hasattr(driver, "store"):
-        return None
-    try:
-        return driver.store.get(profile.get("remote_device", profile["name"]),
-                                button.get("remote_name", button["name"]))
-    except Exception as exc:
-        # A backend can be unavailable or have an incompatible CodeStore API.
-        _LOGGER.debug("RAW export unavailable: %s", type(exc).__name__)
-        return None
+    # Do not read CodeStores belonging to other remote integrations.
+    # Data not imported or learned within IR Studio is not exportable.
+    return None
 
 
 @websocket_api.websocket_command({
@@ -1053,7 +1059,7 @@ async def ws_backup_export(hass, connection, msg):
             "profiles": profiles,
             "raw_ir_codes_included": raw_count,
             "raw_ir_codes_unavailable": count - raw_count,
-            "note": "IR waveforms are included only when readable from a supported local code store.",
+            "note": "Only IR Studio-owned waveforms are exported; other remote integrations' internal stores are not inspected.",
         })
     except ValueError as exc:
         _fail(connection, msg, exc)

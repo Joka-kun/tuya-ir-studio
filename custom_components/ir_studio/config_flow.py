@@ -78,7 +78,7 @@ class IRStudioConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         await async_restore_cloud_auth(self.hass)
         self._cloud = TuyaCloud(
             self.hass,
-            use_tuya_local_cache=(mode != "cloud_fresh_login"),
+            use_cached_session=(mode != "cloud_fresh_login"),
         )
         if mode == "cloud_fresh_login":
             # Explicit re-login must NOT destroy an otherwise valid session

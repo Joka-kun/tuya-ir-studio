@@ -15,6 +15,7 @@ spec.loader.exec_module(cloud_module)
 
 def creds(access="access-old", refresh="refresh-old"):
     return {
+        "_ir_studio_auth_origin": cloud_module.OWN_QR_AUTH_ORIGIN,
         "user_code": "user-code", "terminal_id": "terminal",
         "endpoint": "https://tuya.example.invalid",
         "token_info": {
@@ -74,17 +75,37 @@ async def test_successful_login_persists_and_restores_after_restart(fake_storage
 
 
 @pytest.mark.asyncio
-async def test_legacy_in_memory_and_existing_tuya_local_sessions_are_migrated(fake_storage):
+async def test_ir_studio_in_memory_session_migrates_without_external_tokens(fake_storage):
     saved, _ = fake_storage
     auth = creds()
-    hass = types.SimpleNamespace(data={"ir_studio_cloud": {"auth_cache": auth}})
-    await cloud_module.async_restore_cloud_auth(hass)
+    own = types.SimpleNamespace(data={"ir_studio_cloud": {"auth_cache": auth}})
+    await cloud_module.async_restore_cloud_auth(own)
     assert saved[cloud_module.CLOUD_AUTH_STORE_KEY]["auth"] == auth
+
     saved.clear()
-    shared = types.SimpleNamespace(data={"tuya_local": {"auth_cache": auth}})
-    await cloud_module.async_restore_cloud_auth(shared)
-    assert shared.data["ir_studio_cloud"]["auth_cache"] == auth
-    assert saved[cloud_module.CLOUD_AUTH_STORE_KEY]["auth"] == auth
+    foreign = types.SimpleNamespace(data={"tuya_local": {"auth_cache": auth}})
+    await cloud_module.async_restore_cloud_auth(foreign)
+    assert "auth_cache" not in foreign.data["ir_studio_cloud"]
+    assert cloud_module.CLOUD_AUTH_STORE_KEY not in saved
+    assert not cloud_module.account_session_available(foreign)
+
+
+@pytest.mark.asyncio
+async def test_unmarked_legacy_credentials_are_purged_and_require_own_qr(fake_storage, monkeypatch):
+    saved, _ = fake_storage
+    legacy = creds()
+    legacy.pop("_ir_studio_auth_origin")
+    saved[cloud_module.CLOUD_AUTH_STORE_KEY] = {"auth": legacy}
+    hass = types.SimpleNamespace(data={"ir_studio_cloud": {"auth_cache": legacy}})
+    await cloud_module.async_restore_cloud_auth(hass)
+    assert saved[cloud_module.CLOUD_AUTH_STORE_KEY] == {"auth": None}
+    assert "auth_cache" not in hass.data["ir_studio_cloud"]
+    assert not cloud_module.account_session_available(hass)
+
+    sharing = types.ModuleType("tuya_sharing")
+    sharing.LoginControl = type("LoginControl", (), {})
+    monkeypatch.setitem(sys.modules, "tuya_sharing", sharing)
+    assert not cloud_module.TuyaCloud(hass).is_authenticated
 
 
 @pytest.mark.asyncio
@@ -104,7 +125,7 @@ async def test_failed_qr_confirmation_does_not_logout_old_session(fake_storage, 
         return job(*args)
     hass = types.SimpleNamespace(data={"ir_studio_cloud": {"auth_cache": auth}},
                                  async_add_executor_job=executor)
-    client = cloud_module.TuyaCloud(hass, use_tuya_local_cache=False)
+    client = cloud_module.TuyaCloud(hass, use_cached_session=False)
     client._user_code = "user-code"
     client._qr_token = "pending-qr"
     assert await client.async_login() is False
@@ -128,11 +149,12 @@ async def test_successful_qr_login_writes_tokens_before_responding(fake_storage,
     async def executor(job, *args):
         return job(*args)
     hass = types.SimpleNamespace(data={}, async_add_executor_job=executor)
-    client = cloud_module.TuyaCloud(hass, use_tuya_local_cache=False)
+    client = cloud_module.TuyaCloud(hass, use_cached_session=False)
     client._user_code = "user-code"
     client._qr_token = "approved-token"
     assert await client.async_login()
     assert saved[cloud_module.CLOUD_AUTH_STORE_KEY]["auth"]["token_info"]["access_token"] == "access-new"
+    assert saved[cloud_module.CLOUD_AUTH_STORE_KEY]["auth"]["_ir_studio_auth_origin"] == cloud_module.OWN_QR_AUTH_ORIGIN
     assert hass.data["ir_studio_cloud"]["auth_cache"]["terminal_id"] == "new-terminal"
 
 
@@ -179,3 +201,29 @@ async def test_sdk_token_refresh_persists_updated_access_and_refresh(fake_storag
     assert token["access_token"] == "access-rotated"
     assert token["refresh_token"] == "refresh-rotated"
     assert token["uid"] == "user"
+
+@pytest.mark.asyncio
+async def test_cloud_constructor_never_reads_tuya_local_internal_auth(fake_storage, monkeypatch):
+    class ForeignGuard(dict):
+        def get(self, key, default=None):
+            if key == "tuya_local":
+                raise AssertionError("foreign cache read")
+            return super().get(key, default)
+        def __getitem__(self, key):
+            if key == "tuya_local":
+                raise AssertionError("foreign cache read")
+            return super().__getitem__(key)
+
+    sharing = types.ModuleType("tuya_sharing")
+    sharing.LoginControl = type("LoginControl", (), {})
+    monkeypatch.setitem(sys.modules, "tuya_sharing", sharing)
+    data = ForeignGuard()
+    hass = types.SimpleNamespace(data=data)
+    await cloud_module.async_restore_cloud_auth(hass)
+    assert not cloud_module.account_session_available(hass)
+    assert not cloud_module.TuyaCloud(hass).is_authenticated
+    # Only our own, complete QR auth may be restored or used.
+    data["ir_studio_cloud"]["auth_cache"] = creds()
+    assert cloud_module.account_session_available(hass)
+    assert cloud_module.TuyaCloud(hass).is_authenticated
+    assert not cloud_module.TuyaCloud(hass, use_cached_session=False).is_authenticated

@@ -71,14 +71,14 @@ class FakeRuntime:
     async def save(self):self.saves+=1
 
 @pytest.mark.asyncio
-async def test_successful_learn_only_after_backend_store_write(monkeypatch):
+async def test_external_remote_learning_is_unverified_without_foreign_store_access(monkeypatch):
     ws=load_ws(monkeypatch)
     store=FakeCodeStore();runtime=FakeRuntime(store)
     hass=types.SimpleNamespace(data={'tuya_ir':{'entry-1':types.SimpleNamespace(store=store)}},
              states={'remote.tuya_ir_hub':types.SimpleNamespace(state='on')},services=Services(store))
     await ws._run_service(hass,runtime,'j',user_id='admin')
     assert runtime.jobs['j']['status']=='done'
-    assert runtime.profiles[0]['buttons'][0]['status']=='stored'
+    assert runtime.profiles[0]['buttons'][0]['status']=='needs_check'
     assert runtime.profiles[0]['buttons'][0]['verified'] is False
     assert hass.services.calls[0][1]=='learn_command'
 
