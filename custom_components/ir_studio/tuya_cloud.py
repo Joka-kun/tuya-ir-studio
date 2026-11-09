@@ -90,12 +90,14 @@ def resolve_hub_target(
 
 
 CLOUD_AUTH_STORE_KEY = "ir_studio_cloud_auth"
+OWN_QR_AUTH_ORIGIN = "ir_studio_qr"
 
 
 def _has_valid_cloud_auth(auth: Any) -> bool:
     """Validate stored shape without ever logging or exposing token values."""
     return (
         isinstance(auth, dict)
+        and auth.get("_ir_studio_auth_origin") == OWN_QR_AUTH_ORIGIN
         and all(isinstance(auth.get(field), str) and auth[field]
                 for field in ("user_code", "terminal_id", "endpoint"))
         and isinstance(auth.get("token_info"), dict)
@@ -108,9 +110,9 @@ def _has_valid_cloud_auth(auth: Any) -> bool:
 async def async_restore_cloud_auth(hass) -> None:
     """Restore the *private* QR session before panel and config flow usage.
 
-    Metadata-only account device caching already survives HA restarts, but
-    old versions only kept OAuth tokens in hass.data; they vanished on restart.
-    Existing in-memory sessions always win over disk (QR may have just logged in).
+    Only sessions explicitly obtained by IR Studio's own QR flow are trusted.
+    Old unmarked credentials might have been copied from Tuya Local by previous
+    releases; they must be rejected rather than reused or refreshed.
     """
     from homeassistant.helpers.storage import Store
 
@@ -118,13 +120,22 @@ async def async_restore_cloud_auth(hass) -> None:
     if bucket.get("auth_initialized"):
         return
     try:
-        saved = await Store(hass, 1, CLOUD_AUTH_STORE_KEY, private=True).async_load()
+        store = Store(hass, 1, CLOUD_AUTH_STORE_KEY, private=True)
+        saved = await store.async_load()
         auth = saved.get("auth") if isinstance(saved, dict) else None
-        if _has_valid_cloud_auth(bucket.get("auth_cache")):
-            # A pre-update session may still be in RAM during a hot reload.
-            # Migrate it once rather than waiting for the next QR login.
+        own_auth = bucket.get("auth_cache")
+        if not _has_valid_cloud_auth(own_auth):
+            # In-memory auth from older versions has no verifiable provenance.
+            bucket.pop("auth_cache", None)
+            own_auth = None
+        if auth is not None and not _has_valid_cloud_auth(auth):
+            # Purge legacy credentials that might belong to Tuya Local.
+            # Never refresh them, even if the old private Store contains them.
+            await store.async_save({"auth": None})
+            auth = None
+        if _has_valid_cloud_auth(own_auth):
             if not _has_valid_cloud_auth(auth):
-                await async_persist_cloud_auth(hass, bucket["auth_cache"])
+                await async_persist_cloud_auth(hass, own_auth)
         elif _has_valid_cloud_auth(auth):
             bucket["auth_cache"] = auth
     except Exception as exc:
@@ -227,6 +238,7 @@ class TuyaCloud:
             return False
 
         self._auth = {
+            "_ir_studio_auth_origin": OWN_QR_AUTH_ORIGIN,
             "user_code": self._user_code,
             "terminal_id": info["terminal_id"],
             "endpoint": info["endpoint"],
