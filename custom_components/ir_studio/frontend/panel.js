@@ -2340,24 +2340,20 @@ class IRStudioPanel extends HTMLElement {
     const soleRemote = remotes.length === 1 ? remotes[0] : null;
     return `<div class="row" style="gap:8px;margin:8px 0"><button data-action="backup-select-all">Выбрать все</button><button data-action="backup-select-none">Снять выбор</button></div>` +
       profiles.map(p => {
-        // One available physical transmitter is unambiguous, even when the
-        // backup points to an old entity. Do not require a redundant click.
-        const selected = soleRemote?.id || (remotes.some(r=>r.id===p.remote_entity)
-          ? p.remote_entity : '');
-        const binding = soleRemote
-          ? `<input type="hidden" data-backup-remote="${h(p.id)}" value="${h(soleRemote.id)}" />
-             <p class="tiny">ИК-исполнитель: <b data-no-translate>${h(soleRemote.name)}</b>
-               <span class="muted">· ${h(soleRemote.id)} · выбран автоматически</span></p>`
-          : `<label class="tiny" for="backup-remote-${h(p.id)}">ИК-устройство для отправки команд</label>
-             <select id="backup-remote-${h(p.id)}" data-backup-remote="${h(p.id)}">
-               <option value="" ${!selected?'selected':''} disabled>${remotes.length ? 'Выберите действующий ИК-шлюз' : 'Нет доступных ИК-шлюзов'}</option>
-               ${remotes.map(r=>`<option value="${h(r.id)}" ${r.id===selected?'selected':''}>${h(r.name)} · ${h(r.id)}</option>`).join('')}
-             </select>`;
+        // Always render a real dropdown. When one physical transmitter is
+        // available preselect it; with several, the user must decide.
+        // Never silently bind to an obsolete backup entity ID.
+        const selected = soleRemote?.id || '';
         return `<div class="backup-row" style="display:block">
           <label><input type="checkbox" data-backup-choice="${h(p.id)}" checked />
             <b data-no-translate>${h(p.name)}</b>
             <small>· ${p.buttons?.length||0} команд</small></label>
-          ${binding}
+          <label class="tiny" for="backup-remote-${h(p.id)}">ИК-устройство для отправки команд</label>
+          <select id="backup-remote-${h(p.id)}" data-backup-remote="${h(p.id)}">
+            <option value="" ${!selected?'selected':''} disabled>${remotes.length ? 'Выберите действующий ИК-шлюз' : 'Нет доступных ИК-шлюзов'}</option>
+            ${remotes.map(r=>`<option value="${h(r.id)}" ${r.id===selected?'selected':''}>${h(r.name)} · ${h(r.id)}</option>`).join('')}
+          </select>
+          ${soleRemote ? '<small class="muted">Единственный доступный ИК-шлюз выбран автоматически. При необходимости проверь выбор.</small>' : ''}
           <small class="muted">В резервной копии: ${h(p.remote_entity||'не указан')}</small>
         </div>`;
       }).join('');
