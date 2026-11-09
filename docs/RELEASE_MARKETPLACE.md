@@ -1,22 +1,70 @@
-# Releases and HACS visibility
+# Home Assistant Marketplace listing and brand images
 
-Tuya IR Studio is distributed as a **custom HACS repository**. It is not automatically listed in the official HACS default catalog.
+Tuya IR Studio is a **community-maintained custom integration listed in the
+Home Assistant Marketplace** (formerly HACS), not a built-in Home Assistant
+integration. Its listing was accepted in
+[hacs/default#13600](https://github.com/hacs/default/pull/13600) on
+2026-11-09. Install it by searching **Tuya IR Studio** under
+**Settings → Marketplace**. The custom-repository option is only a fallback
+when the catalog has not refreshed.
 
-## Brand assets
+## What appears in the Marketplace before installation
 
-- Repository and integration branding use matching 256px / 512px PNG icons in `brand/` and `custom_components/ir_studio/brand/`.
-- The Home Assistant sidebar icon is `custom_components/ir_studio/frontend/icon.png`.
-- The GitHub README uses `assets/banner.svg` and `assets/workflow.svg`.
-- `tests/test_brand.py` checks asset integrity and matching icon variants.
+- The installed integration uses
+  `custom_components/ir_studio/brand/icon.png` (256 × 256) and
+  `icon@2x.png` (512 × 512). Optional `dark_icon*.png` use matching
+  artwork. The root `brand/` assets mirror those files for older tooling,
+  and `frontend/icon.png` is only for IR Studio's own panel.
+- **Before installation**, Home Assistant's Marketplace requests icons from
+  `https://brands.home-assistant.io/marketplace/ir_studio/icon.png`
+  rather than directly from GitHub or the already installed local integration.
+  The separate service indexes the `brand/` folder under the integration's
+  domain in the latest published GitHub release. See the
+  [Home Assistant Marketplace publishing guide](https://contributors.home-assistant.io/marketplace/guides/integrations/)
+  and the [brands service README](https://github.com/home-assistant/brands#marketplace-icons).
+- The brands service checks the Marketplace integration feed about hourly,
+  and rechecks a repository when a new release is seen or after a week. It may
+  return **404** for an indexed missing icon or **503** when its availability
+  is unknown. Browser and CDN caches can delay visible changes. Do not move
+  these custom-integration icons into the legacy home-assistant/brands
+  `custom_integrations/` repository.
+- A valid image in Git and passing HACS validation do **not** prove the
+  public Marketplace image endpoint has been indexed. Do not declare the
+  placeholder resolved without a successful `image/png` HTTP response
+  from the marketplace-specific URL and a fresh Marketplace UI check.
 
-An icon in an installed integration does **not** prove the integration is listed in the public HACS catalog.
+## Required verification before filing an upstream issue
 
-## Verified publishing
+1. Check that `custom_components/ir_studio/brand/icon.png` exists
+   **in the latest release tag**, not only in `main`; also verify
+   256/512 px PNG integrity. `tests/test_brand.py` checks this, including
+   consistency between root and integration brand copies.
+2. Open
+   [the Marketplace icon endpoint](https://brands.home-assistant.io/marketplace/ir_studio/icon.png)
+   directly. Record the HTTP status and content type, without assuming that
+   its generic placeholder image is our icon.
+3. Refresh the Marketplace catalog and image cache (accounting for its
+   hourly indexing and CDN cache). Confirm the actual tile displays the icon
+   **before the integration is installed**.
+4. If still missing, compare this case with the
+   [HACS/frontend missing-icon report](https://github.com/hacs/integration/issues/5402)
+   and attach the public release/tag, URL, response status and timestamps
+   to a relevant Marketplace or brands issue. Do not upload duplicate brand
+   artwork as a workaround.
 
-1. Changes are reviewed in a pull request. Required checks: **Unit tests and syntax**, **Hassfest**, **Validate HACS**.
-2. Once merged, the release workflow verifies that all three **push** checks have passed for the current `main` commit.
-3. A GitHub Release is created from the matching manifest version and tested commit. Existing historical Git commit records remain intact.
-4. Validate HACS custom-repository installation, the updated icon and sidebar, then physically test learning/transmission on compatible hardware.
-5. Official HACS catalog submission is a separate process requiring relevant real-device acceptance; do not submit a fork as a shortcut.
+## Releases and QA
 
-**Current testing boundary:** CI verifies structure and unit contracts, not the physical infrared response of every gateway/firmware.
+1. Changes go through a PR with the **Unit tests and syntax**,
+   **Hassfest**, and **Validate HACS** checks.
+2. Only verified merges are released; the publisher checks the exact
+   `main` commit against the manifest version and required check results.
+3. Local learning and IR transmission must be tested on real hardware.
+   A green CI is not proof of physical device response.
+4. GitHub's repository **About** one-line description is separate metadata:
+   editing this Markdown file does not change that field, or the preview
+   image in Marketplace.
+
+**Supported scope:** compatible Tuya / Smart Life IR hubs, local LAN
+transmission, real IR learning, custom remotes and backups. QR onboarding
+uses only IR Studio's own authorized session and does not import Smart Life
+cloud IR layouts or access Tuya Local's private tokens.

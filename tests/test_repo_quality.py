@@ -60,6 +60,18 @@ def test_main_readmes_do_not_advertise_unverified_cloud_ir_import_or_release():
     assert "hardware acceptance" in (ROOT / "ROADMAP.md").read_text().lower()
 
 
+def test_marketplace_docs_do_not_claim_custom_repository_only():
+    for file in ("README.md", "README_RU.md", "docs/RELEASE_MARKETPLACE.md"):
+        text = (ROOT / file).read_text(encoding="utf-8")
+        assert "Marketplace" in text, file
+        assert "not automatically listed" not in text, file
+        assert "HACS-custom%20repository" not in text, file
+    branding = (ROOT / "docs/RELEASE_MARKETPLACE.md").read_text()
+    assert "marketplace/ir_studio/icon.png" in branding
+    assert "custom_components/ir_studio/brand/icon.png" in branding
+
+
+
 def test_no_external_images_or_scripts_in_repository_svg_artwork():
     for filename in ("banner.svg", "workflow.svg"):
         text = (ROOT / "assets" / filename).read_text(encoding="utf-8")
@@ -78,5 +90,12 @@ def test_verified_release_is_non_destructive_and_sha_bound():
     assert '"$tag" --repo "$REPO" --target "$SHA"' in workflow
     assert 'actual_tag_sha=$(gh api "repos/${REPO}/git/ref/tags/${tag}"' in workflow
     assert 'if [[ "$actual_tag_sha" != "$SHA" ]]' in workflow
+    # Existing releases stay pinned. Only doc/test-only changes may skip
+    # creating a new package; a runtime change without version bump still fails.
+    assert 'repos/${REPO}/compare/${actual_tag_sha}...${SHA}' in workflow
+    assert 'all(.files[];' in workflow
+    assert '(.status == "added" or .status == "modified")' in workflow
+    assert 'Docs/tests-only change after published' in workflow
+    assert 'Release tag is not on tested main SHA; refusing mismatch' in workflow
     assert '--method DELETE' not in workflow
     assert '--cleanup-tag' not in workflow
