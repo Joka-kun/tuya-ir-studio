@@ -44,6 +44,25 @@ const profileGlyph = (profile) => profile?.icon_mdi?.startsWith("mdi:") ?
   '<ha-icon class="device-icon" icon="' + h(profile.icon_mdi) + '" aria-hidden="true"></ha-icon>' :
   deviceIcon(profile?.icon || profileTemplateId(profile));
 
+
+// A restored backup's "needs_check" does not mean its old commands vanished.
+// Foreign Remote CodeStores are intentionally opaque, so distinguish known
+// IR Studio payloads from historically learned commands pending verification.
+const profileLearningSummary = (buttons = []) => {
+  let learned = 0, needsCheck = 0;
+  for (const button of buttons) {
+    if (button.verified === true ||
+        button.code_in_local_store === true ||
+        button.code_in_tuya_ir_store === true ||
+        ['stored', 'verified'].includes(button.status)) {
+      learned++;
+    } else if (button.status === 'needs_check') {
+      needsCheck++;
+    }
+  }
+  return {total: buttons.length, learned, needsCheck, accounted: learned + needsCheck};
+};
+
 const EN_TEXT = [
   ["Иконка пульта", "Remote icon"],
   ["Выбрать иконку", "Choose icon"],
@@ -1126,12 +1145,17 @@ class IRStudioPanel extends HTMLElement {
     // For a Remote entity, only "on" is healthy. "off", "unknown" and
     // "unavailable" must not be rendered as a green/healthy connection.
     const remoteClass = ['on', 'off'].includes(remoteState) ? 'good' : 'bad';
-    const profileList = data.profiles.map(p => `
+    const profileList = data.profiles.map(p => {
+      const progress = profileLearningSummary(p.buttons);
+      const summary = progress.needsCheck
+        ? `${progress.accounted} из ${progress.total} обучено/восстановлено · ${progress.needsCheck} проверить`
+        : `${progress.learned} из ${progress.total} обучено`;
+      return `
       <div class="profile-entry" data-profile-row="${h(p.id)}">
         <button type="button" class="profile ${p.id===this._active?'active':''}" data-action="select" data-profile="${h(p.id)}">
           <span class="profile-symbol" aria-hidden="true">${profileGlyph(p)}</span>
           <span class="profile-copy"><b data-no-translate>${h(p.name)}</b>
-            <small>${p.buttons.filter(b=>['stored','verified'].includes(b.status)).length} из ${p.buttons.length} обучено</small></span>
+            <small title="Восстановленные из резервной копии команды учитываются отдельно от физически проверенных.">${h(summary)}</small></span>
           <span class="profile-chevron" aria-hidden="true">›</span>
         </button>
         ${data.profiles.length > 1 ? `<div class="profile-controls">
@@ -1140,7 +1164,8 @@ class IRStudioPanel extends HTMLElement {
             aria-label="${h(this._language()==='ru'?'Изменить порядок пульта '+p.name:'Reorder remote '+p.name)}"
             title="${h(this._language()==='ru'?'Перетащить или использовать стрелки клавиатуры':'Drag or use keyboard arrow keys')}">⠿</button>
         </div>` : ''}
-      </div>`).join('');
+      </div>`;
+    }).join('');
     const css = `
       :host{display:block;box-sizing:border-box;color:var(--primary-text-color,#e5e7eb);background:var(--primary-background-color,#111827);min-height:100vh;font:14px system-ui,sans-serif}
       *{box-sizing:border-box} .shell{max-width:1440px;margin:auto;padding:20px 24px 70px}
@@ -1580,7 +1605,7 @@ class IRStudioPanel extends HTMLElement {
       button.code_in_tuya_ir_store !== true &&
       (button.code_in_local_store === false ||
        button.code_in_tuya_ir_store === false ||
-       ['pending', 'needs_check'].includes(button.status)));
+       button.status === 'pending'));
   }
 
   _learningGuide(profile) {
