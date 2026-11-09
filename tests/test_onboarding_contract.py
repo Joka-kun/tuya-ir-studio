@@ -92,13 +92,16 @@ def test_remote_icon_picker_separates_visual_icon_from_commands():
     assert "color-scheme:" in panel
 
 
-def test_tuya_cloud_flow_reuses_the_tuya_sharing_sdk_and_optional_cache():
+def test_tuya_cloud_flow_uses_own_private_session_and_sharing_sdk():
     flow = (INTEGRATION / "config_flow.py").read_text(encoding="utf-8")
     cloud = (INTEGRATION / "tuya_cloud.py").read_text(encoding="utf-8")
     assert "TuyaCloud" in flow
     assert "async_step_scan" in flow
     assert "LoginControl" in cloud
-    assert 'hass.data.get("tuya_local")' in cloud
+    assert "use_cached_session=" in flow
+    assert 'hass.data.get("tuya_local")' not in cloud
+    assert 'hass.data.get("ir_studio_cloud")' in cloud
+    assert "CLOUD_AUTH_STORE_KEY" in cloud
     assert "Manager(" in cloud
 
 
