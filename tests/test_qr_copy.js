@@ -14,6 +14,13 @@ for (const lang of ['en','ru','de','es','fr','zh']) {
   assert(!forbidden.test(copy), 'Misleading cross-integration QR login in ' + lang);
   assert(/IR Studio/i.test(copy), 'Explicit IR Studio-owned QR session absent: ' + lang);
 }
+for (const readme of ['README.md','README_RU.md']) {
+  const text = fs.readFileSync(readme,'utf8');
+  assert(/HACS/.test(text), 'HACS installation missing: ' + readme);
+  assert(/HACS.*(?:Search|Поиск)/s.test(text), 'Official HACS search should be primary: ' + readme);
+  assert(/Custom repositories|Пользовательские репозитории/.test(text),
+    'Manual HACS fallback should remain documented: ' + readme);
+}
 const core = fs.readFileSync('custom_components/ir_studio/tuya_cloud.py','utf8');
 assert(!core.includes('hass.data.get("tuya_local"'));
 assert(!core.includes("hass.data.get('tuya_local'"));
