@@ -16,8 +16,11 @@ for (const lang of ['en','ru','de','es','fr','zh']) {
 }
 for (const readme of ['README.md','README_RU.md']) {
   const text = fs.readFileSync(readme,'utf8');
-  assert(/HACS/.test(text), 'HACS installation missing: ' + readme);
-  assert(/HACS.*(?:Search|Поиск)/s.test(text), 'Official HACS search should be primary: ' + readme);
+  assert(/Marketplace/.test(text), 'Home Assistant Marketplace instructions missing: ' + readme);
+  assert(/(?:Settings|Настройки)\s*→\s*Marketplace/.test(text),
+    'Settings → Marketplace should be the primary install path: ' + readme);
+  assert(/(?:search|найди)/i.test(text),
+    'Integration search should be documented: ' + readme);
   assert(/Custom repositories|Пользовательские репозитории/.test(text),
     'Manual HACS fallback should remain documented: ' + readme);
 }
