@@ -120,7 +120,7 @@ def make_import_plan(existing: list[dict], backup: dict, selected_ids: list[str]
         raise ValueError("Invalid selected remote bindings")
     target = copy.deepcopy(existing)
     changes = {"added_profiles": [], "merged_profiles": [], "replaced_profiles": [], "skipped_profiles": [],
-               "added_buttons": 0, "raw_codes": 0}
+               "rebound_profiles": [], "added_buttons": 0, "raw_codes": 0}
     for sid in selected_ids:
         incoming = copy.deepcopy(by_id[sid])
         selected_remote = remote_bindings.get(sid)
@@ -146,6 +146,8 @@ def make_import_plan(existing: list[dict], backup: dict, selected_ids: list[str]
             changes["skipped_profiles"].append(incoming["name"])
         elif strategy == "replace":
             # Preserve the active HA profile ID for registry compatibility.
+            if selected_remote and found["remote_entity"] != incoming["remote_entity"]:
+                changes["rebound_profiles"].append(incoming["name"])
             incoming["id"] = found["id"]
             target[target.index(found)] = incoming
             changes["replaced_profiles"].append(incoming["name"])
@@ -153,7 +155,8 @@ def make_import_plan(existing: list[dict], backup: dict, selected_ids: list[str]
         else:
             # Merge may explicitly rebind the executor while retaining button
             # keys, waveform namespaces, order and HA profile identity.
-            if selected_remote:
+            if selected_remote and found["remote_entity"] != incoming["remote_entity"]:
+                changes["rebound_profiles"].append(incoming["name"])
                 found["remote_entity"] = incoming["remote_entity"]
             existing_ids = {b["id"] for b in found["buttons"]}
             existing_labels = {b["name"].casefold() for b in found["buttons"]}
