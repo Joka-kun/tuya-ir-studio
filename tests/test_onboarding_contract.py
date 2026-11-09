@@ -100,7 +100,7 @@ def test_tuya_cloud_flow_uses_own_private_session_and_sharing_sdk():
     assert "LoginControl" in cloud
     assert "use_cached_session=" in flow
     assert 'hass.data.get("tuya_local")' not in cloud
-    assert 'hass.data.get("ir_studio_cloud")' in cloud
+    assert 'hass.data.get("ir_studio_cloud", {})' in cloud
     assert "CLOUD_AUTH_STORE_KEY" in cloud
     assert "Manager(" in cloud
 
