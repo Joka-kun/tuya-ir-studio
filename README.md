@@ -20,7 +20,7 @@ A **local-first infrared remote manager** for Home Assistant. Connect a compatib
 
 | Feature | Behavior |
 | --- | --- |
-| Hub setup | Reuse Tuya / Smart Life authorization, scan QR, or enter local connection credentials manually |
+| Hub setup | Reuse IR Studio's own saved QR session, scan QR, or enter local connection credentials manually |
 | Remote management | Use the built-in Configure wizard to create a remote, learn commands, rename or delete them; the advanced sidebar is optional |
 | Learning | Guided step-by-step IR capture using the original physical remote |
 | Home Assistant devices | Each profile creates a virtual device with its own `remote` entity; learned commands are exposed as native `button` entities for automations |
