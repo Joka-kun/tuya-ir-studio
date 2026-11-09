@@ -127,14 +127,6 @@ async def async_restore_cloud_auth(hass) -> None:
                 await async_persist_cloud_auth(hass, bucket["auth_cache"])
         elif _has_valid_cloud_auth(auth):
             bucket["auth_cache"] = auth
-        else:
-            # Existing Tuya Local users can reuse the same QR session
-            # without another scan. Do not modify Tuya Local's own cache.
-            shared = hass.data.get("tuya_local", {})
-            candidate = shared.get("auth_cache") if isinstance(shared, dict) else None
-            if _has_valid_cloud_auth(candidate):
-                bucket["auth_cache"] = candidate
-                await async_persist_cloud_auth(hass, candidate)
     except Exception as exc:
         _LOGGER.warning("Smart Life session restore failed (%s)", type(exc).__name__)
     bucket["auth_initialized"] = True
@@ -154,19 +146,17 @@ async def async_persist_cloud_auth(hass, auth: dict) -> None:
 
 
 def account_session_available(hass) -> bool:
-    """A reused Tuya / Smart Life QR session is present in HA memory."""
+    """Only IR Studio's explicitly authorized QR session is available."""
     own = hass.data.get("ir_studio_cloud", {})
-    shared = hass.data.get("tuya_local", {})
     return bool(
-        (isinstance(own, dict) and own.get("auth_cache"))
-        or (isinstance(shared, dict) and shared.get("auth_cache"))
+        isinstance(own, dict) and _has_valid_cloud_auth(own.get("auth_cache"))
     )
 
 
 class TuyaCloud:
     """Small wrapper around the same Tuya Sharing SDK used by Tuya Local."""
 
-    def __init__(self, hass, *, use_tuya_local_cache: bool = True):
+    def __init__(self, hass, *, use_cached_session: bool = True):
         from tuya_sharing import LoginControl
 
         self.hass = hass
@@ -175,13 +165,8 @@ class TuyaCloud:
         self._qr_token: str | None = None
         self._last_error: dict[str, Any] = {}
         self._store = hass.data.setdefault("ir_studio_cloud", {})
-        own_auth = self._store.get("auth_cache") if use_tuya_local_cache else None
-        shared_auth = None
-        if use_tuya_local_cache:
-            tuya_local_data = hass.data.get("tuya_local")
-            if isinstance(tuya_local_data, dict):
-                shared_auth = tuya_local_data.get("auth_cache")
-        self._auth = own_auth or shared_auth or {}
+        own_auth = self._store.get("auth_cache") if use_cached_session else None
+        self._auth = own_auth if _has_valid_cloud_auth(own_auth) else {}
         if self._auth:
             self._user_code = self._auth.get("user_code")
 
