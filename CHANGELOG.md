@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.8 — HACS catalog admission and accurate QR login wording
+
+- Correct English, Russian, German, Spanish, French and Chinese onboarding translations: the reusable QR session belongs **only** to Tuya IR Studio and is never borrowed from Tuya Local or another integration. No change to actual authentication or token handling.
+- Update README installation steps to search the **official HACS catalog** first; custom repository installation remains a fallback.
+- Preserve all local IR profiles, existing entity IDs, code stores, backup import bindings and transmit operations unchanged.
+- Add regression checks for translations and JSON validity.
+
+
 ## 1.0.7 — Keep the IR executor dropdown with intelligent defaults
 
 - Restore the visible IR executor selector for **every** imported backup profile, including when only one physical IR transmitter is available.
