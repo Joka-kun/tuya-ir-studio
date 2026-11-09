@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.6 — Automatic selection for a single IR executor
+
+- When exactly one available physical Home Assistant Remote transmitter exists, automatically bind all selected backup profiles to it. No redundant dropdown or click is required.
+- When more than one physical transmitter is available, retain per-profile selection, preselecting only an existing valid saved binding; when none are available, show an explicit unavailable message and prevent import.
+- Keep server-side validation from v1.0.5, never bind an unavailable/virtual remote, and preserve learned waveforms, immutable command keys and all existing IR Studio state.
+- Add JavaScript regressions for single, multiple, and zero available physical transmitters, including direct import without manual selection.
+
+
 ## 1.0.5 — Restore IR profiles to existing transmitters
 
 - Backup import now lets the user choose a **current Home Assistant IR Remote executor for each selected profile**, rather than silently copying a stale remote entity ID from the backup. The prior binding is preselected only when it currently exists and is available.

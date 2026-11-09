@@ -2337,19 +2337,27 @@ class IRStudioPanel extends HTMLElement {
     // Bind each restored appliance to a *current* HA Remote executor. Old
     // entity IDs in backup files can be stale after reinstalling the gateway.
     const remotes = this._remotes().filter(r=>['on','off'].includes(r.status));
+    const soleRemote = remotes.length === 1 ? remotes[0] : null;
     return `<div class="row" style="gap:8px;margin:8px 0"><button data-action="backup-select-all">Выбрать все</button><button data-action="backup-select-none">Снять выбор</button></div>` +
       profiles.map(p => {
-        const selected = remotes.some(r=>r.id===p.remote_entity)
-          ? p.remote_entity : '';
+        // One available physical transmitter is unambiguous, even when the
+        // backup points to an old entity. Do not require a redundant click.
+        const selected = soleRemote?.id || (remotes.some(r=>r.id===p.remote_entity)
+          ? p.remote_entity : '');
+        const binding = soleRemote
+          ? `<input type="hidden" data-backup-remote="${h(p.id)}" value="${h(soleRemote.id)}" />
+             <p class="tiny">ИК-исполнитель: <b data-no-translate>${h(soleRemote.name)}</b>
+               <span class="muted">· ${h(soleRemote.id)} · выбран автоматически</span></p>`
+          : `<label class="tiny" for="backup-remote-${h(p.id)}">ИК-устройство для отправки команд</label>
+             <select id="backup-remote-${h(p.id)}" data-backup-remote="${h(p.id)}">
+               <option value="" ${!selected?'selected':''} disabled>${remotes.length ? 'Выберите действующий ИК-шлюз' : 'Нет доступных ИК-шлюзов'}</option>
+               ${remotes.map(r=>`<option value="${h(r.id)}" ${r.id===selected?'selected':''}>${h(r.name)} · ${h(r.id)}</option>`).join('')}
+             </select>`;
         return `<div class="backup-row" style="display:block">
           <label><input type="checkbox" data-backup-choice="${h(p.id)}" checked />
             <b data-no-translate>${h(p.name)}</b>
             <small>· ${p.buttons?.length||0} команд</small></label>
-          <label class="tiny" for="backup-remote-${h(p.id)}">ИК-устройство для отправки команд</label>
-          <select id="backup-remote-${h(p.id)}" data-backup-remote="${h(p.id)}">
-            <option value="" ${!selected?'selected':''} disabled>Выберите действующий ИК-шлюз</option>
-            ${remotes.map(r=>`<option value="${h(r.id)}" ${r.id===selected?'selected':''}>${h(r.name)} · ${h(r.id)}</option>`).join('')}
-          </select>
+          ${binding}
           <small class="muted">В резервной копии: ${h(p.remote_entity||'не указан')}</small>
         </div>`;
       }).join('');
@@ -2372,7 +2380,7 @@ class IRStudioPanel extends HTMLElement {
     this._setHTML(host, `<h3>Импорт</h3><label>Файл резервной копии JSON</label>
       <input type="file" id="backup-file" accept=".json,application/json" />
       <div id="backup-import-list">${data ? this._backupImportRows(data.profiles || []) : '<p class="tiny muted">Сначала выбери JSON-файл.</p>'}</div>
-      <p class="tiny muted">Для каждого выбранного пульта укажи работающий ИК-передатчик Home Assistant. Сохранённая привязка подставляется, только если этот исполнитель всё ещё доступен. Восстановленные команды и их внутренние имена не изменяются.</p>
+      <p class="tiny muted">Если доступен один физический ИК-шлюз Home Assistant, он выбирается автоматически. Если их несколько — выбери исполнителя для каждого пульта. Коды и внутренние имена команд не изменяются.</p>
       <label>Если пульт уже существует</label>
       <select id="backup-strategy"><option value="skip">Пропустить существующие (безопасно)</option>
         <option value="merge">Добавить отсутствующие кнопки</option>
