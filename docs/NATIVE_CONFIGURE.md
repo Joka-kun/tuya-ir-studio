@@ -48,6 +48,19 @@ deleting the entire profile with confirmation. Deletion
 removes IR Studio-owned metadata/code entries; it **does not delete** any raw
 codes stored in an independent physical remote driver's own CodeStore.
 
+## Backup-restored command status
+
+The advanced sidebar distinguishes commands that have a locally known waveform
+(`stored`, `verified`, or visible in an IR Studio-owned Store) from commands
+restored with `needs_check`. Its left profile counter counts both categories,
+and explicitly says how many restored commands still need verification. The
+latter are *not* marked physically verified, and are not automatically put into
+the re-learning wizard just because a foreign remote driver's private CodeStore
+cannot be inspected. Existing imported profiles are covered without reimport.
+
+A successful `remote.send_command` call is not proof that the appliance acted.
+Use the normal send + physical-confirmation action to mark a command verified.
+
 ## Advanced editor
 
 **Configure → Interface → Show advanced IR Studio panel in sidebar** toggles
