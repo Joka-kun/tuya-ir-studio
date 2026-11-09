@@ -3,9 +3,10 @@
 <p align="center"><a href="README.md">English</a> &nbsp;·&nbsp; <a href="README_RU.md">Русский</a> &nbsp;·&nbsp; <a href="README_DE.md">Deutsch</a> &nbsp;·&nbsp; <a href="README_FR.md">Français</a> &nbsp;·&nbsp; <a href="README_ES.md">Español</a> &nbsp;·&nbsp; <a href="README_ZH.md">中文</a></p>
 
 <p align="center">
-  <a href="https://github.com/Joka-kun/tuya-ir-studio/actions/workflows/tests.yaml"><img src="https://github.com/Joka-kun/tuya-ir-studio/actions/workflows/tests.yaml/badge.svg" alt="Тесты"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/Joka-kun/tuya-ir-studio" alt="MIT"></a>
-  <a href="https://www.home-assistant.io/integrations/marketplace/"><img src="https://img.shields.io/badge/Home%20Assistant-Marketplace%20listed-18a4cb" alt="Интеграция в каталоге Home Assistant Marketplace"></a>
+  <a href="https://github.com/Joka-kun/tuya-ir-studio/actions/workflows/tests.yaml"><img src="https://img.shields.io/github/actions/workflow/status/Joka-kun/tuya-ir-studio/tests.yaml?branch=main&amp;label=tests&amp;style=flat-square" alt="Тесты"></a>
+  <a href="https://github.com/Joka-kun/tuya-ir-studio/releases"><img src="https://img.shields.io/github/v/release/Joka-kun/tuya-ir-studio?label=release&amp;style=flat-square" alt="Последний релиз"></a>
+  <a href="https://www.home-assistant.io/integrations/marketplace/"><img src="https://img.shields.io/badge/Marketplace-listed-18A4CB?style=flat-square&amp;logo=homeassistant&amp;logoColor=white" alt="В каталоге Marketplace"></a>
+  <a href="docs/NATIVE_CONFIGURE.md"><img src="https://img.shields.io/badge/control-local%20IR-0F766E?style=flat-square" alt="Локальный ИК"></a>
 </p>
 
 # Tuya IR Studio
