@@ -60,6 +60,18 @@ def test_main_readmes_do_not_advertise_unverified_cloud_ir_import_or_release():
     assert "hardware acceptance" in (ROOT / "ROADMAP.md").read_text().lower()
 
 
+def test_marketplace_docs_do_not_claim_custom_repository_only():
+    for file in ("README.md", "README_RU.md", "docs/RELEASE_MARKETPLACE.md"):
+        text = (ROOT / file).read_text(encoding="utf-8")
+        assert "Marketplace" in text, file
+        assert "not automatically listed" not in text, file
+        assert "HACS-custom%20repository" not in text, file
+    branding = (ROOT / "docs/RELEASE_MARKETPLACE.md").read_text()
+    assert "marketplace/ir_studio/icon.png" in branding
+    assert "custom_components/ir_studio/brand/icon.png" in branding
+
+
+
 def test_no_external_images_or_scripts_in_repository_svg_artwork():
     for filename in ("banner.svg", "workflow.svg"):
         text = (ROOT / "assets" / filename).read_text(encoding="utf-8")
