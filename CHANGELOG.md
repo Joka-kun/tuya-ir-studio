@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.7 — Keep the IR executor dropdown with intelligent defaults
+
+- Restore the visible IR executor selector for **every** imported backup profile, including when only one physical IR transmitter is available.
+- When exactly one physical HA `remote.*` is usable, keep the dropdown visible and preselect that executor (no extra click required).
+- When multiple physical transmitters are available, leave the selector unchosen until the user explicitly chooses one for each profile; when none are available, show a clear disabled placeholder.
+- Keep existing server-side executor validation and the strict boundary with other integrations. Backup contents, IR waveform data, command IDs, code namespaces, QR credentials and live profiles are unchanged.
+- Extend the UI regression suite for visible single-/multi-/zero-executor dropdowns and one-click import.
+
+
 ## 1.0.6 — Automatic selection for a single IR executor
 
 - When exactly one available physical Home Assistant Remote transmitter exists, automatically bind all selected backup profiles to it. No redundant dropdown or click is required.
