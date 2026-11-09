@@ -22,6 +22,7 @@ def test_all_new_brand_icons_are_valid_rgba_pngs_with_correct_resolution():
     for name in FILES:
         payload = (ROOT / "brand" / name).read_bytes()
         assert payload.startswith(b"\x89PNG\r\n\x1a\n")
+        assert len(payload) <= 2 * 1024 * 1024, "Marketplace brand-service image size limit"
         offset = 8
         chunks = []
         pixel_data = bytearray()
