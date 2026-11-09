@@ -1,97 +1,96 @@
-// Regression for automatic choice of the only available physical HA IR
-// executor. Remapping changes profile remote_entity, not IR signals or keys.
+// The backup executor picker is ALWAYS visible. A single available physical
+// remote is preselected, while 2+ remotes require explicit user choice.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync('custom_components/ir_studio/frontend/panel.js', 'utf8');
-const ctx = {
-  HTMLElement: class {}, customElements: {get:()=>null, define:()=>{}}, console
-};
+const ctx = {HTMLElement: class {}, customElements:{get:()=>null,define:()=>{}}, console};
 vm.createContext(ctx);
-vm.runInContext(source + '\nglobalThis.TestPanel = IRStudioPanel;', ctx);
-
+vm.runInContext(source + '\nglobalThis.TestPanel=IRStudioPanel;', ctx);
 const panel = Object.create(ctx.TestPanel.prototype);
 panel._hass = {states:{
-  'remote.physical': {state:'off', attributes:{friendly_name:'Bedroom IR'}},
+  'remote.only': {state:'off', attributes:{friendly_name:'Living room IR'}},
   'remote.virtual': {state:'on', attributes:{ir_studio_virtual:true}},
-  'remote.disconnected': {state:'unavailable', attributes:{}},
+  'remote.unavailable': {state:'unavailable', attributes:{}},
 }};
 const profiles = [
-  {id:'a',name:'Television',remote_entity:'remote.old',buttons:[{id:'power'}]},
-  {id:'b',name:'Projector',remote_entity:'remote.physical',buttons:[{id:'power'}]},
+  {id:'a',name:'Old TV',remote_entity:'remote.stale',buttons:[{id:'power'}]},
+  {id:'b',name:'Lamp',remote_entity:'remote.only',buttons:[{id:'toggle'}]},
 ];
-const html = panel._backupImportRows(profiles);
-assert.equal((html.match(/type="hidden" data-backup-remote=/g)||[]).length,2);
-assert.equal((html.match(/value="remote.physical"/g)||[]).length,2);
-assert(!html.includes('<select id="backup-remote-'));
-assert(!html.includes('Выберите действующий ИК-шлюз'));
-assert(html.includes('выбран автоматически'));
-assert(html.includes('remote.old'), 'preserve old binding as informative text');
-assert(!html.includes('value="remote.virtual"'));
-assert(!html.includes('value="remote.disconnected"'));
+const once = panel._backupImportRows(profiles);
+assert.equal((once.match(/<select id="backup-remote-/g)||[]).length,2,
+  'a dropdown must remain visible for every backup profile even with one hub');
+assert.equal((once.match(/data-backup-remote="/g)||[]).length,2);
+assert(!once.includes('type="hidden" data-backup-remote='));
+assert.equal((once.match(/<option value="remote.only" selected>/g)||[]).length,2,
+  'the sole physical hub must be preselected for every profile');
+assert(once.includes('выбран автоматически'));
+assert(once.includes('remote.stale'), 'retain old entity ID as informational label');
+assert(!once.includes('value="remote.virtual"'));
+assert(!once.includes('value="remote.unavailable"'));
 
-// Simulate the real HTML controls returned by _backupImportRows: the user
-// clicks Import directly, with no manual selection.
-const hidden = [...html.matchAll(/<input type="hidden" data-backup-remote="([^"]+)" value="([^"]+)"/g)];
-assert.equal(hidden.length,2);
-const choices = hidden.map((match)=>({dataset:{backupRemote:match[1]},value:match[2]}));
-const calls = [];
-let lastToast = '';
-panel._selectedBackupIds = ()=>['a','b'];
-panel._importBackup = {format:'tuya-ir-studio-backup',format_version:3,profiles};
-panel._call = async (type,args)=>{
+// The actual selected option in the visible dropdown is sent to preview AND
+// commit without an extra user click.
+const selectMatches = [...once.matchAll(/<select id="backup-remote-([^"]+)" data-backup-remote="([^"]+)">([\s\S]*?)<\/select>/g)];
+assert.equal(selectMatches.length,2);
+const choices = selectMatches.map(match=>{
+  const selected = match[3].match(/<option value="([^"]*)" selected>/);
+  assert(selected, 'no preselected executor in real select');
+  return {dataset:{backupRemote:match[2]},value:selected[1]};
+});
+const calls=[];
+let lastToast='';
+panel._selectedBackupIds=()=>['a','b'];
+panel._importBackup={format:'tuya-ir-studio-backup',format_version:3,profiles};
+panel._call=async(type,args)=>{
   calls.push({type,args});
-  return {changes:{replaced_profiles:[],added_profiles:['Television'],
+  return {changes:{replaced_profiles:[],added_profiles:['Old TV'],
     merged_profiles:[],skipped_profiles:[]}};
 };
-panel._load = async()=>{};
-panel._dialogClose = ()=>{};
-panel._toast = message=>{lastToast=message;};
-panel.shadowRoot = {
-  querySelector: key=>key==='#backup-strategy'?{value:'merge'}:null,
-  querySelectorAll: key=>key==='[data-backup-remote]'?choices:[],
+panel._load=async()=>{};
+panel._dialogClose=()=>{};
+panel._toast=s=>{lastToast=s};
+panel.shadowRoot={
+  querySelector:key=>key==='#backup-strategy'?{value:'merge'}:null,
+  querySelectorAll:key=>key==='[data-backup-remote]'?choices:[],
 };
+
 (async()=>{
   await panel._backupImport();
-  assert.equal(calls.length,2,'preview and commit both use the automatic binding');
+  assert.equal(calls.length,2);
   for (const call of calls) {
-    assert.equal(call.type,'backup_import');
-    assert.equal(call.args.remote_bindings.a,'remote.physical');
-    assert.equal(call.args.remote_bindings.b,'remote.physical');
+    assert.equal(call.args.remote_bindings.a,'remote.only');
+    assert.equal(call.args.remote_bindings.b,'remote.only');
     assert.equal(call.args.strategy,'merge');
   }
   calls.length=0;
-  panel._importBackup = {format:'tuya-ir-studio-backup',profiles};
+  panel._importBackup={format:'tuya-ir-studio-backup',profiles};
   choices[0].value='';
   await panel._backupImport();
-  assert.equal(calls.length,0,'never perform a partial import if a binding is missing');
+  assert.equal(calls.length,0,'must not import partially with unselected executor');
   assert(lastToast.includes('Выбери ИК-устройство'));
 
-  // With multiple live physical transmitters, keep a selector and only
-  // preselect a stored binding that still refers to a real available entity.
+  // Several: dropdown stays visible, no choice preselected, because user
+  // explicitly asked to select the executor even if the backup ID still exists.
   panel._hass.states['remote.second'] = {
-    state:'on',attributes:{friendly_name:'Hall IR'}
+    state:'on',attributes:{friendly_name:'Bedroom IR'}
   };
   const multiple = panel._backupImportRows(profiles);
   assert.equal((multiple.match(/<select id="backup-remote-/g)||[]).length,2);
-  assert(!multiple.includes('type="hidden" data-backup-remote='));
-  assert(multiple.includes('Выберите действующий ИК-шлюз'));
-  assert(multiple.includes('value="remote.physical"'));
+  assert.equal((multiple.match(/<option value="" selected disabled>/g)||[]).length,2);
+  assert(!multiple.includes('<option value="remote.only" selected>'));
+  assert(!multiple.includes('<option value="remote.second" selected>'));
   assert(multiple.includes('value="remote.second"'));
-  assert(!multiple.includes('value="remote.virtual"'));
-  assert(!multiple.includes('value="remote.disconnected"'));
-  // The first old binding is gone, so its select has only placeholder
-  // selected; the second binding is still valid and may be reused.
-  assert(/<select id="backup-remote-a"[\s\S]*?<option value="" selected disabled>/.test(multiple));
-  assert(/<select id="backup-remote-b"[\s\S]*?<option value="remote.physical" selected>/.test(multiple));
+  assert(!multiple.includes('выбран автоматически'));
+  assert(!multiple.includes('type="hidden" data-backup-remote='));
 
-  // No usable executor: never silently assign an unavailable/virtual one.
-  panel._hass.states['remote.physical'].state='unavailable';
-  panel._hass.states['remote.second'].state='unknown';
+  // No available transmitter: show a visible selector with no valid option.
+  panel._hass.states['remote.only'].state='unknown';
+  panel._hass.states['remote.second'].state='unavailable';
   const none = panel._backupImportRows(profiles);
+  assert.equal((none.match(/<select id="backup-remote-/g)||[]).length,2);
   assert(none.includes('Нет доступных ИК-шлюзов'));
   assert(!none.includes('type="hidden" data-backup-remote='));
   assert(!none.includes('выбран автоматически'));
-
-  console.log('Single executor auto-selected; multi/none safe selection: PASS');
-})().catch(error=>{console.error(error);process.exitCode=1;});
+  console.log('Backup: visible dropdown, sole-device auto-choice, multi-device manual selection: PASS');
+})().catch(e=>{console.error(e);process.exitCode=1});
