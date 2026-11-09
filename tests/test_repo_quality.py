@@ -90,5 +90,12 @@ def test_verified_release_is_non_destructive_and_sha_bound():
     assert '"$tag" --repo "$REPO" --target "$SHA"' in workflow
     assert 'actual_tag_sha=$(gh api "repos/${REPO}/git/ref/tags/${tag}"' in workflow
     assert 'if [[ "$actual_tag_sha" != "$SHA" ]]' in workflow
+    # Existing releases stay pinned. Only doc/test-only changes may skip
+    # creating a new package; a runtime change without version bump still fails.
+    assert 'repos/${REPO}/compare/${actual_tag_sha}...${SHA}' in workflow
+    assert 'all(.files[];' in workflow
+    assert '(.status == "added" or .status == "modified")' in workflow
+    assert 'Docs/tests-only change after published' in workflow
+    assert 'Release tag is not on tested main SHA; refusing mismatch' in workflow
     assert '--method DELETE' not in workflow
     assert '--cleanup-tag' not in workflow
