@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Add a Tuya IR hub",
-        "description": "Choose how to connect your local IR gateway. Reuse an existing Tuya / Smart Life login, sign in via QR, or enter local credentials manually.",
+        "description": "Choose how to connect your local IR gateway. Reuse only IR Studio's own saved Tuya / Smart Life QR session, sign in via QR, or enter local credentials manually.",
         "data": {
           "setup_mode": "Connection method"
         }
@@ -64,7 +64,7 @@
   "selector": {
     "setup_mode": {
       "options": {
-        "cloud": "Tuya / Smart Life — reuse an existing login or sign in with QR",
+        "cloud": "Tuya / Smart Life — use IR Studio's saved QR session or sign in with QR",
         "manual": "Manual local setup — IP, Device ID and Local Key",
         "cloud_fresh_login": "Tuya / Smart Life — start a fresh QR login"
       }

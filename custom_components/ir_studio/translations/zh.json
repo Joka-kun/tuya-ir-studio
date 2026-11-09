@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "添加涂鸦红外网关",
-        "description": "选择本地红外网关的连接方式：复用 Tuya/Smart Life 登录、二维码登录或手动填写本地凭据。",
+        "description": "选择本地红外网关的连接方式：仅使用 IR Studio 自己保存的二维码会话、重新扫码登录或手动填写本地凭据，不读取其他集成的登录信息。",
         "data": {
           "setup_mode": "连接方式"
         }
@@ -64,7 +64,7 @@
   "selector": {
     "setup_mode": {
       "options": {
-        "cloud": "Tuya / Smart Life – 复用登录或二维码",
+        "cloud": "Tuya / Smart Life – IR Studio 自身保存的二维码会话或重新扫码登录",
         "manual": "手动 – IP、Device ID 和 Local Key",
         "cloud_fresh_login": "Tuya / Smart Life – 重新二维码登录"
       }
