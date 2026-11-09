@@ -1070,6 +1070,7 @@ async def ws_backup_export(hass, connection, msg):
     vol.Required("backup"): dict,
     vol.Required("profile_ids"): [str],
     vol.Required("strategy"): vol.In(("skip", "merge", "replace")),
+    vol.Optional("remote_bindings", default={}): {str: str},
     vol.Optional("dry_run", default=True): bool,
 })
 @websocket_api.require_admin
@@ -1082,6 +1083,25 @@ async def ws_backup_import(hass, connection, msg):
             selected_incoming = [
                 profile for profile in incoming if profile["id"] in msg["profile_ids"]
             ]
+            remote_bindings = msg.get("remote_bindings", {})
+            if not isinstance(remote_bindings, dict) or any(
+                profile_id not in msg["profile_ids"]
+                for profile_id in remote_bindings
+            ):
+                raise ValueError("Некорректные привязки исполнителей")
+            # Users may select only actual Home Assistant Remote devices.
+            # A virtual IR Studio appliance is not a physical IR transmitter.
+            for entity_id in remote_bindings.values():
+                entity_id = remote_entity_id(entity_id)
+                state = hass.states.get(entity_id)
+                if (
+                    state is None
+                    or state.state not in ("on", "off")
+                    or state.attributes.get("ir_studio_virtual")
+                ):
+                    raise ValueError(
+                        "Выбранный ИК-исполнитель не существует или недоступен"
+                    )
             replaced_profile_ids = set()
             if msg["strategy"] == "replace":
                 for incoming_profile in selected_incoming:
@@ -1098,7 +1118,7 @@ async def ws_backup_import(hass, connection, msg):
 
             target, changes = make_import_plan(
                 runtime.profiles, msg["backup"], msg["profile_ids"], msg["strategy"],
-                valid_icons=runtime.icons,
+                valid_icons=runtime.icons, remote_bindings=remote_bindings,
             )
             if not msg["dry_run"]:
                 # Replacement removes only IR Studio-owned payloads for the old
