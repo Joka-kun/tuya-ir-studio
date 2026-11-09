@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Ajouter une passerelle IR Tuya",
-        "description": "Choisissez la connexion à votre passerelle IR locale : session Tuya/Smart Life existante, QR ou identifiants locaux.",
+        "description": "Choisissez la connexion à votre passerelle IR locale : session QR enregistrée par IR Studio, nouvelle connexion QR ou identifiants locaux. Les sessions d'autres intégrations ne sont pas réutilisées.",
         "data": {
           "setup_mode": "Méthode de connexion"
         }
@@ -64,7 +64,7 @@
   "selector": {
     "setup_mode": {
       "options": {
-        "cloud": "Tuya / Smart Life – session existante ou QR",
+        "cloud": "Tuya / Smart Life – session QR propre à IR Studio ou nouveau QR",
         "manual": "Manuel – IP, Device ID et Local Key",
         "cloud_fresh_login": "Tuya / Smart Life – nouvelle connexion QR"
       }
