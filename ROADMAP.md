@@ -6,6 +6,8 @@ The project is a local infrared remote manager for Home Assistant. QR / Smart Li
 
 ## Implemented and covered by automated tests
 
+- [x] Published [v1.0.8](https://github.com/Joka-kun/tuya-ir-studio/releases/tag/v1.0.8) and accepted into the official Home Assistant Marketplace in [hacs/default#13600](https://github.com/hacs/default/pull/13600) on 2026-11-09; publication does not certify physical IR learning or transmission.
+
 - [x] Direct Tuya LAN gateway setup using QR-assisted or manual credentials; saved QR authorization can be reused.
 - [x] Virtual HA Device and `remote` per profile, with `button` entities for learned commands. User-facing captions, entity IDs and physical IR namespaces are independent.
 - [x] Native **Configure** wizard for profiles and individual buttons (learn, test, relearn, rename, delete), plus an optional advanced sidebar for bulk workflows, Flipper `.ir` import and backups.
@@ -34,7 +36,7 @@ These are **not** proven by CI. Complete them against a real YRC11 and at least 
 - Hardware-verified error categories for LAN write, DP202 timeout and physical target non-response.
 - Better diagnostics without logging raw signals, secrets or authentication tokens.
 - Translate the complete native **Configure** wizard beyond English and Russian only if maintainers can verify those locales; existing DE/ES/FR/ZH config onboarding translations stay available.
-- Consider official HACS Marketplace submission only after device acceptance and review.
+- Keep the already-approved HACS Marketplace listing accurate; verify public icon delivery separately from the installed integration's local brand images and record any upstream CDN issue before making a new release. See [Marketplace brand checks](docs/RELEASE_MARKETPLACE.md).
 
 ## Explicitly outside scope
 
