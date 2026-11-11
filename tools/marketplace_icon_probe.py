@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from io import BytesIO
+import base64
 from PIL import Image
 import hashlib
 import json
@@ -89,6 +90,13 @@ def main() -> int:
                     public_pixels = public.convert("RGBA").tobytes()
                     public_size = public.size
                 same_pixels = source_size == public_size and source_pixels == public_pixels
+                if image == "icon.png":
+                    for label, contents in (("released", raw.data), ("marketplace", delivered.data)):
+                        with Image.open(BytesIO(contents)) as icon:
+                            preview = icon.convert("RGBA").resize((96, 96), Image.Resampling.LANCZOS)
+                            out = BytesIO()
+                            preview.save(out, "PNG", optimize=True)
+                            print(f"PREVIEW_IMAGE domain={domain} source={label} png_base64={base64.b64encode(out.getvalue()).decode('ascii')}")
                 print(json.dumps({
                     "case": f"{domain}/pixels/{image}",
                     "source_dimensions": source_size,
