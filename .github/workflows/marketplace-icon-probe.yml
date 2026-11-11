@@ -1,0 +1,21 @@
+name: Probe Marketplace brand delivery
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/marketplace-icon-probe.yml"
+      - "tools/marketplace_icon_probe.py"
+      - "custom_components/ir_studio/brand/**"
+      - "brand/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-marketplace-icon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check release and Marketplace icon provenance
+        run: python3 tools/marketplace_icon_probe.py
