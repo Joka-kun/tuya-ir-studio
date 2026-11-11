@@ -33,6 +33,36 @@ when the catalog has not refreshed.
   placeholder resolved without a successful `image/png` HTTP response
   from the marketplace-specific URL and a fresh Marketplace UI check.
 
+## Verified Tuya icon delivery — 2026-11-11
+
+A [read-only GitHub Actions probe](../tools/marketplace_icon_probe.py) checked the
+latest published `v1.0.8` asset against the **public** Marketplace images,
+with `so_diffuser_ble` as a control:
+
+- `https://brands.home-assistant.io/marketplace/ir_studio/icon.png`:
+  **HTTP 200**, `image/png`, **256 × 256**.
+- `https://brands.home-assistant.io/marketplace/ir_studio/icon@2x.png`:
+  **HTTP 200**, `image/png`, **512 × 512**.
+- Both PNGs have **identical visible RGBA appearance** to the published Tuya
+  icons when composited against either light or dark backgrounds
+  (mean absolute RGB error **0.0**). File hashes may differ because
+  transparent pixels and PNG encoding can differ without changing the image.
+- The Xiaomi `so_diffuser_ble` Marketplace icon passed the same checks.
+
+**Conclusion:** Tuya's published icon and the public Marketplace icon delivery
+are both correct as of this check. A missing card on a specific Home Assistant
+installation should first be investigated as an **instance/frontend cache or
+client connectivity issue**; a blind new release, duplicate brand files or
+repeated asset uploads are not supported by this evidence.
+
+Safe UI-level first test: hard-refresh the Marketplace page
+(`Ctrl+Shift+R`) or reopen it in a fresh private browsing window.
+If the issue persists, inspect the browser request for
+`/api/brands/marketplace/ir_studio/dark_icon.png` and Home Assistant's
+per-domain cache under `/config/.cache/brands/marketplace/ir_studio` rather
+than purging the global brands cache. Do not delete storage entries or
+reconfigure integration credentials to fix an icon.
+
 ## Required verification before filing an upstream issue
 
 1. Check that `custom_components/ir_studio/brand/icon.png` exists
