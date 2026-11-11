@@ -8,8 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from io import BytesIO
-import base64
-from PIL import Image
+from PIL import Image, ImageChops, ImageStat
 import hashlib
 import json
 import urllib.error
@@ -90,29 +89,38 @@ def main() -> int:
                     public_pixels = public.convert("RGBA").tobytes()
                     public_size = public.size
                 same_pixels = source_size == public_size and source_pixels == public_pixels
-                if image == "icon.png":
-                    for label, contents in (("released", raw.data), ("marketplace", delivered.data)):
-                        with Image.open(BytesIO(contents)) as icon:
-                            preview = icon.convert("RGBA").resize((96, 96), Image.Resampling.LANCZOS)
-                            out = BytesIO()
-                            preview.save(out, "PNG", optimize=True)
-                            print(f"PREVIEW_IMAGE domain={domain} source={label} png_base64={base64.b64encode(out.getvalue()).decode('ascii')}")
+
+                # The brand CDN may optimize/quantize its PNG bytes; exact
+                # encoded bytes and pixel buffers are not a delivery contract.
+                # Compare visible colors against both light and dark UIs,
+                # compositing alpha before taking mean absolute differences.
+                error_means = []
+                if source_size == public_size:
+                    for backdrop in ("white", "black"):
+                        with Image.open(BytesIO(raw.data)) as a, Image.open(BytesIO(delivered.data)) as b:
+                            a = a.convert("RGBA")
+                            b = b.convert("RGBA")
+                            bg_a = Image.new("RGBA", a.size, backdrop)
+                            bg_b = Image.new("RGBA", b.size, backdrop)
+                            bg_a.alpha_composite(a)
+                            bg_b.alpha_composite(b)
+                            diff = ImageChops.difference(bg_a.convert("RGB"), bg_b.convert("RGB"))
+                            error_means.append(round(sum(ImageStat.Stat(diff).mean) / 3, 3))
+
                 print(json.dumps({
-                    "case": f"{domain}/pixels/{image}",
+                    "case": f"{domain}/appearance/{image}",
                     "source_dimensions": source_size,
                     "public_dimensions": public_size,
-                    "same_pixels": same_pixels,
-                    "source_pixel_sha256": hashlib.sha256(source_pixels).hexdigest(),
-                    "public_pixel_sha256": hashlib.sha256(public_pixels).hexdigest(),
+                    "same_decoded_pixels": same_pixels,
+                    "mean_rgb_error_light_and_dark": error_means,
                 }, sort_keys=True))
-                if not same_pixels:
-                    print(f"DELIVERY_IMAGE_MISMATCH domain={domain} image={image}")
+
+                if source_size != public_size or any(err > 5 for err in error_means):
+                    print(f"DELIVERY_ARTWORK_MISMATCH domain={domain} image={image}")
                     if domain == "ir_studio":
                         failed = True
-                elif raw.data != delivered.data:
-                    print(f"DELIVERY_SAME_PIXELS_OPTIMIZED domain={domain} image={image}")
                 else:
-                    print(f"DELIVERY_MATCH domain={domain} image={image}")
+                    print(f"DELIVERY_ARTWORK_OK domain={domain} image={image}")
     # Upstream may return 503 or not have indexed the current release; leave
     # the CI pass/fail gate to the release integrity check, report delivery
     # differences as diagnostic evidence only.
