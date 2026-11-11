@@ -17,5 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install image comparison dependency
+        run: python3 -m pip install --disable-pip-version-check Pillow==11.3.0
       - name: Check release and Marketplace icon provenance
         run: python3 tools/marketplace_icon_probe.py
