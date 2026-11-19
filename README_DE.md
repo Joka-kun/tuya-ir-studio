@@ -7,6 +7,7 @@
   <a href="https://github.com/Joka-kun/tuya-ir-studio/releases"><img src="https://img.shields.io/github/v/release/Joka-kun/tuya-ir-studio?label=release&amp;style=flat-square" alt="Neueste Version"></a>
   <a href="https://www.home-assistant.io/integrations/marketplace/"><img src="https://img.shields.io/badge/Marketplace-listed-18A4CB?style=flat-square&amp;logo=homeassistant&amp;logoColor=white" alt="Marketplace-Eintrag"></a>
   <a href="docs/NATIVE_CONFIGURE.md"><img src="https://img.shields.io/badge/control-local%20IR-0F766E?style=flat-square" alt="Lokales IR"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT-Lizenz"></a>
 </p>
 
 # Tuya IR Studio
