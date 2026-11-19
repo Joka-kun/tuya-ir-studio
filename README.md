@@ -50,4 +50,4 @@ Open **Settings → Devices & services → Tuya IR Studio → Configure** to add
 
 Questions and bug reports: [GitHub Issues](https://github.com/Joka-kun/tuya-ir-studio/issues). Please include the Home Assistant version, gateway family, protocol and reproducible steps **without** Local Keys, tokens or personal identifiers.
 
-MIT License · Independent open-source project, not affiliated with Tuya or Home Assistant.
+[MIT License](LICENSE) · [Third-party notices](THIRD_PARTY_NOTICES.md) · Independent open-source project, not affiliated with Tuya or Home Assistant.

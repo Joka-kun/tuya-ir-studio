@@ -37,7 +37,7 @@ when the catalog has not refreshed.
 
 A [read-only GitHub Actions probe](../tools/marketplace_icon_probe.py) checked the
 latest published `v1.0.8` asset against the **public** Marketplace images,
-with `so_diffuser_ble` as a control:
+with an independently listed integration as a control:
 
 - `https://brands.home-assistant.io/marketplace/ir_studio/icon.png`:
   **HTTP 200**, `image/png`, **256 × 256**.
@@ -47,7 +47,7 @@ with `so_diffuser_ble` as a control:
   icons when composited against either light or dark backgrounds
   (mean absolute RGB error **0.0**). File hashes may differ because
   transparent pixels and PNG encoding can differ without changing the image.
-- The Xiaomi `so_diffuser_ble` Marketplace icon passed the same checks.
+- The comparison icon also passed the same checks.
 
 **Conclusion:** Tuya's published icon and the public Marketplace icon delivery
 are both correct as of this check. A missing card on a specific Home Assistant

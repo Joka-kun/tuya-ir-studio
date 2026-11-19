@@ -29,7 +29,7 @@
 
 Dans **Paramètres → Marketplace** (anciennement **HACS**), recherchez **Tuya IR Studio** et installez l'intégration depuis le catalogue.
 
-Ouvrez **Paramètres → Appareils et services → Ajouter une intégration → Tuya IR Studio** pour configurer la passerelle. Créez ensuite une télécommande dans la barre latérale, ajoutez les touches nécessaires et lancez **l'apprentissage pas à pas**. Vérifiez la réaction de l'appareil réel.
+Ouvrez **Paramètres → Appareils et services → Ajouter une intégration → Tuya IR Studio** pour configurer la passerelle. Dans **Paramètres → Appareils et services → Tuya IR Studio → Configurer**, créez ensuite une télécommande, ajoutez les touches nécessaires et lancez **l’apprentissage pas à pas**. Le panneau latéral avancé est facultatif et masqué par défaut lors des nouvelles installations. Vérifiez la réaction de l'appareil réel.
 
 ## Limites
 
@@ -37,4 +37,4 @@ Aucune touche n'est inventée à partir d'une catégorie d'appareil et aucune di
 
 [Guide d'installation (anglais)](docs/TUYA_ONBOARDING.md) · [Feuille de route (anglais)](ROADMAP.md) · [Historique](CHANGELOG.md) · [Signaler un problème](https://github.com/Joka-kun/tuya-ir-studio/issues)
 
-Licence MIT. Projet open source indépendant.
+[Licence MIT](LICENSE) · [Mentions relatives aux composants tiers (anglais)](THIRD_PARTY_NOTICES.md) · Projet open source indépendant.

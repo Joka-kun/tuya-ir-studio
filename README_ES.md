@@ -29,7 +29,7 @@
 
 En **Ajustes → Marketplace** (antes **HACS**), busca **Tuya IR Studio** e instala la integración desde el catálogo.
 
-En **Ajustes → Dispositivos y servicios → Añadir integración → Tuya IR Studio**, configura tu pasarela. Después abre la barra lateral, crea un mando, añade botones y utiliza el **aprendizaje paso a paso**. Comprueba que el aparato responda físicamente.
+En **Ajustes → Dispositivos y servicios → Añadir integración → Tuya IR Studio**, configura tu pasarela. Después, en **Ajustes → Dispositivos y servicios → Tuya IR Studio → Configurar**, crea un mando, añade botones y utiliza el **aprendizaje paso a paso**. El panel lateral avanzado es opcional y está oculto por defecto en las nuevas instalaciones. Comprueba que el aparato responda físicamente.
 
 ## Limitaciones
 
@@ -37,4 +37,4 @@ No se generan botones según la categoría del dispositivo ni se importan diseñ
 
 [Guía de configuración (inglés)](docs/TUYA_ONBOARDING.md) · [Hoja de ruta (inglés)](ROADMAP.md) · [Cambios](CHANGELOG.md) · [Informar de problemas](https://github.com/Joka-kun/tuya-ir-studio/issues)
 
-Licencia MIT. Proyecto independiente de código abierto.
+[Licencia MIT](LICENSE) · [Avisos de terceros (inglés)](THIRD_PARTY_NOTICES.md) · Proyecto independiente de código abierto.
