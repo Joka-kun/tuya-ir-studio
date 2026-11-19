@@ -29,7 +29,7 @@
 
 Unter **Einstellungen → Marketplace** (früher **HACS**) nach **Tuya IR Studio** suchen und die Integration aus dem Katalog installieren.
 
-Über **Einstellungen → Geräte & Dienste → Integration hinzufügen → Tuya IR Studio** das Gateway einrichten. Danach in der Seitenleiste eine Fernbedienung anlegen, Tasten hinzufügen und **schrittweise anlernen**. Die tatsächliche Reaktion des Zielgeräts prüfen.
+Über **Einstellungen → Geräte & Dienste → Integration hinzufügen → Tuya IR Studio** das Gateway einrichten. Danach unter **Einstellungen → Geräte & Dienste → Tuya IR Studio → Konfigurieren** eine Fernbedienung anlegen, Tasten hinzufügen und **schrittweise anlernen**. Die erweiterte Seitenleiste ist optional und bei Neuinstallationen standardmäßig ausgeblendet. Die tatsächliche Reaktion des Zielgeräts prüfen.
 
 ## Wichtige Hinweise
 
@@ -37,4 +37,4 @@ IR Studio erfindet keine Tasten anhand der Gerätekategorie und importiert keine
 
 [Einrichtungsanleitung (Englisch)](docs/TUYA_ONBOARDING.md) · [Roadmap (Englisch)](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Probleme melden](https://github.com/Joka-kun/tuya-ir-studio/issues)
 
-MIT-Lizenz. Unabhängiges Open-Source-Projekt.
+[MIT-Lizenz](LICENSE) · [Hinweise zu Drittanbieterkomponenten (Englisch)](THIRD_PARTY_NOTICES.md) · Unabhängiges Open-Source-Projekt.

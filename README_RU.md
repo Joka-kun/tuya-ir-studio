@@ -50,4 +50,4 @@
 
 Ошибки и предложения: [GitHub Issues](https://github.com/Joka-kun/tuya-ir-studio/issues). Указывай модель шлюза, протокол, версию Home Assistant и шаги воспроизведения, **но не публикуй** Local Key, QR-токены и приватные идентификаторы.
 
-MIT · Независимый проект, не связанный официально с Tuya или Home Assistant.
+[Лицензия MIT](LICENSE) · [Сторонние компоненты и лицензии](THIRD_PARTY_NOTICES.md) · Независимый проект, не связанный официально с Tuya или Home Assistant.

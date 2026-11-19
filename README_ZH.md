@@ -29,7 +29,7 @@
 
 打开 **设置 → Marketplace**（原 **HACS**），搜索 **Tuya IR Studio**，并从目录中安装此集成。
 
-前往 **设置 → 设备与服务 → 添加集成 → Tuya IR Studio** 配置红外网关。随后在侧边栏创建遥控器，添加所需按键，使用**逐步学习**功能。请务必确认实体设备确实响应。
+前往 **设置 → 设备与服务 → 添加集成 → Tuya IR Studio** 配置红外网关。随后前往 **设置 → 设备与服务 → Tuya IR Studio → 配置**，创建遥控器、添加所需按键并使用**逐步学习**功能。高级侧边栏面板为可选功能，新安装时默认隐藏。请务必确认实体设备确实响应。
 
 ## 限制
 
@@ -37,4 +37,4 @@
 
 [配置指南（英文）](docs/TUYA_ONBOARDING.md) · [开发计划（英文）](ROADMAP.md) · [更新日志](CHANGELOG.md) · [反馈问题](https://github.com/Joka-kun/tuya-ir-studio/issues)
 
-MIT 许可证。本项目为独立开源项目。
+[MIT 许可证](LICENSE) · [第三方组件声明（英文）](THIRD_PARTY_NOTICES.md) · 本项目为独立开源项目。
