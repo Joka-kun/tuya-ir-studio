@@ -50,7 +50,7 @@ with an independently listed integration as a control:
 - The comparison icon also passed the same checks.
 
 **Conclusion:** Tuya's published icon and the public Marketplace icon delivery
-are both correct as of this check. A missing card on a specific Home Assistant
+are both correct as of this check. A missing icon on a specific Home Assistant
 installation should first be investigated as an **instance/frontend cache or
 client connectivity issue**; a blind new release, duplicate brand files or
 repeated asset uploads are not supported by this evidence.
@@ -82,7 +82,7 @@ reconfigure integration credentials to fix an icon.
    to a relevant Marketplace or brands issue. Do not upload duplicate brand
    artwork as a workaround.
 
-## Releases and QA
+## Release checks
 
 1. Changes go through a PR with the **Unit tests and syntax**,
    **Hassfest**, and **Validate HACS** checks.
@@ -90,9 +90,8 @@ reconfigure integration credentials to fix an icon.
    `main` commit against the manifest version and required check results.
 3. Local learning and IR transmission must be tested on real hardware.
    A green CI is not proof of physical device response.
-4. GitHub's repository **About** one-line description is separate metadata:
-   editing this Markdown file does not change that field, or the preview
-   image in Marketplace.
+4. Documentation-only changes do not require a new integration release.
+   GitHub repository metadata and Marketplace brand images are managed separately.
 
 **Supported scope:** compatible Tuya / Smart Life IR hubs, local LAN
 transmission, real IR learning, custom remotes and backups. QR onboarding
