@@ -104,7 +104,7 @@ def test_verified_release_is_non_destructive_and_sha_bound():
 def test_release_docs_only_skip_matches_exact_safe_paths():
     """Release checks must accept our public documentation, not runtime changes."""
     workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text()
-    match = re.search(r'\\.filename \\| test\\("([^"]+)"\\)', workflow)
+    match = re.search(r'\.filename \| test\("([^"]+)"\)', workflow)
     assert match, "The release workflow is missing its path allowlist"
     pattern = re.compile(json.loads('"' + match.group(1) + '"'))
     allowed = (
