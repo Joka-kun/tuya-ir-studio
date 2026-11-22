@@ -99,3 +99,29 @@ def test_verified_release_is_non_destructive_and_sha_bound():
     assert 'Release tag is not on tested main SHA; refusing mismatch' in workflow
     assert '--method DELETE' not in workflow
     assert '--cleanup-tag' not in workflow
+
+
+def test_release_docs_only_skip_matches_exact_safe_paths():
+    """Release checks must accept our public documentation, not runtime changes."""
+    workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text()
+    match = re.search(r'\.filename \| test\("([^"]+)"\)', workflow)
+    assert match, "The release workflow is missing its path allowlist"
+    pattern = re.compile(json.loads('"' + match.group(1) + '"'))
+    allowed = (
+        "README.md", "README_RU.md", "ROADMAP.md",
+        "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md",
+        "THIRD_PARTY_NOTICES.md", "docs/RELEASE_MARKETPLACE.md",
+        "tests/test_brand.py", "tests/test_qr_copy.js",
+        ".github/workflows/release.yml",
+        ".github/workflows/marketplace-icon-probe.yml",
+        "tools/marketplace_icon_probe.py",
+    )
+    prohibited = (
+        "custom_components/ir_studio/manifest.json",
+        "custom_components/ir_studio/__init__.py",
+        "custom_components/ir_studio/frontend/panel.js",
+        "brand/icon.png", "install_ir_studio.sh",
+        "tools/other.py", ".github/workflows/tests.yaml",
+    )
+    assert all(pattern.fullmatch(path) for path in allowed)
+    assert all(not pattern.fullmatch(path) for path in prohibited)
